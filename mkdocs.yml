@@ -1,0 +1,36 @@
+﻿site_name: searge | Cyberdeck
+site_url: "https://searge.pp.ua/deck"
+theme:
+  name: material
+  language: en
+  palette:
+    # Palette toggle for dark mode
+    - scheme: slate
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - scheme: default
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - header.autohide
+    - search.suggest
+    - search.share
+plugins:
+  - obsidian-bridge
+  - search
+  - privacy
+markdown_extensions:
+  - obsidian_callouts
+extra:
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.

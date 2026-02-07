@@ -1,0 +1,23 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# WIP files
+.env
+tmp
+
+# Obsidian workspace file
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/appearance.json
+
+# Logseq backup directory and recyle bin
+logseq/bak
+logseq/.recycle
