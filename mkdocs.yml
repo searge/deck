@@ -20,6 +20,7 @@ theme:
     - header.autohide
     - search.suggest
     - search.share
+docs_dir: core
 plugins:
   - obsidian-bridge
   - search
