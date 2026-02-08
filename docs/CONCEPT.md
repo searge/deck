@@ -12,15 +12,16 @@ The structure is designed to grow without rotting. New modules slot into `core/`
 Deck/
 ├── assets/
 ├── templates/
-├── daemons/                  # Automation, scripts
+├── daemons/                  # Automation, scripts, background agents
 │
 ├── docs/                     # The system describes itself
 │   ├── CONCEPT.md            # This file. Why the deck exists
+│   ├── LORE.md               # Mythology. Daemons, ghosts, and the net
 │   └── SCHEMA.md             # Conventions: naming, tagging, linking
 │
-└── core/                     # Long-term memory
-    ├── net/                  # Networking, DNS, mesh, protocols
-    ├── hacks/                # Snippets, runbooks, quick access
+└── core/                     # Long-term memory (MkDocs source)
+    ├── hacks/                # Quickhacks: snippets, one-liners
+    ├── net/                  # Networking, DNS, protocols
     └── .../                  # Modular expansion
 ```
 
