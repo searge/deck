@@ -14,12 +14,23 @@ The phone book of the internet.
 
 ## How resolution works
 
-```
-Browser → Local cache → /etc/hosts → Resolver (e.g. 8.8.8.8)
-  → Root NS (.)
-    → TLD NS (.com)
-      → Authoritative NS (example.com)
-        → IP address
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant R as Resolver<br/>8.8.8.8
+    participant Root as Root NS<br/>.
+    participant TLD as TLD NS<br/>.com
+    participant Auth as Authoritative NS<br/>example.com
+
+    B->>B: local cache / /etc/hosts
+    B->>R: who is example.com?
+    R->>Root: query example.com
+    Root-->>R: ask .com TLD
+    R->>TLD: query example.com
+    TLD-->>R: ask ns1.example.com
+    R->>Auth: query example.com
+    Auth-->>R: 93.184.216.34
+    R-->>B: 93.184.216.34
 ```
 
 ## Record types
