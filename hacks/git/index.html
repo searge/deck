@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands.">
+        <meta name="description" content="Git workflow, stash, rebase, and common operations.">
       
       
         <meta name="author" content="searge">
@@ -29,7 +29,7 @@
     
     
       
-        <title>git - Cyberdeck</title>
+        <title>Git - Cyberdeck</title>
       
     
     
@@ -66,16 +66,16 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="git - Cyberdeck" />
-<meta property="og:description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands." />
+<meta property="og:title" content="Git - Cyberdeck" />
+<meta property="og:description" content="Git workflow, stash, rebase, and common operations." />
 <meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/git/index.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://searge.pp.ua/deck/hacks/git/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="git - Cyberdeck" />
-<meta property="twitter:description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands." />
+<meta property="twitter:title" content="Git - Cyberdeck" />
+<meta property="twitter:description" content="Git workflow, stash, rebase, and common operations." />
 <meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/git/index.png" />
 </head>
   
@@ -132,7 +132,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              git
+              Git
             
           </span>
         </div>
@@ -294,7 +294,7 @@
   <span class="md-ellipsis">
     
   
-    core
+    Cyberdeck
   
 
     
@@ -401,7 +401,7 @@
   <span class="md-ellipsis">
     
   
-    net_info
+    Network diagnostics
   
 
     
@@ -429,7 +429,7 @@
   <span class="md-ellipsis">
     
   
-    nginx
+    Nginx
   
 
     
@@ -529,7 +529,7 @@
   <span class="md-ellipsis">
     
   
-    emacs_mode
+    Emacs mode
   
 
     
@@ -613,7 +613,7 @@
   <span class="md-ellipsis">
     
   
-    ssh
+    SSH
   
 
     
@@ -641,7 +641,7 @@
   <span class="md-ellipsis">
     
   
-    user
+    User management
   
 
     
@@ -968,7 +968,7 @@
   <span class="md-ellipsis">
     
   
-    git_cicd
+    Git CI/CD
   
 
     
@@ -1450,30 +1450,57 @@
 
 
 <h1 id="git">git</h1>
-<h2 id="color-config">Color config</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>color.ui<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<h2 id="config">Config</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>color.ui<span class="w"> </span><span class="nb">true</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.pager<span class="w"> </span><span class="s1">&#39;less -r&#39;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>pull.rebase<span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>init.defaultBranch<span class="w"> </span>main
 </code></pre></div>
 <h2 id="stash">Stash</h2>
-<p>Save uncommitted changes (staged and unstaged):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>stash
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>stash<span class="w">                                  </span><span class="c1"># save staged + unstaged</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>git<span class="w"> </span>stash<span class="w"> </span>-u<span class="w">                               </span><span class="c1"># include untracked</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>git<span class="w"> </span>stash<span class="w"> </span>save<span class="w"> </span><span class="s2">&quot;wip: feature X&quot;</span><span class="w">            </span><span class="c1"># with message</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>git<span class="w"> </span>stash<span class="w"> </span>show<span class="w">                             </span><span class="c1"># summary</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>git<span class="w"> </span>stash<span class="w"> </span>show<span class="w"> </span>-p<span class="w">                          </span><span class="c1"># full diff</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>git<span class="w"> </span>stash<span class="w"> </span>list<span class="w">                             </span><span class="c1"># all stashes</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>git<span class="w"> </span>stash<span class="w"> </span>pop<span class="w">                              </span><span class="c1"># apply + remove</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>git<span class="w"> </span>stash<span class="w"> </span>pop<span class="w"> </span>stash@<span class="o">{</span><span class="m">2</span><span class="o">}</span><span class="w">                    </span><span class="c1"># specific stash</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>git<span class="w"> </span>stash<span class="w"> </span>drop<span class="w"> </span>stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span><span class="w">                   </span><span class="c1"># remove without applying</span>
 </code></pre></div>
-<p>Include untracked files:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>stash<span class="w"> </span>-u
+<h2 id="branches">Branches</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>branch<span class="w"> </span>-a<span class="w">                              </span><span class="c1"># list all branches</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>feature/old<span class="w">                  </span><span class="c1"># delete merged branch</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>git<span class="w"> </span>branch<span class="w"> </span>-D<span class="w"> </span>feature/old<span class="w">                  </span><span class="c1"># force delete</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/new<span class="w">                </span><span class="c1"># create and switch</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>feature/new<span class="w">                  </span><span class="c1"># same, modern syntax</span>
 </code></pre></div>
-<p>Annotate with a message:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>stash<span class="w"> </span>save<span class="w"> </span><span class="s2">&quot;work in progress: feature X&quot;</span>
+<h2 id="rebase">Rebase</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>rebase<span class="w"> </span>main<span class="w">                            </span><span class="c1"># rebase current onto main</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>git<span class="w"> </span>rebase<span class="w"> </span>--abort<span class="w">                         </span><span class="c1"># cancel mid-rebase</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>git<span class="w"> </span>rebase<span class="w"> </span>--continue<span class="w">                      </span><span class="c1"># after resolving conflicts</span>
 </code></pre></div>
-<p>Show stash summary:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git<span class="w"> </span>stash<span class="w"> </span>show
+<h2 id="log">Log</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--graph<span class="w"> </span>--all<span class="w">            </span><span class="c1"># visual history</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>-10<span class="w">                      </span><span class="c1"># last 10 commits</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>git<span class="w"> </span>log<span class="w"> </span>--author<span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="w"> </span>--since<span class="o">=</span><span class="s2">&quot;2 weeks&quot;</span><span class="w">  </span><span class="c1"># filtered</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>git<span class="w"> </span>log<span class="w"> </span>-p<span class="w"> </span>--<span class="w"> </span>path/to/file<span class="w">                 </span><span class="c1"># file history with diff</span>
 </code></pre></div>
-<p>Re-apply and remove from stash:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>stash<span class="w"> </span>pop
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>git<span class="w"> </span>stash<span class="w"> </span>pop<span class="w"> </span>stash@<span class="o">{</span><span class="m">2</span><span class="o">}</span><span class="w">  </span><span class="c1"># specific stash</span>
+<h2 id="undo">Undo</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>reset<span class="w"> </span>HEAD~1<span class="w">                           </span><span class="c1"># undo last commit (keep changes)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD~1<span class="w">                    </span><span class="c1"># undo last commit (discard changes)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>file.txt<span class="w">                   </span><span class="c1"># discard changes in file</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>git<span class="w"> </span>restore<span class="w"> </span>file.txt<span class="w">                       </span><span class="c1"># same, modern syntax</span>
 </code></pre></div>
 <h2 id="cleanup">Cleanup</h2>
-<p>Remove untracked files and directories:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>clean<span class="w"> </span>-fd
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>clean<span class="w"> </span>-fd<span class="w">                              </span><span class="c1"># remove untracked files + dirs</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>git<span class="w"> </span>clean<span class="w"> </span>-fdn<span class="w">                             </span><span class="c1"># dry run</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>git<span class="w"> </span>remote<span class="w"> </span>prune<span class="w"> </span>origin<span class="w">                    </span><span class="c1"># remove stale remote refs</span>
+</code></pre></div>
+<h2 id="tags">Tags</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>git<span class="w"> </span>tag<span class="w"> </span>v1.0.0<span class="w">                             </span><span class="c1"># lightweight tag</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>git<span class="w"> </span>tag<span class="w"> </span>-a<span class="w"> </span>v1.0.0<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Release 1.0.0&quot;</span><span class="w">      </span><span class="c1"># annotated tag</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>v1.0.0<span class="w">                     </span><span class="c1"># push single tag</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--tags<span class="w">                     </span><span class="c1"># push all tags</span>
 </code></pre></div>
 <h2 id="see-also">See also</h2>
 <ul>
@@ -1538,13 +1565,13 @@
         
         
           
-          <a href="git_cicd/" class="md-footer__link md-footer__link--next" aria-label="Next: git_cicd">
+          <a href="git_cicd/" class="md-footer__link md-footer__link--next" aria-label="Next: Git CI/CD">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                git_cicd
+                Git CI/CD
               </div>
             </div>
             <div class="md-footer__button md-icon">

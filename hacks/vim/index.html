@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands.">
+        <meta name="description" content="Vim survival kit — navigation, editing, and common operations.">
       
       
         <meta name="author" content="searge">
@@ -29,7 +29,7 @@
     
     
       
-        <title>vim - Cyberdeck</title>
+        <title>Vim - Cyberdeck</title>
       
     
     
@@ -66,16 +66,16 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="vim - Cyberdeck" />
-<meta property="og:description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands." />
+<meta property="og:title" content="Vim - Cyberdeck" />
+<meta property="og:description" content="Vim survival kit — navigation, editing, and common operations." />
 <meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/vim/index.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://searge.pp.ua/deck/hacks/vim/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="vim - Cyberdeck" />
-<meta property="twitter:description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands." />
+<meta property="twitter:title" content="Vim - Cyberdeck" />
+<meta property="twitter:description" content="Vim survival kit — navigation, editing, and common operations." />
 <meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/vim/index.png" />
 </head>
   
@@ -132,7 +132,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              vim
+              Vim
             
           </span>
         </div>
@@ -294,7 +294,7 @@
   <span class="md-ellipsis">
     
   
-    core
+    Cyberdeck
   
 
     
@@ -401,7 +401,7 @@
   <span class="md-ellipsis">
     
   
-    net_info
+    Network diagnostics
   
 
     
@@ -429,7 +429,7 @@
   <span class="md-ellipsis">
     
   
-    nginx
+    Nginx
   
 
     
@@ -529,7 +529,7 @@
   <span class="md-ellipsis">
     
   
-    emacs_mode
+    Emacs mode
   
 
     
@@ -613,7 +613,7 @@
   <span class="md-ellipsis">
     
   
-    ssh
+    SSH
   
 
     
@@ -641,7 +641,7 @@
   <span class="md-ellipsis">
     
   
-    user
+    User management
   
 
     
@@ -966,7 +966,7 @@
   <span class="md-ellipsis">
     
   
-    git_cicd
+    Git CI/CD
   
 
     
@@ -1450,6 +1450,139 @@
 
 
 <h1 id="vim">vim</h1>
+<h2 id="modes">Modes</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Mode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>i</code></td>
+<td>Insert</td>
+<td>Type text before cursor</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>Insert</td>
+<td>Type text after cursor</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>Insert</td>
+<td>New line below</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Normal</td>
+<td>Command mode</td>
+</tr>
+<tr>
+<td><code>v</code></td>
+<td>Visual</td>
+<td>Select characters</td>
+</tr>
+<tr>
+<td><code>V</code></td>
+<td>Visual Line</td>
+<td>Select lines</td>
+</tr>
+<tr>
+<td><code>:</code></td>
+<td>Command</td>
+<td>Ex commands</td>
+</tr>
+</tbody>
+</table>
+<h2 id="navigation">Navigation</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h j k l</code></td>
+<td>Left, down, up, right</td>
+</tr>
+<tr>
+<td><code>w / b</code></td>
+<td>Next / previous word</td>
+</tr>
+<tr>
+<td><code>0 / $</code></td>
+<td>Start / end of line</td>
+</tr>
+<tr>
+<td><code>gg / G</code></td>
+<td>Start / end of file</td>
+</tr>
+<tr>
+<td><code>Ctrl-d / Ctrl-u</code></td>
+<td>Half page down / up</td>
+</tr>
+<tr>
+<td><code>/{pattern}</code></td>
+<td>Search forward</td>
+</tr>
+<tr>
+<td><code>?{pattern}</code></td>
+<td>Search backward</td>
+</tr>
+<tr>
+<td><code>n / N</code></td>
+<td>Next / previous match</td>
+</tr>
+</tbody>
+</table>
+<h2 id="editing">Editing</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dd</code></td>
+<td>Delete line</td>
+</tr>
+<tr>
+<td><code>yy</code></td>
+<td>Yank (copy) line</td>
+</tr>
+<tr>
+<td><code>p / P</code></td>
+<td>Paste after / before</td>
+</tr>
+<tr>
+<td><code>u</code></td>
+<td>Undo</td>
+</tr>
+<tr>
+<td><code>Ctrl-r</code></td>
+<td>Redo</td>
+</tr>
+<tr>
+<td><code>ciw</code></td>
+<td>Change inner word</td>
+</tr>
+<tr>
+<td><code>ci"</code></td>
+<td>Change inside quotes</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>Repeat last command</td>
+</tr>
+</tbody>
+</table>
 <h2 id="paste-mode">Paste mode</h2>
 <p>Disable autoindent before pasting:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">:</span><span class="k">set</span> <span class="nb">paste</span>
@@ -1459,6 +1592,20 @@
 </code></pre></div>
 <p>Toggle with F3 (add to <code>.vimrc</code>):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">set</span> <span class="nb">pastetoggle</span><span class="p">=&lt;</span>F3<span class="p">&gt;</span>
+</code></pre></div>
+<h2 id="search-and-replace">Search and replace</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">:</span>%s<span class="sr">/old/</span><span class="k">new</span>/<span class="k">g</span>       <span class="c">&quot; replace all in file</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">:</span>%s<span class="sr">/old/</span><span class="k">new</span>/gc      <span class="c">&quot; replace with confirmation</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">:</span><span class="m">5</span><span class="p">,</span><span class="m">20</span>s<span class="sr">/old/</span><span class="k">new</span>/<span class="k">g</span>    <span class="c">&quot; replace in line range</span>
+</code></pre></div>
+<h2 id="file-operations">File operations</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">:</span><span class="k">w</span>                  <span class="c">&quot; save</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">:</span><span class="k">q</span>                  <span class="c">&quot; quit</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">:</span><span class="k">wq</span>                 <span class="c">&quot; save and quit</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">:</span><span class="k">q</span><span class="p">!</span>                 <span class="c">&quot; quit without saving</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">:</span><span class="k">e</span> filename         <span class="c">&quot; open file</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">:</span>split filename     <span class="c">&quot; horizontal split</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">:</span><span class="k">vsplit</span> filename    <span class="c">&quot; vertical split</span>
 </code></pre></div>
 <h2 id="references">References</h2>
 <ul>

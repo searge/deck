@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands.">
+        <meta name="description" content="GitLab CI/CD pipeline snippets for git operations.">
       
       
         <meta name="author" content="searge">
@@ -29,7 +29,7 @@
     
     
       
-        <title>git_cicd - Cyberdeck</title>
+        <title>Git CI/CD - Cyberdeck</title>
       
     
     
@@ -66,16 +66,16 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="git_cicd - Cyberdeck" />
-<meta property="og:description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands." />
+<meta property="og:title" content="Git CI/CD - Cyberdeck" />
+<meta property="og:description" content="GitLab CI/CD pipeline snippets for git operations." />
 <meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/git/git_cicd.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://searge.pp.ua/deck/hacks/git/git_cicd/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="git_cicd - Cyberdeck" />
-<meta property="twitter:description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands." />
+<meta property="twitter:title" content="Git CI/CD - Cyberdeck" />
+<meta property="twitter:description" content="GitLab CI/CD pipeline snippets for git operations." />
 <meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/git/git_cicd.png" />
 </head>
   
@@ -132,7 +132,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              git_cicd
+              Git CI/CD
             
           </span>
         </div>
@@ -294,7 +294,7 @@
   <span class="md-ellipsis">
     
   
-    core
+    Cyberdeck
   
 
     
@@ -401,7 +401,7 @@
   <span class="md-ellipsis">
     
   
-    net_info
+    Network diagnostics
   
 
     
@@ -429,7 +429,7 @@
   <span class="md-ellipsis">
     
   
-    nginx
+    Nginx
   
 
     
@@ -529,7 +529,7 @@
   <span class="md-ellipsis">
     
   
-    emacs_mode
+    Emacs mode
   
 
     
@@ -613,7 +613,7 @@
   <span class="md-ellipsis">
     
   
-    ssh
+    SSH
   
 
     
@@ -641,7 +641,7 @@
   <span class="md-ellipsis">
     
   
-    user
+    User management
   
 
     
@@ -977,7 +977,7 @@
   <span class="md-ellipsis">
     
   
-    git_cicd
+    Git CI/CD
   
 
     
@@ -995,7 +995,7 @@
   <span class="md-ellipsis">
     
   
-    git_cicd
+    Git CI/CD
   
 
     
@@ -1036,6 +1036,28 @@
     <span class="md-ellipsis">
       
         Pull changes by branch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-git-in-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure git in pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shallow-clone-faster-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shallow clone (faster CI)
       
     </span>
   </a>
@@ -1544,6 +1566,17 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git pull origin $DEV_BRANCH --rebase=true --allow-unrelated-histories</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git remote -v; git status</span>
 </code></pre></div>
+<h2 id="configure-git-in-pipeline">Configure git in pipeline</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">.git_config</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;git_config</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git config --global user.email &quot;ci@example.com&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git config --global user.name &quot;CI Bot&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git remote set-url origin &quot;https://oauth2:${CI_TOKEN}@gitlab.com/${CI_PROJECT_PATH}.git&quot;</span>
+</code></pre></div>
+<h2 id="shallow-clone-faster-ci">Shallow clone (faster CI)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">variables</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">GIT_DEPTH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">GIT_STRATEGY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fetch</span>
+</code></pre></div>
 
 
 
@@ -1582,7 +1615,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: git">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Git">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1592,7 +1625,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                git
+                Git
               </div>
             </div>
           </a>
