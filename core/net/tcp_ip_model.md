@@ -5,6 +5,7 @@ tags:
 aliases:
   - TCP/IP Model
 title: TCP/IP Model
+description: Four-layer TCP/IP model with protocol mapping and port reference.
 ---
 
 # tcp_ip_model
@@ -32,10 +33,11 @@ This is what the internet actually runs on.
 
 ## TCP three-way handshake
 
-```
-Client → Server:  SYN         (I want to connect)
-Server → Client:  SYN-ACK     (OK, acknowledged)
-Client → Server:  ACK          (Confirmed, let's go)
+```mermaid
+sequenceDiagram
+    Client->>Server: SYN
+    Server->>Client: SYN-ACK
+    Client->>Server: ACK
 ```
 
 ## Key port numbers

@@ -2,57 +2,89 @@
 tags:
   - git
   - snippets
+title: Git
+aliases:
+  - Git
+description: Git workflow, stash, rebase, and common operations.
 
 ---
 
 # git
 
-## Color config
+## Config
 
 ```bash
-git config --global color.ui true &&
+git config --global color.ui true
 git config --global core.pager 'less -r'
+git config --global pull.rebase true
+git config --global init.defaultBranch main
 ```
 
 ## Stash
 
-Save uncommitted changes (staged and unstaged):
-
 ```bash
-git stash
+git stash                                  # save staged + unstaged
+git stash -u                               # include untracked
+git stash save "wip: feature X"            # with message
+git stash show                             # summary
+git stash show -p                          # full diff
+git stash list                             # all stashes
+git stash pop                              # apply + remove
+git stash pop stash@{2}                    # specific stash
+git stash drop stash@{0}                   # remove without applying
 ```
 
-Include untracked files:
+## Branches
 
 ```bash
-git stash -u
+git branch -a                              # list all branches
+git branch -d feature/old                  # delete merged branch
+git branch -D feature/old                  # force delete
+git checkout -b feature/new                # create and switch
+git switch -c feature/new                  # same, modern syntax
 ```
 
-Annotate with a message:
+## Rebase
 
 ```bash
-git stash save "work in progress: feature X"
+git rebase main                            # rebase current onto main
+git rebase --abort                         # cancel mid-rebase
+git rebase --continue                      # after resolving conflicts
 ```
 
-Show stash summary:
+## Log
 
 ```bash
-git stash show
+git log --oneline --graph --all            # visual history
+git log --oneline -10                      # last 10 commits
+git log --author="name" --since="2 weeks"  # filtered
+git log -p -- path/to/file                 # file history with diff
 ```
 
-Re-apply and remove from stash:
+## Undo
 
 ```bash
-git stash pop
-git stash pop stash@{2}  # specific stash
+git reset HEAD~1                           # undo last commit (keep changes)
+git reset --hard HEAD~1                    # undo last commit (discard changes)
+git checkout -- file.txt                   # discard changes in file
+git restore file.txt                       # same, modern syntax
 ```
 
 ## Cleanup
 
-Remove untracked files and directories:
+```bash
+git clean -fd                              # remove untracked files + dirs
+git clean -fdn                             # dry run
+git remote prune origin                    # remove stale remote refs
+```
+
+## Tags
 
 ```bash
-git clean -fd
+git tag v1.0.0                             # lightweight tag
+git tag -a v1.0.0 -m "Release 1.0.0"      # annotated tag
+git push origin v1.0.0                     # push single tag
+git push origin --tags                     # push all tags
 ```
 
 ## See also

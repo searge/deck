@@ -3,6 +3,10 @@ tags:
   - network
   - linux
   - diagnostics
+title: Network diagnostics
+aliases:
+  - Network diagnostics
+description: Network interface diagnostics and connection checks.
 
 ---
 

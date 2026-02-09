@@ -5,6 +5,7 @@ tags:
 aliases:
   - Databases
 title: Databases
+description: MariaDB, PostgreSQL, and MySQL cheat sheets.
 ---
 
 # databases

@@ -5,6 +5,7 @@ tags:
 aliases:
   - Kubernetes hacks
 title: Kubernetes hacks
+description: Kubernetes cheat sheet — kubectl, helm, and cluster operations.
 ---
 
 # kubernetes

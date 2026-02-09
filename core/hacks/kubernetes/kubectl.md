@@ -5,6 +5,7 @@ tags:
 aliases:
   - kubectl commands
 title: kubectl commands
+description: kubectl commands for pods, secrets, port-forwarding, and debugging.
 ---
 
 # kubectl

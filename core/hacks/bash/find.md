@@ -3,6 +3,10 @@ tags:
   - bash
   - linux
   - filesystem
+title: find
+aliases:
+  - find
+description: find command patterns for file search and audit.
 
 ---
 

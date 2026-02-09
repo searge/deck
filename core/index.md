@@ -1,10 +1,14 @@
 ---
 tags:
   - index
+title: Cyberdeck
+aliases:
+  - Cyberdeck
+description: Knowledge base for platform engineering, quickhacks, and networking.
 
 ---
 
-# core
+# Cyberdeck
 
 Long-term memory of the deck. Everything the ghost learned, mapped, and survived.
 

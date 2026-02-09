@@ -5,6 +5,7 @@ tags:
 aliases:
   - MySQL
 title: MySQL
+description: MySQL user management and database operations.
 ---
 
 # mysql

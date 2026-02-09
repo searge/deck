@@ -6,6 +6,7 @@ aliases:
   - HTTP
   - HTTPS
 title: HTTP
+description: HTTP methods, status codes, and protocol versions.
 ---
 
 # http
@@ -15,7 +16,7 @@ HTTPS is HTTP over [[tls]].
 
 ## Request structure
 
-```
+```text
 METHOD /path HTTP/1.1
 Host: example.com
 Header: value

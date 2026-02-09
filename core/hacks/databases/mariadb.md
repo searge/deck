@@ -5,6 +5,7 @@ tags:
 aliases:
   - MariaDB
 title: MariaDB
+description: MariaDB connection, dump, and restore commands.
 ---
 
 # mariadb

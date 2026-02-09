@@ -3,6 +3,10 @@ tags:
   - bash
   - linux
   - snippets
+title: Bash
+aliases:
+  - Bash
+description: Bash one-liners for disk, locale, and package management.
 
 ---
 # bash

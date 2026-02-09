@@ -3,6 +3,10 @@ tags:
   - bash
   - shell
   - keybindings
+title: Emacs mode
+aliases:
+  - Emacs mode
+description: Bash Emacs mode keybindings for movement, deletion, and history.
 
 ---
 

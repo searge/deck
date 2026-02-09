@@ -3,6 +3,10 @@ tags:
   - nginx
   - troubleshooting
   - linux
+title: Nginx
+aliases:
+  - Nginx
+description: Nginx troubleshooting and configuration.
 
 ---
 

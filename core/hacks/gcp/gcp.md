@@ -5,6 +5,7 @@ tags:
 aliases:
   - Google Cloud Platform
 title: Google Cloud Platform
+description: GCP auth, compute, and GKE cluster lifecycle commands.
 ---
 
 # gcp

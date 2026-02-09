@@ -3,6 +3,10 @@ tags:
   - git
   - cicd
   - gitlab
+title: Git CI/CD
+aliases:
+  - Git CI/CD
+description: GitLab CI/CD pipeline snippets for git operations.
 
 ---
 
@@ -31,4 +35,21 @@ Git operations inside CI/CD pipelines.
   - git reset --hard $SHORT_SHA && git checkout $DEV_BRANCH
   - git pull origin $DEV_BRANCH --rebase=true --allow-unrelated-histories
   - git remote -v; git status
+```
+
+## Configure git in pipeline
+
+```yaml
+.git_config: &git_config
+  - git config --global user.email "ci@example.com"
+  - git config --global user.name "CI Bot"
+  - git remote set-url origin "https://oauth2:${CI_TOKEN}@gitlab.com/${CI_PROJECT_PATH}.git"
+```
+
+## Shallow clone (faster CI)
+
+```yaml
+variables:
+  GIT_DEPTH: 1
+  GIT_STRATEGY: fetch
 ```

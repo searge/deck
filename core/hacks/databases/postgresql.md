@@ -5,6 +5,7 @@ tags:
 aliases:
   - PostgreSQL
 title: PostgreSQL
+description: PostgreSQL dump, restore, and Kubernetes operations.
 ---
 
 # postgresql

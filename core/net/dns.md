@@ -5,6 +5,7 @@ tags:
 aliases:
   - DNS
 title: DNS
+description: DNS resolution, record types, and diagnostic commands.
 ---
 
 # dns

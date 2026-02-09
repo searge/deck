@@ -5,6 +5,7 @@ tags:
 aliases:
   - OSI Model
 title: OSI Model
+description: Seven layers of the OSI model with troubleshooting guide.
 ---
 
 # osi_model

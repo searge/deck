@@ -3,6 +3,10 @@ tags:
   - bash
   - linux
   - administration
+title: User management
+aliases:
+  - User management
+description: Linux user and group administration commands.
 
 ---
 

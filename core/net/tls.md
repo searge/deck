@@ -7,6 +7,7 @@ aliases:
   - TLS
   - SSL
 title: TLS
+description: TLS handshake, certificates, and debugging commands.
 ---
 
 # tls
@@ -28,12 +29,13 @@ vulnerabilities. TLS (Transport Layer Security) is the modern replacement.
 
 ## TLS handshake (simplified)
 
-```
-Client → Server:  ClientHello     (supported ciphers, TLS version)
-Server → Client:  ServerHello     (chosen cipher, certificate)
-Client:           Verify cert     (check CA chain, expiry, domain)
-Client → Server:  Key exchange    (shared secret via asymmetric crypto)
-Both:             Derive keys     (symmetric encryption begins)
+```mermaid
+sequenceDiagram
+    Client->>Server: ClientHello (ciphers, version)
+    Server->>Client: ServerHello (cipher, cert)
+    Client->>Client: Verify certificate
+    Client->>Server: Key exchange
+    Note over Client,Server: Symmetric encryption begins
 ```
 
 TLS 1.3 reduced the handshake from 2 round-trips to 1.

@@ -3,6 +3,10 @@ tags:
   - ssh
   - linux
   - security
+title: SSH
+aliases:
+  - SSH
+description: SSH key management, agent setup, and host key operations.
 
 ---
 
