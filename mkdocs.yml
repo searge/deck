@@ -18,9 +18,12 @@ theme:
         name: Switch to dark mode
   features:
     - header.autohide
+    - navigation.indexes
     - search.suggest
     - search.share
 docs_dir: core
+hooks:
+  - hooks/folder_to_index.py
 plugins:
   - obsidian-bridge
   - search
