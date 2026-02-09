@@ -25,7 +25,7 @@
     
     
       
-        <title>gcp - searge | Cyberdeck</title>
+        <title>Google Cloud Platform - searge | Cyberdeck</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              gcp
+              Google Cloud Platform
             
           </span>
         </div>
@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -678,7 +678,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -706,7 +706,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -734,7 +734,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -762,7 +762,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -856,7 +856,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -874,7 +874,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1210,7 +1210,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1238,7 +1238,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1266,7 +1266,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1439,7 +1439,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1467,7 +1467,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1495,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1523,7 +1523,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1551,7 +1551,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1579,7 +1579,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1767,54 +1767,54 @@
 
 <h1 id="gcp">gcp</h1>
 <h2 id="auth">Auth</h2>
-<pre><code class="language-bash">gcloud auth login
-gcloud auth configure-docker
-gcloud auth list
-gcloud cheat-sheet
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>gcloud<span class="w"> </span>auth<span class="w"> </span>login
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>gcloud<span class="w"> </span>auth<span class="w"> </span>configure-docker
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>gcloud<span class="w"> </span>auth<span class="w"> </span>list
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>gcloud<span class="w"> </span>cheat-sheet
+</code></pre></div>
 <h2 id="config">Config</h2>
-<pre><code class="language-bash">gcloud config set compute/region $region
-gcloud config set compute/zone $zone
-gcloud config list
-gcloud config config-helper --format=json
-</code></pre>
-<pre><code class="language-bash">gcloud info --format='value(installation.sdk_root)'
-gcloud info --format='value(config.paths.global_config_dir)'
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>compute/region<span class="w"> </span><span class="nv">$region</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>compute/zone<span class="w"> </span><span class="nv">$zone</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>gcloud<span class="w"> </span>config<span class="w"> </span>list
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>gcloud<span class="w"> </span>config<span class="w"> </span>config-helper<span class="w"> </span>--format<span class="o">=</span>json
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>gcloud<span class="w"> </span>info<span class="w"> </span>--format<span class="o">=</span><span class="s1">&#39;value(installation.sdk_root)&#39;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>gcloud<span class="w"> </span>info<span class="w"> </span>--format<span class="o">=</span><span class="s1">&#39;value(config.paths.global_config_dir)&#39;</span>
+</code></pre></div>
 <h2 id="compute">Compute</h2>
-<pre><code class="language-bash">gcloud compute zones list
-gcloud compute regions list
-gcloud compute project-info describe --project $project
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>zones<span class="w"> </span>list
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>regions<span class="w"> </span>list
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>project-info<span class="w"> </span>describe<span class="w"> </span>--project<span class="w"> </span><span class="nv">$project</span>
+</code></pre></div>
 <h3 id="ssh-to-instance">SSH to instance</h3>
-<pre><code class="language-bash">gcloud compute ssh \
-  --zone &quot;$zone&quot; &quot;$instance&quot; \
-  --project &quot;$project&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>gcloud<span class="w"> </span>compute<span class="w"> </span>ssh<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--zone<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$zone</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$instance</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>--project<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$project</span><span class="s2">&quot;</span>
+</code></pre></div>
 <h2 id="gke">GKE</h2>
 <h3 id="install-components">Install components</h3>
-<pre><code class="language-bash">gcloud components install kubectl gke-gcloud-auth-plugin
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>gcloud<span class="w"> </span>components<span class="w"> </span>install<span class="w"> </span>kubectl<span class="w"> </span>gke-gcloud-auth-plugin
+</code></pre></div>
 <h3 id="create-cluster">Create cluster</h3>
-<pre><code class="language-bash">gcloud container clusters create $cluster \
-  --zone $zone \
-  --machine-type e2-medium --num-nodes 2
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>gcloud<span class="w"> </span>container<span class="w"> </span>clusters<span class="w"> </span>create<span class="w"> </span><span class="nv">$cluster</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span>--zone<span class="w"> </span><span class="nv">$zone</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>--machine-type<span class="w"> </span>e2-medium<span class="w"> </span>--num-nodes<span class="w"> </span><span class="m">2</span>
+</code></pre></div>
 <h3 id="get-credentials">Get credentials</h3>
-<pre><code class="language-bash">gcloud container clusters get-credentials $cluster \
-  --zone $zone \
-  --project $project
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>gcloud<span class="w"> </span>container<span class="w"> </span>clusters<span class="w"> </span>get-credentials<span class="w"> </span><span class="nv">$cluster</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--zone<span class="w"> </span><span class="nv">$zone</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>--project<span class="w"> </span><span class="nv">$project</span>
+</code></pre></div>
 <h3 id="delete-cluster">Delete cluster</h3>
-<pre><code class="language-bash">gcloud container clusters delete $cluster \
-  --zone $zone \
-  --project $project
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>gcloud<span class="w"> </span>container<span class="w"> </span>clusters<span class="w"> </span>delete<span class="w"> </span><span class="nv">$cluster</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>--zone<span class="w"> </span><span class="nv">$zone</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>--project<span class="w"> </span><span class="nv">$project</span>
+</code></pre></div>
 <h3 id="delete-project">Delete project</h3>
-<pre><code class="language-bash">gcloud projects delete $project
-# Undo within grace period:
-gcloud projects undelete $project
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>gcloud<span class="w"> </span>projects<span class="w"> </span>delete<span class="w"> </span><span class="nv">$project</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># Undo within grace period:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>gcloud<span class="w"> </span>projects<span class="w"> </span>undelete<span class="w"> </span><span class="nv">$project</span>
+</code></pre></div>
 
 
 

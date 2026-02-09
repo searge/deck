@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -797,7 +797,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -825,7 +825,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -853,7 +853,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -881,7 +881,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -964,7 +964,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1158,7 +1158,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1186,7 +1186,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1214,7 +1214,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1387,7 +1387,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1415,7 +1415,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1443,7 +1443,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1471,7 +1471,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1499,7 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1527,7 +1527,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1667,38 +1667,38 @@
 <p>Network diagnostics and information gathering.</p>
 <h2 id="open-ports">Open ports</h2>
 <h3 id="lsof">lsof</h3>
-<pre><code class="language-bash">lsof -i -P -n | grep LISTEN
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>lsof<span class="w"> </span>-i<span class="w"> </span>-P<span class="w"> </span>-n<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>LISTEN
+</code></pre></div>
 <p>Specific port:</p>
-<pre><code class="language-bash">lsof -i:22
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>lsof<span class="w"> </span>-i:22
+</code></pre></div>
 <h3 id="netstat">netstat</h3>
-<pre><code class="language-bash">netstat -tulpn | grep LISTEN
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>netstat<span class="w"> </span>-tulpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>LISTEN
+</code></pre></div>
 <h3 id="ss">ss</h3>
-<pre><code class="language-bash">ss -tulpn | grep LISTEN
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ss<span class="w"> </span>-tulpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>LISTEN
+</code></pre></div>
 <h2 id="ip-geolocation">IP geolocation</h2>
 <p>Specific IP:</p>
-<pre><code class="language-bash">curl 'https://ipapi.co/8.8.8.8/json/'
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span><span class="s1">&#39;https://ipapi.co/8.8.8.8/json/&#39;</span>
+</code></pre></div>
 <p>Your own IP:</p>
-<pre><code class="language-bash">curl 'https://ipapi.co/json/'
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span><span class="s1">&#39;https://ipapi.co/json/&#39;</span>
+</code></pre></div>
 <h2 id="routing">Routing</h2>
-<pre><code class="language-bash">ip link
-ip addr
-ip route
-route
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ip<span class="w"> </span>link
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ip<span class="w"> </span>addr
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>ip<span class="w"> </span>route
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>route
+</code></pre></div>
 <p>Add address and routes:</p>
-<pre><code class="language-bash">ip addr add 192.168.1.10/24 dev eth0
-ip route add 192.168.1.0/24 via 192.168.2.1
-ip route add default via 192.168.2.1
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ip<span class="w"> </span>addr<span class="w"> </span>add<span class="w"> </span><span class="m">192</span>.168.1.10/24<span class="w"> </span>dev<span class="w"> </span>eth0
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>ip<span class="w"> </span>route<span class="w"> </span>add<span class="w"> </span><span class="m">192</span>.168.1.0/24<span class="w"> </span>via<span class="w"> </span><span class="m">192</span>.168.2.1
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>ip<span class="w"> </span>route<span class="w"> </span>add<span class="w"> </span>default<span class="w"> </span>via<span class="w"> </span><span class="m">192</span>.168.2.1
+</code></pre></div>
 <p>Check IP forwarding:</p>
-<pre><code class="language-bash">cat /proc/sys/net/ipv4/ip_forward
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cat<span class="w"> </span>/proc/sys/net/ipv4/ip_forward
+</code></pre></div>
 
 
 

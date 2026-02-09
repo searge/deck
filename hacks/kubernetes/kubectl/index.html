@@ -25,7 +25,7 @@
     
     
       
-        <title>kubectl - searge | Cyberdeck</title>
+        <title>kubectl commands - searge | Cyberdeck</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              kubectl
+              kubectl commands
             
           </span>
         </div>
@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -678,7 +678,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -706,7 +706,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -734,7 +734,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -762,7 +762,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -845,7 +845,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1041,7 +1041,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1078,7 +1078,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1096,7 +1096,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1282,7 +1282,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1455,7 +1455,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1483,7 +1483,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1511,7 +1511,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1539,7 +1539,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1567,7 +1567,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1595,7 +1595,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1800,69 +1800,69 @@
 <h1 id="kubectl">kubectl</h1>
 <h2 id="autocomplete">Autocomplete</h2>
 <h3 id="bash">Bash</h3>
-<pre><code class="language-bash">source &lt;(kubectl completion bash)
-
-cat &gt;&gt;~/.bashrc &lt;&lt;EOL
-source &lt;(kubectl completion bash)
-alias k=kubectl
-complete -o default -F __start_kubectl k
-EOL
-exec $SHELL
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">source</span><span class="w"> </span>&lt;<span class="o">(</span>kubectl<span class="w"> </span>completion<span class="w"> </span>bash<span class="o">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>cat<span class="w"> </span>&gt;&gt;~/.bashrc<span class="w"> </span><span class="s">&lt;&lt;EOL</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s">source &lt;(kubectl completion bash)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="s">alias k=kubectl</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="s">complete -o default -F __start_kubectl k</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="s">EOL</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">exec</span><span class="w"> </span><span class="nv">$SHELL</span>
+</code></pre></div>
 <h3 id="zsh">Zsh</h3>
-<pre><code class="language-bash">source &lt;(kubectl completion zsh)
-echo '[[ $commands[kubectl] ]] &amp;&amp; source &lt;(kubectl completion zsh)' &gt;&gt; ~/.zshrc
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">source</span><span class="w"> </span>&lt;<span class="o">(</span>kubectl<span class="w"> </span>completion<span class="w"> </span>zsh<span class="o">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[[ $commands[kubectl] ]] &amp;&amp; source &lt;(kubectl completion zsh)&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
+</code></pre></div>
 <h2 id="pods">Pods</h2>
-<pre><code class="language-bash">k get po
-k get po -o wide
-k get po --show-labels
-k get po -n $ns
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>k<span class="w"> </span>get<span class="w"> </span>po
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>k<span class="w"> </span>get<span class="w"> </span>po<span class="w"> </span>-o<span class="w"> </span>wide
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>k<span class="w"> </span>get<span class="w"> </span>po<span class="w"> </span>--show-labels
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>k<span class="w"> </span>get<span class="w"> </span>po<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span>
+</code></pre></div>
 <h2 id="deployments">Deployments</h2>
-<pre><code class="language-bash">k get deploy
-k get daemonset
-k get events
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>k<span class="w"> </span>get<span class="w"> </span>deploy
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>k<span class="w"> </span>get<span class="w"> </span>daemonset
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>k<span class="w"> </span>get<span class="w"> </span>events
+</code></pre></div>
 <h2 id="port-forwarding">Port forwarding</h2>
-<pre><code class="language-bash">k port-forward deployment/myapp 8080:8080
-k port-forward svc/myservice 8080:80
-k port-forward -n $ns svc/myservice 8088:80 &amp;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>k<span class="w"> </span>port-forward<span class="w"> </span>deployment/myapp<span class="w"> </span><span class="m">8080</span>:8080
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>k<span class="w"> </span>port-forward<span class="w"> </span>svc/myservice<span class="w"> </span><span class="m">8080</span>:80
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>k<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span>svc/myservice<span class="w"> </span><span class="m">8088</span>:80<span class="w"> </span><span class="p">&amp;</span>
+</code></pre></div>
 <h2 id="exec-into-pod">Exec into pod</h2>
-<pre><code class="language-bash">k exec -it -n $ns $pod -- /bin/sh
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>k<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span><span class="nv">$pod</span><span class="w"> </span>--<span class="w"> </span>/bin/sh
+</code></pre></div>
 <p>Select pod by label:</p>
-<pre><code class="language-bash">k exec -it -n $ns \
-  $(k get pods --selector=app=web -o jsonpath='{.items[0].metadata.name}' -n $ns) \
-  -c $container -- /bin/sh
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>k<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="k">$(</span>k<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--selector<span class="o">=</span><span class="nv">app</span><span class="o">=</span>web<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.items[0].metadata.name}&#39;</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-c<span class="w"> </span><span class="nv">$container</span><span class="w"> </span>--<span class="w"> </span>/bin/sh
+</code></pre></div>
 <h2 id="secrets">Secrets</h2>
-<pre><code class="language-bash">k create secret generic db-pass \
-  --from-literal=password='SECRET'
-
-k create secret docker-registry registry-secret \
-  --docker-server=&quot;registry.example.com&quot; \
-  --docker-username=&quot;user&quot; \
-  --docker-password=&quot;pass&quot; \
-  --namespace $ns
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>k<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>generic<span class="w"> </span>db-pass<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--from-literal<span class="o">=</span><span class="nv">password</span><span class="o">=</span><span class="s1">&#39;SECRET&#39;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>k<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>docker-registry<span class="w"> </span>registry-secret<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span>--docker-server<span class="o">=</span><span class="s2">&quot;registry.example.com&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span>--docker-username<span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span>--docker-password<span class="o">=</span><span class="s2">&quot;pass&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span>--namespace<span class="w"> </span><span class="nv">$ns</span>
+</code></pre></div>
 <h2 id="dry-run">Dry run</h2>
-<pre><code class="language-bash">k run nginx --image nginx --dry-run=client -o yaml
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>k<span class="w"> </span>run<span class="w"> </span>nginx<span class="w"> </span>--image<span class="w"> </span>nginx<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml
+</code></pre></div>
 <h2 id="configmaps">ConfigMaps</h2>
-<pre><code class="language-bash">k -n $ns get cm $configmap -o jsonpath=&quot;{.data.key}&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>k<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span>get<span class="w"> </span>cm<span class="w"> </span><span class="nv">$configmap</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.key}&quot;</span>
+</code></pre></div>
 <h2 id="krew-plugins">Krew plugins</h2>
-<pre><code class="language-bash">k krew install ctx
-k krew install ns
-k krew list
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>k<span class="w"> </span>krew<span class="w"> </span>install<span class="w"> </span>ctx
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>k<span class="w"> </span>krew<span class="w"> </span>install<span class="w"> </span>ns
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>k<span class="w"> </span>krew<span class="w"> </span>list
+</code></pre></div>
 <h2 id="cluster-info">Cluster info</h2>
-<pre><code class="language-bash">k cluster-info
-k cluster-info dump
-k top node
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>k<span class="w"> </span>cluster-info
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>k<span class="w"> </span>cluster-info<span class="w"> </span>dump
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>k<span class="w"> </span>top<span class="w"> </span>node
+</code></pre></div>
 
 
 

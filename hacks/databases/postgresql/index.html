@@ -25,7 +25,7 @@
     
     
       
-        <title>postgresql - searge | Cyberdeck</title>
+        <title>PostgreSQL - searge | Cyberdeck</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              postgresql
+              PostgreSQL
             
           </span>
         </div>
@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -680,7 +680,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -708,7 +708,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -736,7 +736,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -773,7 +773,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -791,7 +791,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -938,7 +938,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1132,7 +1132,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1160,7 +1160,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1188,7 +1188,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1361,7 +1361,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1389,7 +1389,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1417,7 +1417,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1445,7 +1445,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1473,7 +1473,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1501,7 +1501,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1611,26 +1611,26 @@
 
 <h1 id="postgresql">postgresql</h1>
 <h2 id="dump-and-restore">Dump and restore</h2>
-<pre><code class="language-bash"># Dump into custom-format archive
-pg_dump -U $user -Fc $database &gt; /tmp/db-prod.dump
-
-# Restore into existing database
-pg_restore -d $database -c --if-exists -O -U $user /tmp/db-prod.dump
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Dump into custom-format archive</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pg_dump<span class="w"> </span>-U<span class="w"> </span><span class="nv">$user</span><span class="w"> </span>-Fc<span class="w"> </span><span class="nv">$database</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/db-prod.dump
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Restore into existing database</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>pg_restore<span class="w"> </span>-d<span class="w"> </span><span class="nv">$database</span><span class="w"> </span>-c<span class="w"> </span>--if-exists<span class="w"> </span>-O<span class="w"> </span>-U<span class="w"> </span><span class="nv">$user</span><span class="w"> </span>/tmp/db-prod.dump
+</code></pre></div>
 <h2 id="copy-between-kubernetes-clusters">Copy between Kubernetes clusters</h2>
-<pre><code class="language-bash"># Export from source cluster
-kubectl exec -n $ns $pod -- tar cf - /tmp/db.dump | tar xf - -C /tmp/
-
-# Import to target cluster
-kubectl cp -n $ns /tmp/tmp/db.dump $pod:/tmp/
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Export from source cluster</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span><span class="nv">$pod</span><span class="w"> </span>--<span class="w"> </span>tar<span class="w"> </span>cf<span class="w"> </span>-<span class="w"> </span>/tmp/db.dump<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>xf<span class="w"> </span>-<span class="w"> </span>-C<span class="w"> </span>/tmp/
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Import to target cluster</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>kubectl<span class="w"> </span>cp<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span>/tmp/tmp/db.dump<span class="w"> </span><span class="nv">$pod</span>:/tmp/
+</code></pre></div>
 <h2 id="interactive-session">Interactive session</h2>
-<pre><code class="language-bash">psql -U $user -d $database
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>psql<span class="w"> </span>-U<span class="w"> </span><span class="nv">$user</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$database</span>
+</code></pre></div>
 <h2 id="drop-and-recreate">Drop and recreate</h2>
-<pre><code class="language-sql">\c postgres;
-DROP DATABASE mydb;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">\</span><span class="k">c</span><span class="w"> </span><span class="n">postgres</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">mydb</span><span class="p">;</span>
+</code></pre></div>
 
 
 

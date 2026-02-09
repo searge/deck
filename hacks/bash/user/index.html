@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -760,7 +760,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -788,7 +788,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -816,7 +816,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -844,7 +844,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -927,7 +927,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1121,7 +1121,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1149,7 +1149,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1177,7 +1177,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1350,7 +1350,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1378,7 +1378,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1406,7 +1406,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1434,7 +1434,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1462,7 +1462,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1490,7 +1490,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1590,32 +1590,32 @@
 <h1 id="user">user</h1>
 <p>User and group management.</p>
 <h2 id="create-user">Create user</h2>
-<pre><code class="language-bash">useradd -m -s /usr/bin/zsh -c &quot;Comment&quot; -G adm,cdrom,sudo username
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>useradd<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span>/usr/bin/zsh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;Comment&quot;</span><span class="w"> </span>-G<span class="w"> </span>adm,cdrom,sudo<span class="w"> </span>username
+</code></pre></div>
 <p>Batch create:</p>
-<pre><code class="language-bash">for user in alice bob charlie; do
-  useradd -m -s /bin/bash -G sudo,adm &quot;$user&quot;
-done
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">for</span><span class="w"> </span>user<span class="w"> </span><span class="k">in</span><span class="w"> </span>alice<span class="w"> </span>bob<span class="w"> </span>charlie<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>useradd<span class="w"> </span>-m<span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>-G<span class="w"> </span>sudo,adm<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$user</span><span class="s2">&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">done</span>
+</code></pre></div>
 <h2 id="groups">Groups</h2>
 <p>List all groups:</p>
-<pre><code class="language-bash">cat /etc/group
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cat<span class="w"> </span>/etc/group
+</code></pre></div>
 <p>Create group with specific GID:</p>
-<pre><code class="language-bash">groupadd -g 1008 mygroup
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>groupadd<span class="w"> </span>-g<span class="w"> </span><span class="m">1008</span><span class="w"> </span>mygroup
+</code></pre></div>
 <p>Assign primary group:</p>
-<pre><code class="language-bash">usermod -g primarygroup username
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>usermod<span class="w"> </span>-g<span class="w"> </span>primarygroup<span class="w"> </span>username
+</code></pre></div>
 <p>Assign secondary group (<code>-a</code> keeps existing groups):</p>
-<pre><code class="language-bash">usermod -a -G secondarygroup username
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>secondarygroup<span class="w"> </span>username
+</code></pre></div>
 <h2 id="troubleshooting">Troubleshooting</h2>
-<pre><code class="language-bash">usermod -u 1008 username
-pkill -U 1005
-pgrep -U username | xargs kill -9
-ps -p 3822 -o comm=
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>usermod<span class="w"> </span>-u<span class="w"> </span><span class="m">1008</span><span class="w"> </span>username
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>pkill<span class="w"> </span>-U<span class="w"> </span><span class="m">1005</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>pgrep<span class="w"> </span>-U<span class="w"> </span>username<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>-9
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>ps<span class="w"> </span>-p<span class="w"> </span><span class="m">3822</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">comm</span><span class="o">=</span>
+</code></pre></div>
 
 
 

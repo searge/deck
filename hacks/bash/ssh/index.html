@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -771,7 +771,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -799,7 +799,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -827,7 +827,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -855,7 +855,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -938,7 +938,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1132,7 +1132,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1160,7 +1160,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1188,7 +1188,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1361,7 +1361,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1389,7 +1389,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1417,7 +1417,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1445,7 +1445,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1473,7 +1473,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1501,7 +1501,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1612,32 +1612,32 @@
 <h1 id="ssh">ssh</h1>
 <h2 id="key-operations">Key operations</h2>
 <p>Create public key from private:</p>
-<pre><code class="language-bash">ssh-keygen -y -f ~/.ssh/id_rsa &gt; ~/.ssh/id_rsa.pub
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ssh-keygen<span class="w"> </span>-y<span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_rsa<span class="w"> </span>&gt;<span class="w"> </span>~/.ssh/id_rsa.pub
+</code></pre></div>
 <p>SHA256 fingerprint:</p>
-<pre><code class="language-bash">ssh-keygen -lf ~/.ssh/id_rsa.pub
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ssh-keygen<span class="w"> </span>-lf<span class="w"> </span>~/.ssh/id_rsa.pub
+</code></pre></div>
 <p>MD5 fingerprint (GitHub format):</p>
-<pre><code class="language-bash">ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ssh-keygen<span class="w"> </span>-E<span class="w"> </span>md5<span class="w"> </span>-lf<span class="w"> </span>~/.ssh/id_rsa.pub
+</code></pre></div>
 <p>Add to agent:</p>
-<pre><code class="language-bash">eval &quot;$(ssh-agent -s)&quot; &amp;&amp; ssh-add ~/.ssh/id_ed25519
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="w"> </span>-s<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ssh-add<span class="w"> </span>~/.ssh/id_ed25519
+</code></pre></div>
 <h2 id="regenerate-host-keys">Regenerate host keys</h2>
-<pre><code class="language-bash">sudo /bin/rm -v /etc/ssh/ssh_host_*
-sudo dpkg-reconfigure openssh-server
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo<span class="w"> </span>/bin/rm<span class="w"> </span>-v<span class="w"> </span>/etc/ssh/ssh_host_*
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sudo<span class="w"> </span>dpkg-reconfigure<span class="w"> </span>openssh-server
+</code></pre></div>
 <h2 id="windows-ssh-agent">Windows SSH agent</h2>
-<pre><code class="language-powershell"># Check service status
-Get-Service ssh-agent
-
-# Enable manual start
-Get-Service -Name ssh-agent | Set-Service -StartupType Manual
-
-# Start and add key
-Start-Service ssh-agent
-ssh-add .\.ssh\id_rsa
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c"># Check service status</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">Get-Service</span> <span class="n">ssh-agent</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c"># Enable manual start</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nb">Get-Service</span> <span class="n">-Name</span> <span class="n">ssh-agent</span> <span class="p">|</span> <span class="nb">Set-Service</span> <span class="n">-StartupType</span> <span class="n">Manual</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c"># Start and add key</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nb">Start-Service</span> <span class="n">ssh-agent</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="n">ssh-add</span> <span class="p">.\.</span><span class="n">ssh</span><span class="p">\</span><span class="n">id_rsa</span>
+</code></pre></div>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://raymii.org/s/tutorials/Limit_access_to_openssh_features_with_the_Match_keyword.html">Limit access to openssh features with the Match option</a></li>

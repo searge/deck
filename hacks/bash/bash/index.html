@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -782,7 +782,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -810,7 +810,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -838,7 +838,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -866,7 +866,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -949,7 +949,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1143,7 +1143,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1171,7 +1171,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1199,7 +1199,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1372,7 +1372,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1400,7 +1400,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1428,7 +1428,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1456,7 +1456,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1484,7 +1484,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1512,7 +1512,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1634,27 +1634,27 @@
 <h1 id="bash">bash</h1>
 <p>General-purpose shell hacks. System config, package management, daily ops.</p>
 <h2 id="disk-usage">Disk usage</h2>
-<pre><code class="language-bash">du -h -d 1 | sort -hr
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>du<span class="w"> </span>-h<span class="w"> </span>-d<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-hr
+</code></pre></div>
 <h2 id="timezone-locale-hostname">Timezone / Locale / Hostname</h2>
-<pre><code class="language-bash">dpkg-reconfigure tzdata
-dpkg-reconfigure locales
-</code></pre>
-<pre><code class="language-bash">hostnamectl set-hostname name
-</code></pre>
-<pre><code class="language-bash">sudo hostnamectl set-hostname &quot;Your Pretty HostName&quot; --pretty
-sudo hostnamectl set-hostname host.example.com --static
-sudo hostnamectl set-hostname host.example.com --transient
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dpkg-reconfigure<span class="w"> </span>tzdata
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>dpkg-reconfigure<span class="w"> </span>locales
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>name
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span><span class="s2">&quot;Your Pretty HostName&quot;</span><span class="w"> </span>--pretty
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>host.example.com<span class="w"> </span>--static
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>host.example.com<span class="w"> </span>--transient
+</code></pre></div>
 <h2 id="install-nvm">Install NVM</h2>
-<pre><code class="language-bash">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-nvm install --lts || echo &quot;$(nvm current) is already installed&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>nvm<span class="w"> </span>install<span class="w"> </span>--lts<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>nvm<span class="w"> </span>current<span class="k">)</span><span class="s2"> is already installed&quot;</span>
+</code></pre></div>
 <h2 id="list-installed-php-modules-debianubuntu">List installed PHP modules (Debian/Ubuntu)</h2>
-<pre><code class="language-bash">php_ver='8.3'
-apt list --installed 2&gt;/dev/null |
-  grep &quot;php${php_ver}-&quot; | cut -d'/' -f1
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">php_ver</span><span class="o">=</span><span class="s1">&#39;8.3&#39;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>apt<span class="w"> </span>list<span class="w"> </span>--installed<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>grep<span class="w"> </span><span class="s2">&quot;php</span><span class="si">${</span><span class="nv">php_ver</span><span class="si">}</span><span class="s2">-&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39;/&#39;</span><span class="w"> </span>-f1
+</code></pre></div>
 <h2 id="see-also">See also</h2>
 <ul>
 <li><a href="../ssh/">ssh</a></li>

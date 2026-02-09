@@ -25,7 +25,7 @@
     
     
       
-        <title>mariadb - searge | Cyberdeck</title>
+        <title>MariaDB - searge | Cyberdeck</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              mariadb
+              MariaDB
             
           </span>
         </div>
@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -680,7 +680,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -717,7 +717,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -735,7 +735,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -816,7 +816,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -844,7 +844,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -927,7 +927,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1121,7 +1121,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1149,7 +1149,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1177,7 +1177,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1350,7 +1350,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1378,7 +1378,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1406,7 +1406,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1434,7 +1434,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1462,7 +1462,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1490,7 +1490,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1589,20 +1589,20 @@
 
 <h1 id="mariadb">mariadb</h1>
 <h2 id="environment">Environment</h2>
-<pre><code class="language-bash">MYSQL_HOST=
-MYSQL_USER=
-MYSQL_PASSWORD=
-MYSQL_DATABASE=
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">MYSQL_HOST</span><span class="o">=</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">MYSQL_USER</span><span class="o">=</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nv">MYSQL_DATABASE</span><span class="o">=</span>
+</code></pre></div>
 <h2 id="connect">Connect</h2>
-<pre><code class="language-bash">mariadb --ssl-verify-server-cert=false \
-  -h ${MYSQL_HOST} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE}
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mariadb<span class="w"> </span>--ssl-verify-server-cert<span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>-h<span class="w"> </span><span class="si">${</span><span class="nv">MYSQL_HOST</span><span class="si">}</span><span class="w"> </span>-u<span class="w"> </span><span class="si">${</span><span class="nv">MYSQL_USER</span><span class="si">}</span><span class="w"> </span>-p<span class="si">${</span><span class="nv">MYSQL_PASSWORD</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">MYSQL_DATABASE</span><span class="si">}</span>
+</code></pre></div>
 <h2 id="dump">Dump</h2>
-<pre><code class="language-bash">mariadb-dump --ssl-verify-server-cert=false \
-  -h ${MYSQL_HOST} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE} &gt; \
-  /mnt/nfs/backup.$(date +%F).sql;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mariadb-dump<span class="w"> </span>--ssl-verify-server-cert<span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-h<span class="w"> </span><span class="si">${</span><span class="nv">MYSQL_HOST</span><span class="si">}</span><span class="w"> </span>-u<span class="w"> </span><span class="si">${</span><span class="nv">MYSQL_USER</span><span class="si">}</span><span class="w"> </span>-p<span class="si">${</span><span class="nv">MYSQL_PASSWORD</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">MYSQL_DATABASE</span><span class="si">}</span><span class="w"> </span>&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>/mnt/nfs/backup.<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.sql<span class="p">;</span>
+</code></pre></div>
 
 
 

@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -758,7 +758,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -786,7 +786,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -814,7 +814,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -842,7 +842,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -925,7 +925,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1119,7 +1119,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1147,7 +1147,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1175,7 +1175,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1348,7 +1348,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1376,7 +1376,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1404,7 +1404,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1432,7 +1432,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1460,7 +1460,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1488,7 +1488,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1588,29 +1588,29 @@
 <h1 id="nginx">nginx</h1>
 <h2 id="port-conflict">Port conflict</h2>
 <p>Kill processes holding ports 80/443:</p>
-<pre><code class="language-bash">fuser -k 80/tcp &amp;&amp; fuser -k 443/tcp
-service nginx restart
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>fuser<span class="w"> </span>-k<span class="w"> </span><span class="m">80</span>/tcp<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>fuser<span class="w"> </span>-k<span class="w"> </span><span class="m">443</span>/tcp
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>service<span class="w"> </span>nginx<span class="w"> </span>restart
+</code></pre></div>
 <h2 id="server_names_hash_bucket_size">server_names_hash_bucket_size</h2>
 <p>Error:</p>
-<pre><code>nginx: [emerg] could not build the server_names_hash, you should increase server_names_hash_bucket_size: 64
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nginx: [emerg] could not build the server_names_hash, you should increase server_names_hash_bucket_size: 64
+</code></pre></div>
 <p>Fix — double the reported value in <code>nginx.conf</code>:</p>
-<pre><code class="language-nginx">http {
-    server_names_hash_bucket_size  128;
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">http</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kn">server_names_hash_bucket_size</span><span class="w">  </span><span class="mi">128</span><span class="p">;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+</code></pre></div>
 <h2 id="update-gpg-keys">Update GPG keys</h2>
-<pre><code class="language-bash">curl https://nginx.org/keys/nginx_signing.key \
-  | gpg --dearmor \
-  | tee /usr/share/keyrings/nginx-archive-keyring.gpg &gt;/dev/null
-
-echo &quot;deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
-  http://nginx.org/packages/debian bookworm nginx&quot; \
-  | tee /etc/apt/sources.list.d/nginx_org_packages_debian.list
-
-apt update &amp;&amp; apt list --upgradable
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>https://nginx.org/keys/nginx_signing.key<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/usr/share/keyrings/nginx-archive-keyring.gpg<span class="w"> </span>&gt;/dev/null
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s2">  http://nginx.org/packages/debian bookworm nginx&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/nginx_org_packages_debian.list
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>list<span class="w"> </span>--upgradable
+</code></pre></div>
 
 
 

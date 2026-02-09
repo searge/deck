@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -678,7 +678,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -706,7 +706,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -734,7 +734,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -762,7 +762,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -845,7 +845,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1143,7 +1143,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1171,7 +1171,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1199,7 +1199,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1372,7 +1372,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1400,7 +1400,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1428,7 +1428,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1456,7 +1456,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1484,7 +1484,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1512,7 +1512,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1633,30 +1633,30 @@
 
 <h1 id="git">git</h1>
 <h2 id="color-config">Color config</h2>
-<pre><code class="language-bash">git config --global color.ui true &amp;&amp;
-git config --global core.pager 'less -r'
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>color.ui<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.pager<span class="w"> </span><span class="s1">&#39;less -r&#39;</span>
+</code></pre></div>
 <h2 id="stash">Stash</h2>
 <p>Save uncommitted changes (staged and unstaged):</p>
-<pre><code class="language-bash">git stash
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>stash
+</code></pre></div>
 <p>Include untracked files:</p>
-<pre><code class="language-bash">git stash -u
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>stash<span class="w"> </span>-u
+</code></pre></div>
 <p>Annotate with a message:</p>
-<pre><code class="language-bash">git stash save &quot;work in progress: feature X&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>stash<span class="w"> </span>save<span class="w"> </span><span class="s2">&quot;work in progress: feature X&quot;</span>
+</code></pre></div>
 <p>Show stash summary:</p>
-<pre><code class="language-bash">git stash show
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git<span class="w"> </span>stash<span class="w"> </span>show
+</code></pre></div>
 <p>Re-apply and remove from stash:</p>
-<pre><code class="language-bash">git stash pop
-git stash pop stash@{2}  # specific stash
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>stash<span class="w"> </span>pop
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>git<span class="w"> </span>stash<span class="w"> </span>pop<span class="w"> </span>stash@<span class="o">{</span><span class="m">2</span><span class="o">}</span><span class="w">  </span><span class="c1"># specific stash</span>
+</code></pre></div>
 <h2 id="cleanup">Cleanup</h2>
 <p>Remove untracked files and directories:</p>
-<pre><code class="language-bash">git clean -fd
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>clean<span class="w"> </span>-fd
+</code></pre></div>
 <h2 id="see-also">See also</h2>
 <ul>
 <li><a href="../git_cicd/">git_cicd</a></li>

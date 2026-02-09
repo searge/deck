@@ -23,7 +23,7 @@
     
     
       
-        <title>tls - searge | Cyberdeck</title>
+        <title>TLS - searge | Cyberdeck</title>
       
     
     
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              tls
+              TLS
             
           </span>
         </div>
@@ -320,7 +320,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -674,7 +674,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -702,7 +702,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -730,7 +730,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -758,7 +758,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -841,7 +841,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1035,7 +1035,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1063,7 +1063,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1091,7 +1091,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1266,7 +1266,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1294,7 +1294,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1322,7 +1322,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1350,7 +1350,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1378,7 +1378,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1415,7 +1415,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1433,7 +1433,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1682,34 +1682,34 @@ vulnerabilities. TLS (Transport Layer Security) is the modern replacement.</p>
 </tbody>
 </table>
 <h2 id="tls-handshake-simplified">TLS handshake (simplified)</h2>
-<pre><code>Client → Server:  ClientHello     (supported ciphers, TLS version)
-Server → Client:  ServerHello     (chosen cipher, certificate)
-Client:           Verify cert     (check CA chain, expiry, domain)
-Client → Server:  Key exchange    (shared secret via asymmetric crypto)
-Both:             Derive keys     (symmetric encryption begins)
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Client → Server:  ClientHello     (supported ciphers, TLS version)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Server → Client:  ServerHello     (chosen cipher, certificate)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Client:           Verify cert     (check CA chain, expiry, domain)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Client → Server:  Key exchange    (shared secret via asymmetric crypto)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Both:             Derive keys     (symmetric encryption begins)
+</code></pre></div>
 <p>TLS 1.3 reduced the handshake from 2 round-trips to 1.</p>
 <h2 id="certificate-inspection">Certificate inspection</h2>
-<pre><code class="language-bash"># Check remote certificate
-openssl s_client -connect example.com:443 &lt;/dev/null 2&gt;/dev/null \
-  | openssl x509 -noout -text
-
-# Expiry date only
-openssl s_client -connect example.com:443 &lt;/dev/null 2&gt;/dev/null \
-  | openssl x509 -noout -dates
-
-# Check with curl
-curl -vI https://example.com 2&gt;&amp;1 | grep -E 'expire|subject|issuer'
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Check remote certificate</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-text
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Expiry date only</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-dates
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># Check with curl</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>curl<span class="w"> </span>-vI<span class="w"> </span>https://example.com<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;expire|subject|issuer&#39;</span>
+</code></pre></div>
 <h2 id="self-signed-certificate-devtesting">Self-signed certificate (dev/testing)</h2>
-<pre><code class="language-bash">openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-  -keyout tls.key -out tls.crt \
-  -subj &quot;/CN=localhost&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-nodes<span class="w"> </span>-days<span class="w"> </span><span class="m">365</span><span class="w"> </span>-newkey<span class="w"> </span>rsa:2048<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-keyout<span class="w"> </span>tls.key<span class="w"> </span>-out<span class="w"> </span>tls.crt<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=localhost&quot;</span>
+</code></pre></div>
 <h2 id="kubernetes-tls-secret">Kubernetes TLS secret</h2>
-<pre><code class="language-bash">kubectl create secret tls my-tls-secret \
-  --cert=tls.crt --key=tls.key -n $ns
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>tls<span class="w"> </span>my-tls-secret<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--cert<span class="o">=</span>tls.crt<span class="w"> </span>--key<span class="o">=</span>tls.key<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span>
+</code></pre></div>
 <h2 id="common-issues">Common issues</h2>
 <p><strong>Certificate expired:</strong>
 - Check with <code>openssl s_client</code> above
@@ -1717,11 +1717,11 @@ curl -vI https://example.com 2&gt;&amp;1 | grep -E 'expire|subject|issuer'
 <p><strong>ERR_CERT_AUTHORITY_INVALID:</strong>
 - Self-signed cert or missing intermediate CA in chain
 - Chain must include: leaf cert → intermediate(s) → root CA</p>
-<p><strong>TLS version mismatch:</strong></p>
-<pre><code class="language-bash"># Test specific TLS version
-openssl s_client -connect example.com:443 -tls1_2
-openssl s_client -connect example.com:443 -tls1_3
-</code></pre>
+<p><strong>TLS version mismatch:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Test specific TLS version</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>-tls1_2
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>-tls1_3
+</code></pre></div></p>
 
 
 

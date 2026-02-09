@@ -25,7 +25,7 @@
     
     
       
-        <title>osi_model - searge | Cyberdeck</title>
+        <title>OSI Model - searge | Cyberdeck</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              osi_model
+              OSI Model
             
           </span>
         </div>
@@ -322,7 +322,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -676,7 +676,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -704,7 +704,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -732,7 +732,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -760,7 +760,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -843,7 +843,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1065,7 +1065,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1268,7 +1268,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1296,7 +1296,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1324,7 +1324,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1361,7 +1361,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1379,7 +1379,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1482,7 +1482,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1510,7 +1510,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1694,26 +1694,26 @@ communicate over a network. Seven layers, bottom to top.</p>
 <p>When diagnosing an issue, work from <strong>bottom to top</strong>:</p>
 <ol>
 <li><strong>Physical</strong> — is the cable plugged in? Is the link up?
-   <code>bash
-   ip link
-   ethtool eth0</code></li>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ip<span class="w"> </span>link
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ethtool<span class="w"> </span>eth0
+</code></pre></div></li>
 <li><strong>Data Link</strong> — do we have a MAC address? ARP working?
-   <code>bash
-   ip neigh
-   arp -a</code></li>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip<span class="w"> </span>neigh
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>arp<span class="w"> </span>-a
+</code></pre></div></li>
 <li><strong>Network</strong> — do we have an IP? Can we reach the gateway?
-   <code>bash
-   ip addr
-   ping -c 3 $gateway
-   traceroute $destination</code></li>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip<span class="w"> </span>addr
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="nv">$gateway</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>traceroute<span class="w"> </span><span class="nv">$destination</span>
+</code></pre></div></li>
 <li><strong>Transport</strong> — is the port open? Is something listening?
-   <code>bash
-   ss -tulpn | grep $port
-   nc -zv $host $port</code></li>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ss<span class="w"> </span>-tulpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="nv">$port</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>nc<span class="w"> </span>-zv<span class="w"> </span><span class="nv">$host</span><span class="w"> </span><span class="nv">$port</span>
+</code></pre></div></li>
 <li><strong>Application</strong> — does the service respond correctly?
-   <code>bash
-   curl -v https://$host
-   dig $domain</code></li>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-v<span class="w"> </span>https://<span class="nv">$host</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>dig<span class="w"> </span><span class="nv">$domain</span>
+</code></pre></div></li>
 </ol>
 <h2 id="see-also">See also</h2>
 <ul>

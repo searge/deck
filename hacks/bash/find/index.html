@@ -324,7 +324,7 @@
   <span class="md-ellipsis">
     
   
-    hacks
+    Quick hacks
   
 
     
@@ -760,7 +760,7 @@
   <span class="md-ellipsis">
     
   
-    databases
+    Databases
   
 
     
@@ -788,7 +788,7 @@
   <span class="md-ellipsis">
     
   
-    mariadb
+    MariaDB
   
 
     
@@ -816,7 +816,7 @@
   <span class="md-ellipsis">
     
   
-    mysql
+    MySQL
   
 
     
@@ -844,7 +844,7 @@
   <span class="md-ellipsis">
     
   
-    postgresql
+    PostgreSQL
   
 
     
@@ -927,7 +927,7 @@
   <span class="md-ellipsis">
     
   
-    gcp
+    Google Cloud Platform
   
 
     
@@ -1121,7 +1121,7 @@
   <span class="md-ellipsis">
     
   
-    helm
+    Helm commands
   
 
     
@@ -1149,7 +1149,7 @@
   <span class="md-ellipsis">
     
   
-    kubectl
+    kubectl commands
   
 
     
@@ -1177,7 +1177,7 @@
   <span class="md-ellipsis">
     
   
-    kubernetes
+    Kubernetes hacks
   
 
     
@@ -1350,7 +1350,7 @@
   <span class="md-ellipsis">
     
   
-    dns
+    DNS
   
 
     
@@ -1378,7 +1378,7 @@
   <span class="md-ellipsis">
     
   
-    http
+    HTTP
   
 
     
@@ -1406,7 +1406,7 @@
   <span class="md-ellipsis">
     
   
-    net
+    Networking
   
 
     
@@ -1434,7 +1434,7 @@
   <span class="md-ellipsis">
     
   
-    osi_model
+    OSI Model
   
 
     
@@ -1462,7 +1462,7 @@
   <span class="md-ellipsis">
     
   
-    tcp_ip_model
+    TCP/IP Model
   
 
     
@@ -1490,7 +1490,7 @@
   <span class="md-ellipsis">
     
   
-    tls
+    TLS
   
 
     
@@ -1590,20 +1590,20 @@
 <h1 id="find">find</h1>
 <h2 id="wrong-permissions">Wrong permissions</h2>
 <p>Find all directories with 777 and list them:</p>
-<pre><code class="language-bash">find -type d -perm 777 -exec bash -c 'ls -ld {}' \;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>find<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-perm<span class="w"> </span><span class="m">777</span><span class="w"> </span>-exec<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;ls -ld {}&#39;</span><span class="w"> </span><span class="se">\;</span>
+</code></pre></div>
 <h2 id="wrong-user">Wrong user</h2>
 <p>Find files not belonging to a user:</p>
-<pre><code class="language-bash">find . ! -user $User -exec ls -lh {} \;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>find<span class="w"> </span>.<span class="w"> </span>!<span class="w"> </span>-user<span class="w"> </span><span class="nv">$User</span><span class="w"> </span>-exec<span class="w"> </span>ls<span class="w"> </span>-lh<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+</code></pre></div>
 <p>Count them:</p>
-<pre><code class="language-bash">find . ! -user $User | wc -l
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>find<span class="w"> </span>.<span class="w"> </span>!<span class="w"> </span>-user<span class="w"> </span><span class="nv">$User</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+</code></pre></div>
 <h2 id="find-all-git-repositories">Find all git repositories</h2>
 <p>Discover repos and show remotes:</p>
-<pre><code class="language-bash">find . -type d -name .git \
-  -exec bash -c &quot;echo '{}' &amp;&amp; cd '{}'/.. &amp;&amp; git remote -v&quot; \;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-name<span class="w"> </span>.git<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-exec<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;{}&#39; &amp;&amp; cd &#39;{}&#39;/.. &amp;&amp; git remote -v&quot;</span><span class="w"> </span><span class="se">\;</span>
+</code></pre></div>
 
 
 
