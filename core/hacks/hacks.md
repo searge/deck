@@ -4,6 +4,7 @@ tags:
 aliases:
   - Quick hacks
 title: Quick hacks
+description: Copy-paste ready code, one-liners, and field-tested commands.
 ---
 # hacks
 
