@@ -1564,24 +1564,22 @@
 <p>Domain Name System — translates human-readable names to IP addresses.
 The phone book of the internet.</p>
 <h2 id="how-resolution-works">How resolution works</h2>
-<p>```mermaid
-sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant B as Browser
-    participant R as Resolver<br/>8.8.8.8
-    participant Root as Root NS<br/>.
-    participant TLD as TLD NS<br/>.com
-    participant Auth as Authoritative NS<br/>example.com</p>
-<div class="highlight"><pre><span></span><code>B-&gt;&gt;B: local cache / /etc/hosts
-B-&gt;&gt;R: who is example.com?
-R-&gt;&gt;Root: query example.com
-Root--&gt;&gt;R: ask .com TLD
-R-&gt;&gt;TLD: query example.com
-TLD--&gt;&gt;R: ask ns1.example.com
-R-&gt;&gt;Auth: query example.com
-Auth--&gt;&gt;R: 93.184.216.34
-R--&gt;&gt;B: 93.184.216.34
-</code></pre></div>
-<p>```</p>
+    participant R as Resolver&lt;br/&gt;8.8.8.8
+    participant Root as Root NS&lt;br/&gt;.
+    participant TLD as TLD NS&lt;br/&gt;.com
+    participant Auth as Authoritative NS&lt;br/&gt;example.com
+
+    B-&gt;&gt;B: local cache / /etc/hosts
+    B-&gt;&gt;R: who is example.com?
+    R-&gt;&gt;Root: query example.com
+    Root--&gt;&gt;R: ask .com TLD
+    R-&gt;&gt;TLD: query example.com
+    TLD--&gt;&gt;R: ask ns1.example.com
+    R-&gt;&gt;Auth: query example.com
+    Auth--&gt;&gt;R: 93.184.216.34
+    R--&gt;&gt;B: 93.184.216.34</code></pre>
 <h2 id="record-types">Record types</h2>
 <table>
 <thead>
@@ -1874,8 +1872,6 @@ R--&gt;&gt;B: 93.184.216.34
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
-  <script src="../../assets/external/unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
-  <script src="../../assets/javascripts/mermaid.js"></script>
 
   </body>
 </html>

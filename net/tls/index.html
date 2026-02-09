@@ -1598,13 +1598,12 @@ vulnerabilities. TLS (Transport Layer Security) is the modern replacement.</p>
 </tbody>
 </table>
 <h2 id="tls-handshake-simplified">TLS handshake (simplified)</h2>
-<p><code>mermaid
-sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     Client-&gt;&gt;Server: ClientHello (ciphers, version)
     Server-&gt;&gt;Client: ServerHello (cipher, cert)
     Client-&gt;&gt;Client: Verify certificate
     Client-&gt;&gt;Server: Key exchange
-    Note over Client,Server: Symmetric encryption begins</code></p>
+    Note over Client,Server: Symmetric encryption begins</code></pre>
 <p>TLS 1.3 reduced the handshake from 2 round-trips to 1.</p>
 <h2 id="certificate-inspection">Certificate inspection</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Check remote certificate</span>
@@ -1811,8 +1810,6 @@ sequenceDiagram
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
-  <script src="../../assets/external/unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
-  <script src="../../assets/javascripts/mermaid.js"></script>
 
   </body>
 </html>
