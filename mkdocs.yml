@@ -28,6 +28,7 @@ theme:
 docs_dir: core
 hooks:
   - hooks/folder_to_index.py
+  - hooks/external_assets.py
 plugins:
     - obsidian-bridge
     - search
