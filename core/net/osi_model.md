@@ -13,6 +13,8 @@ description: Seven layers of the OSI model with troubleshooting guide.
 Open Systems Interconnection — a reference model for how protocols
 communicate over a network. Seven layers, bottom to top.
 
+![OSI Model](../../assets/osi_model.webp)
+
 ## Layers
 
 | # | Layer | Function | Protocols / Examples |
@@ -34,6 +36,7 @@ communicate over a network. Seven layers, bottom to top.
 ## Troubleshooting by layer
 
 When diagnosing an issue, work from **bottom to top**:
+Note: in practice, Presentation (6) and Session (5) are often folded into Application-level checks.
 
 1. **Physical** — is the cable plugged in? Is the link up?
    ```bash

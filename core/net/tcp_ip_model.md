@@ -13,6 +13,8 @@ description: Four-layer TCP/IP model with protocol mapping and port reference.
 The practical model. Four layers instead of seven.
 This is what the internet actually runs on.
 
+![TCP/IP four layers](../../assets/tcp-ip-model-4-layers.png)
+
 ## Layers
 
 | # | TCP/IP Layer | OSI Equivalent | Protocols |
@@ -54,6 +56,10 @@ sequenceDiagram
 | 3306 | MySQL | TCP |
 | 5432 | PostgreSQL | TCP |
 | 6443 | Kubernetes API | TCP |
+
+## TCP/IP vs OSI
+
+![TCP/IP vs OSI comparison](../../assets/tcp-ip-model-vs-osi.png)
 
 ## See also
 
