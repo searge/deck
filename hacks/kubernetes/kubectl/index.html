@@ -54,6 +54,8 @@
       
     
     
+      <link rel="stylesheet" href="../../../assets/stylesheets/interactive_graph.css">
+    
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -1748,7 +1750,7 @@
 </code></pre></div>
 <h3 id="zsh">Zsh</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">source</span><span class="w"> </span>&lt;<span class="o">(</span>kubectl<span class="w"> </span>completion<span class="w"> </span>zsh<span class="o">)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;[[ $commands[kubectl] ]] &amp;&amp; source &lt;(kubectl completion zsh)&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;command -v kubectl &amp;&gt;/dev/null &amp;&amp; source &lt;(kubectl completion zsh)&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.zshrc
 </code></pre></div>
 <h2 id="pods">Pods</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>k<span class="w"> </span>get<span class="w"> </span>po
@@ -1901,6 +1903,12 @@
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../assets/external/fastly.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+      
+        <script src="../../../assets/external/fastly.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+      
+        <script src="../../../assets/javascripts/interactive_graph.js"></script>
       
     
   </body>

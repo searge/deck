@@ -1,0 +1,300 @@
+{
+  "nodes": [
+    {
+      "id": "0",
+      "name": "core",
+      "symbolSize": 2,
+      "value": "/deck/"
+    },
+    {
+      "id": "1",
+      "name": "Quick hacks",
+      "symbolSize": 9,
+      "value": "/deck/hacks/"
+    },
+    {
+      "id": "2",
+      "name": "net_info",
+      "symbolSize": 3,
+      "value": "/deck/hacks/net_info/"
+    },
+    {
+      "id": "3",
+      "name": "nginx",
+      "symbolSize": 2,
+      "value": "/deck/hacks/nginx/"
+    },
+    {
+      "id": "4",
+      "name": "bash",
+      "symbolSize": 6,
+      "value": "/deck/hacks/bash/"
+    },
+    {
+      "id": "5",
+      "name": "emacs_mode",
+      "symbolSize": 1,
+      "value": "/deck/hacks/bash/emacs_mode/"
+    },
+    {
+      "id": "6",
+      "name": "find",
+      "symbolSize": 1,
+      "value": "/deck/hacks/bash/find/"
+    },
+    {
+      "id": "7",
+      "name": "rsync",
+      "symbolSize": 1,
+      "value": "/deck/hacks/bash/rsync/"
+    },
+    {
+      "id": "8",
+      "name": "ssh",
+      "symbolSize": 1,
+      "value": "/deck/hacks/bash/ssh/"
+    },
+    {
+      "id": "9",
+      "name": "user",
+      "symbolSize": 1,
+      "value": "/deck/hacks/bash/user/"
+    },
+    {
+      "id": "10",
+      "name": "Databases",
+      "symbolSize": 4,
+      "value": "/deck/hacks/databases/"
+    },
+    {
+      "id": "11",
+      "name": "MariaDB",
+      "symbolSize": 1,
+      "value": "/deck/hacks/databases/mariadb/"
+    },
+    {
+      "id": "12",
+      "name": "MySQL",
+      "symbolSize": 1,
+      "value": "/deck/hacks/databases/mysql/"
+    },
+    {
+      "id": "13",
+      "name": "PostgreSQL",
+      "symbolSize": 1,
+      "value": "/deck/hacks/databases/postgresql/"
+    },
+    {
+      "id": "14",
+      "name": "Google Cloud Platform",
+      "symbolSize": 1,
+      "value": "/deck/hacks/gcp/"
+    },
+    {
+      "id": "15",
+      "name": "git",
+      "symbolSize": 2,
+      "value": "/deck/hacks/git/"
+    },
+    {
+      "id": "16",
+      "name": "git_cicd",
+      "symbolSize": 1,
+      "value": "/deck/hacks/git/git_cicd/"
+    },
+    {
+      "id": "17",
+      "name": "Kubernetes hacks",
+      "symbolSize": 3,
+      "value": "/deck/hacks/kubernetes/"
+    },
+    {
+      "id": "18",
+      "name": "Helm commands",
+      "symbolSize": 1,
+      "value": "/deck/hacks/kubernetes/helm/"
+    },
+    {
+      "id": "19",
+      "name": "kubectl commands",
+      "symbolSize": 1,
+      "value": "/deck/hacks/kubernetes/kubectl/"
+    },
+    {
+      "id": "20",
+      "name": "vim",
+      "symbolSize": 1,
+      "value": "/deck/hacks/vim/"
+    },
+    {
+      "id": "21",
+      "name": "Networking",
+      "symbolSize": 5,
+      "value": "/deck/net/"
+    },
+    {
+      "id": "22",
+      "name": "DNS",
+      "symbolSize": 3,
+      "value": "/deck/net/dns/"
+    },
+    {
+      "id": "23",
+      "name": "HTTP",
+      "symbolSize": 5,
+      "value": "/deck/net/http/"
+    },
+    {
+      "id": "24",
+      "name": "OSI Model",
+      "symbolSize": 3,
+      "value": "/deck/net/osi_model/"
+    },
+    {
+      "id": "25",
+      "name": "TCP/IP Model",
+      "symbolSize": 3,
+      "value": "/deck/net/tcp_ip_model/"
+    },
+    {
+      "id": "26",
+      "name": "TLS",
+      "symbolSize": 3,
+      "value": "/deck/net/tls/"
+    }
+  ],
+  "links": [
+    {
+      "source": "0",
+      "target": "1"
+    },
+    {
+      "source": "0",
+      "target": "2"
+    },
+    {
+      "source": "1",
+      "target": "4"
+    },
+    {
+      "source": "1",
+      "target": "10"
+    },
+    {
+      "source": "1",
+      "target": "14"
+    },
+    {
+      "source": "1",
+      "target": "15"
+    },
+    {
+      "source": "1",
+      "target": "17"
+    },
+    {
+      "source": "1",
+      "target": "20"
+    },
+    {
+      "source": "1",
+      "target": "2"
+    },
+    {
+      "source": "1",
+      "target": "3"
+    },
+    {
+      "source": "4",
+      "target": "8"
+    },
+    {
+      "source": "4",
+      "target": "6"
+    },
+    {
+      "source": "4",
+      "target": "7"
+    },
+    {
+      "source": "4",
+      "target": "9"
+    },
+    {
+      "source": "4",
+      "target": "5"
+    },
+    {
+      "source": "10",
+      "target": "11"
+    },
+    {
+      "source": "10",
+      "target": "13"
+    },
+    {
+      "source": "10",
+      "target": "12"
+    },
+    {
+      "source": "15",
+      "target": "16"
+    },
+    {
+      "source": "17",
+      "target": "19"
+    },
+    {
+      "source": "17",
+      "target": "18"
+    },
+    {
+      "source": "22",
+      "target": "2"
+    },
+    {
+      "source": "23",
+      "target": "26"
+    },
+    {
+      "source": "23",
+      "target": "26"
+    },
+    {
+      "source": "23",
+      "target": "22"
+    },
+    {
+      "source": "23",
+      "target": "3"
+    },
+    {
+      "source": "21",
+      "target": "24"
+    },
+    {
+      "source": "21",
+      "target": "25"
+    },
+    {
+      "source": "21",
+      "target": "22"
+    },
+    {
+      "source": "21",
+      "target": "26"
+    },
+    {
+      "source": "21",
+      "target": "23"
+    },
+    {
+      "source": "24",
+      "target": "25"
+    },
+    {
+      "source": "25",
+      "target": "24"
+    }
+  ]
+}
