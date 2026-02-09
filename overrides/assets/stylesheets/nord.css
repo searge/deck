@@ -136,3 +136,16 @@
 [data-md-color-scheme="nord-light"] .md-header .md-header__button {
   color: #2e3440;
 }
+
+/* Header site name as clickable link */
+.md-header__topic-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Hide nav title on desktop — keep for mobile drawer */
+@media screen and (min-width: 76.25em) {
+  .md-nav--primary > .md-nav__title {
+    display: none;
+  }
+}
