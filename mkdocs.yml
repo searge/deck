@@ -29,23 +29,20 @@ docs_dir: core
 hooks:
   - hooks/folder_to_index.py
 plugins:
-  - obsidian-bridge
-  - search
-  - privacy
-  - tags
-  - social
-  - mermaid2:
-      version: 10.0.2
+    - obsidian-bridge
+    - search
+    - privacy
+    - tags
+    - social
 markdown_extensions:
   - obsidian_callouts
   - pymdownx.highlight:
       anchor_linenums: true
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: >-
-            !!python/name:mermaid2.fence_mermaid_custom
+    - pymdownx.superfences:
+          custom_fences:
+              - name: mermaid
+                class: mermaid
+                format: !!python/name:pymdownx.superfences.fence_code_format
 extra:
   social:
     - icon: fontawesome/brands/mastodon
