@@ -22,6 +22,7 @@ docs_dir: core
 hooks:
   - hooks/folder_to_index.py
 plugins:
+  - obsidian-interactive-graph
   - obsidian-bridge
   - search
   - privacy
@@ -34,6 +35,12 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+extra_javascript:
+  - https://fastly.jsdelivr.net/npm/jquery/dist/jquery.min.js
+  - https://fastly.jsdelivr.net/npm/echarts/dist/echarts.min.js
+  - assets/javascripts/interactive_graph.js
+extra_css:
+  - assets/stylesheets/interactive_graph.css
 extra:
   consent:
     title: Cookie consent
