@@ -13,7 +13,7 @@ description: Seven layers of the OSI model with troubleshooting guide.
 Open Systems Interconnection — a reference model for how protocols
 communicate over a network. Seven layers, bottom to top.
 
-![OSI Model](../../assets/osi_model.webp)
+![OSI Model](../../assets/images/osi_model.webp)
 
 ## Layers
 
