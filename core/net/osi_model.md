@@ -4,6 +4,7 @@ tags:
   - models
 aliases:
   - OSI Model
+title: OSI Model
 ---
 
 # osi_model

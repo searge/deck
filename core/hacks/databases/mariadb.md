@@ -4,6 +4,7 @@ tags:
   - mariadb
 aliases:
   - MariaDB
+title: MariaDB
 ---
 
 # mariadb

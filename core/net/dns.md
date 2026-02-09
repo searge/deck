@@ -4,6 +4,7 @@ tags:
   - dns
 aliases:
   - DNS
+title: DNS
 ---
 
 # dns

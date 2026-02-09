@@ -4,6 +4,7 @@ tags:
   - mysql
 aliases:
   - MySQL
+title: MySQL
 ---
 
 # mysql

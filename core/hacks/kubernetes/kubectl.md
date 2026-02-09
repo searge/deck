@@ -4,6 +4,7 @@ tags:
   - kubectl
 aliases:
   - kubectl commands
+title: kubectl commands
 ---
 
 # kubectl

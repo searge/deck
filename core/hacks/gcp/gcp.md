@@ -4,6 +4,7 @@ tags:
   - cloud
 aliases:
   - Google Cloud Platform
+title: Google Cloud Platform
 ---
 
 # gcp

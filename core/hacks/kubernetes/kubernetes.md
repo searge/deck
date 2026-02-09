@@ -4,6 +4,7 @@ tags:
   - snippets
 aliases:
   - Kubernetes hacks
+title: Kubernetes hacks
 ---
 
 # kubernetes

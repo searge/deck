@@ -3,6 +3,7 @@ tags:
   - snippets
 aliases:
   - Quick hacks
+title: Quick hacks
 ---
 # hacks
 

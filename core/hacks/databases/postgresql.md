@@ -4,6 +4,7 @@ tags:
   - postgresql
 aliases:
   - PostgreSQL
+title: PostgreSQL
 ---
 
 # postgresql

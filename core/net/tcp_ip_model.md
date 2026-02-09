@@ -4,6 +4,7 @@ tags:
   - models
 aliases:
   - TCP/IP Model
+title: TCP/IP Model
 ---
 
 # tcp_ip_model

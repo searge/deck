@@ -4,6 +4,7 @@ tags:
   - snippets
 aliases:
   - Databases
+title: Databases
 ---
 
 # databases

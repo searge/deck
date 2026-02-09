@@ -4,6 +4,7 @@ tags:
   - helm
 aliases:
   - Helm commands
+title: Helm commands
 ---
 
 # helm
