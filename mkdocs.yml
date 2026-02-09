@@ -6,8 +6,8 @@ repo_url: 'https://github.com/searge/deck'
 theme:
   name: material
   custom_dir: overrides
-  logo: assets/images/logo.webp
-  favicon: assets/images/logo.webp
+  # logo: assets/images/logo.webp
+  # favicon: assets/images/logo.webp
   language: en
   palette:
     - scheme: nord-dark
