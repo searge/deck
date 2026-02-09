@@ -27,6 +27,9 @@ plugins:
   - privacy
 markdown_extensions:
   - obsidian_callouts
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
 extra:
   consent:
     title: Cookie consent
