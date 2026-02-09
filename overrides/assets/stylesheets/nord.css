@@ -1,3 +1,20 @@
+/* Override Material's default indigo primary */
+[data-md-color-scheme="nord-dark"][data-md-color-primary] {
+  --md-primary-fg-color: #2e3440;
+  --md-primary-fg-color--light: #3b4252;
+  --md-primary-fg-color--dark: #2e3440;
+  --md-primary-bg-color: #d8dee9;
+  --md-primary-bg-color--light: #eceff4;
+}
+
+[data-md-color-scheme="nord-light"][data-md-color-primary] {
+  --md-primary-fg-color: #eceff4;
+  --md-primary-fg-color--light: #e5e9f0;
+  --md-primary-fg-color--dark: #eceff4;
+  --md-primary-bg-color: #2e3440;
+  --md-primary-bg-color--light: #3b4252;
+}
+
 /* Nord dark scheme (Polar Night + Frost) */
 [data-md-color-scheme="nord-dark"] {
   --md-default-fg-color: #d8dee9;
@@ -50,6 +67,12 @@
   --md-shadow-z2: 0 0.2rem 0.5rem #0006, 0 0 0.05rem #0003;
 }
 
+/* Nord dark — explicit header/tabs override */
+[data-md-color-scheme="nord-dark"] .md-header,
+[data-md-color-scheme="nord-dark"] .md-tabs {
+  background-color: #2e3440;
+}
+
 /* Nord light scheme (Snow Storm + Frost) */
 [data-md-color-scheme="nord-light"] {
   --md-default-fg-color: #2e3440;
@@ -98,4 +121,18 @@
   --md-footer-fg-color--lighter: #c8ced9;
   --md-footer-bg-color: #3b4252;
   --md-footer-bg-color--dark: #2e3440;
+}
+
+/* Nord light — explicit header/tabs override */
+[data-md-color-scheme="nord-light"] .md-header,
+[data-md-color-scheme="nord-light"] .md-tabs {
+  background-color: #eceff4;
+  color: #2e3440;
+}
+
+[data-md-color-scheme="nord-light"] .md-header .md-header__title,
+[data-md-color-scheme="nord-light"] .md-header .md-logo,
+[data-md-color-scheme="nord-light"] .md-header .md-search__icon,
+[data-md-color-scheme="nord-light"] .md-header .md-header__button {
+  color: #2e3440;
 }
