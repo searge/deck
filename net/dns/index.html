@@ -1592,12 +1592,22 @@
 <p>Domain Name System — translates human-readable names to IP addresses.
 The phone book of the internet.</p>
 <h2 id="how-resolution-works">How resolution works</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Browser → Local cache → /etc/hosts → Resolver (e.g. 8.8.8.8)
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  → Root NS (.)
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    → TLD NS (.com)
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      → Authoritative NS (example.com)
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        → IP address
-</code></pre></div>
+<pre class="mermaid"><code>sequenceDiagram
+    participant B as Browser
+    participant R as Resolver&lt;br/&gt;8.8.8.8
+    participant Root as Root NS&lt;br/&gt;.
+    participant TLD as TLD NS&lt;br/&gt;.com
+    participant Auth as Authoritative NS&lt;br/&gt;example.com
+
+    B-&gt;&gt;B: local cache / /etc/hosts
+    B-&gt;&gt;R: who is example.com?
+    R-&gt;&gt;Root: query example.com
+    Root--&gt;&gt;R: ask .com TLD
+    R-&gt;&gt;TLD: query example.com
+    TLD--&gt;&gt;R: ask ns1.example.com
+    R-&gt;&gt;Auth: query example.com
+    Auth--&gt;&gt;R: 93.184.216.34
+    R--&gt;&gt;B: 93.184.216.34</code></pre>
 <h2 id="record-types">Record types</h2>
 <table>
 <thead>
@@ -1656,37 +1666,37 @@ The phone book of the internet.</p>
 </tbody>
 </table>
 <h2 id="diagnostic-commands">Diagnostic commands</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Basic lookup</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>dig<span class="w"> </span>example.com
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>dig<span class="w"> </span>example.com<span class="w"> </span>+short
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Specific record type</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>dig<span class="w"> </span>MX<span class="w"> </span>example.com
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>dig<span class="w"> </span>TXT<span class="w"> </span>example.com
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>dig<span class="w"> </span>AAAA<span class="w"> </span>example.com
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Query specific nameserver</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>dig<span class="w"> </span>@8.8.8.8<span class="w"> </span>example.com
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># Trace full resolution path</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>dig<span class="w"> </span>+trace<span class="w"> </span>example.com
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1"># Reverse lookup</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>dig<span class="w"> </span>-x<span class="w"> </span><span class="m">93</span>.184.216.34
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1"># Short answer with nslookup</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>nslookup<span class="w"> </span>example.com
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>host<span class="w"> </span>example.com
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Basic lookup</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>dig<span class="w"> </span>example.com
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>dig<span class="w"> </span>example.com<span class="w"> </span>+short
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Specific record type</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>dig<span class="w"> </span>MX<span class="w"> </span>example.com
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>dig<span class="w"> </span>TXT<span class="w"> </span>example.com
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>dig<span class="w"> </span>AAAA<span class="w"> </span>example.com
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Query specific nameserver</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>dig<span class="w"> </span>@8.8.8.8<span class="w"> </span>example.com
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># Trace full resolution path</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>dig<span class="w"> </span>+trace<span class="w"> </span>example.com
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># Reverse lookup</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>dig<span class="w"> </span>-x<span class="w"> </span><span class="m">93</span>.184.216.34
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="c1"># Short answer with nslookup</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>nslookup<span class="w"> </span>example.com
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>host<span class="w"> </span>example.com
 </code></pre></div>
 <h2 id="local-resolution">Local resolution</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Check local resolver config</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>cat<span class="w"> </span>/etc/resolv.conf
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Check hosts file</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>cat<span class="w"> </span>/etc/hosts
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Check nsswitch order</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>grep<span class="w"> </span>hosts<span class="w"> </span>/etc/nsswitch.conf
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Check local resolver config</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>cat<span class="w"> </span>/etc/resolv.conf
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Check hosts file</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>cat<span class="w"> </span>/etc/hosts
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Check nsswitch order</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>grep<span class="w"> </span>hosts<span class="w"> </span>/etc/nsswitch.conf
 </code></pre></div>
 <h2 id="common-issues">Common issues</h2>
 <p><strong>Resolution fails locally but works from outside:</strong>
@@ -1694,9 +1704,9 @@ The phone book of the internet.</p>
 - Check <code>/etc/nsswitch.conf</code> — is <code>files</code> before <code>dns</code>?
 - CoreDNS/kube-dns issues in Kubernetes</p>
 <p><strong>TTL too high after DNS change:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Check current TTL</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>dig<span class="w"> </span>example.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;^\w&#39;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Lower TTL before migration, wait for old TTL to expire</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Check current TTL</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>dig<span class="w"> </span>example.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;^\w&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Lower TTL before migration, wait for old TTL to expire</span>
 </code></pre></div></p>
 <h2 id="see-also">See also</h2>
 <ul>
