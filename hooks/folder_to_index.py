@@ -3,28 +3,29 @@
 Obsidian uses folder/folder.md as section entry points.
 MkDocs expects folder/index.md for clean URLs.
 This hook bridges the gap without touching files on disk.
+
+Keeps original src_path so that obsidian-bridge and other plugins
+can still resolve wikilinks like [[hacks]] → hacks/hacks.md.
+Only dest_path is rewritten for clean output URLs.
 """
 
+import os
 from pathlib import Path
 
-from mkdocs.structure.files import File, Files
+from mkdocs.structure.files import Files
 
 
 def on_files(files: Files, config: dict) -> Files:
-    new_files = []
-    docs_dir = config["docs_dir"]
     site_dir = config["site_dir"]
-    use_directory_urls = config["use_directory_urls"]
 
     for file in files:
-        if file.src_path.endswith(".md"):
-            path = Path(file.src_path)
-            if path.stem == path.parent.name:
-                index_path = str(path.parent / "index.md")
-                new_file = File(index_path, docs_dir, site_dir, use_directory_urls)
-                new_file.abs_src_path = file.abs_src_path
-                new_files.append(new_file)
-                continue
-        new_files.append(file)
+        if not file.src_path.endswith(".md"):
+            continue
+        path = Path(file.src_path)
+        if path.stem == path.parent.name:
+            file.dest_path = str(path.parent / "index.html")
+            file.abs_dest_path = os.path.join(site_dir, file.dest_path)
+            file.name = "index"
+            file.url = str(path.parent) + "/"
 
-    return Files(new_files)
+    return files
