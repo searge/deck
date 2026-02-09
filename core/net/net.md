@@ -1,0 +1,22 @@
+---
+tags:
+  - networking
+aliases:
+  - Networking
+---
+
+# net
+
+How packets find their way through the wire. Models, protocols, and the
+plumbing that holds the net together.
+
+## Models
+
+- [[osi_model]]
+- [[tcp_ip_model]]
+
+## Protocols
+
+- [[dns]]
+- [[tls]]
+- [[http]]
