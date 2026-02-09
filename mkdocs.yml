@@ -1,61 +1,63 @@
 ﻿site_name: Cyberdeck
-site_url: "https://searge.pp.ua/deck"
+site_url: 'https://searge.pp.ua/deck'
 site_description: Long-term memory of the deck. Quickhacks, networking, and field-tested commands.
 site_author: searge
-repo_url: "https://github.com/searge/deck"
+repo_url: 'https://github.com/searge/deck'
 theme:
-    name: material
-    custom_dir: overrides
-    language: en
-    palette:
-        - scheme: nord-dark
-          toggle:
-              icon: material/brightness-4
-              name: Switch to light mode
-        - scheme: nord-light
-          toggle:
-              icon: material/brightness-7
-              name: Switch to dark mode
-    features:
-        - content.code.copy
-        - header.autohide
-        - navigation.footer
-        - navigation.indexes
-        - navigation.top
-        - search.suggest
-        - search.share
-        - toc.integrate
+  name: material
+  custom_dir: overrides
+  language: en
+  palette:
+    - scheme: nord-dark
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: nord-light
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - content.code.copy
+    - header.autohide
+    - navigation.footer
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.share
+    - toc.integrate
 docs_dir: core
 hooks:
-    - hooks/folder_to_index.py
+  - hooks/folder_to_index.py
 plugins:
-    - obsidian-bridge
-    - search
-    - privacy
-    - tags
-    - social
+  - obsidian-bridge
+  - search
+  - privacy
+  - tags
+  - social
+  - mermaid2:
+      version: 10.0.2
 markdown_extensions:
-    - obsidian_callouts
-    - pymdownx.highlight:
-          anchor_linenums: true
-    - pymdownx.superfences:
-          custom_fences:
-              - name: mermaid
-                class: mermaid
-                format: >-
-                    !!python/name:pymdownx.superfences.fence_code_format
+  - obsidian_callouts
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: >-
+            !!python/name:mermaid2.fence_mermaid_custom
 extra:
-    social:
-        - icon: fontawesome/brands/mastodon
-          link: https://hachyderm.io/@Searge
-          name: "@Searge@hachyderm.io"
-        - icon: fontawesome/brands/github
-          link: https://github.com/searge
-          name: searge on GitHub
-    consent:
-        title: Cookie consent
-        description: >-
-            We use cookies to recognize your repeated visits and preferences, as well
-            as to measure the effectiveness of our documentation and whether users
-            find what they're searching for. With your consent, you're helping us to
-            make our documentation better.
+  social:
+    - icon: fontawesome/brands/mastodon
+      link: https://hachyderm.io/@Searge
+      name: '@Searge@hachyderm.io'
+    - icon: fontawesome/brands/github
+      link: https://github.com/searge
+      name: searge on GitHub
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
