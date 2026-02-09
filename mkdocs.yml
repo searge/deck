@@ -33,6 +33,7 @@ plugins:
     - search
     - privacy
     - tags
+    - social
 markdown_extensions:
     - obsidian_callouts
     - pymdownx.highlight:
