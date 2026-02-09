@@ -13,6 +13,7 @@ wheels/
 # WIP files
 .env
 tmp
+site/
 
 # Obsidian workspace file
 .obsidian/workspace.json
