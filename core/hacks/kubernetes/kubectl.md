@@ -28,7 +28,7 @@ exec $SHELL
 
 ```bash
 source <(kubectl completion zsh)
-echo '[[ $commands[kubectl] ]] && source <(kubectl completion zsh)' >> ~/.zshrc
+echo 'command -v kubectl &>/dev/null && source <(kubectl completion zsh)' >> ~/.zshrc
 ```
 
 ## Pods
