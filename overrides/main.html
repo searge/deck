@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+  <meta name="fediverse:creator" content="@Searge@hachyderm.io">
+{% endblock %}
+
 {% block styles %}
   {{ super() }}
   <link rel="stylesheet" href="{{ 'assets/stylesheets/nord.css' | url }}">
