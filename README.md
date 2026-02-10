@@ -11,6 +11,8 @@ Quickhacks, networking, and field-tested commands.
 
 ```bash
 core/
+├── containers/     # Linux containers, namespaces, runtimes
+├── embedded/       # embedded Linux, build systems, custom distros
 ├── hacks/          # snippets, one-liners, copy-paste commands
 │   ├── bash/
 │   ├── databases/

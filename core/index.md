@@ -19,3 +19,5 @@ Long-term memory of the deck. Everything the ghost learned, mapped, and survived
 
 - [[hacks]] — quickhacks: snippets, one-liners, copy-paste commands
 - [[net]] — networking, DNS, protocols
+- [[containers]] — Linux containers, namespaces, runtimes
+- [[embedded]] — embedded Linux, build systems, custom distros
