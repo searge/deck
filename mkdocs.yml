@@ -35,7 +35,11 @@ plugins:
     - search
     - privacy
     - tags
-    - social
+    - social:
+        cards_layout_options:
+          logo: assets/images/logo.webp
+          background_color: "#2e3440"
+          color: "#d8dee9"
 markdown_extensions:
   - obsidian_callouts
   - pymdownx.highlight:
