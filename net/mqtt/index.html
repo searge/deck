@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="TLS handshake, certificates, and debugging commands.">
+        <meta name="description" content="MQTT protocol — lightweight pub/sub messaging for IoT with broker architecture, QoS levels, and security.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/net/tls/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/net/mqtt/">
       
       
-        <link rel="prev" href="../tcp_ip_model/">
+        <link rel="prev" href="../http/">
       
+      
+        <link rel="next" href="../osi_model/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>TLS - Cyberdeck</title>
+        <title>MQTT - Cyberdeck</title>
       
     
     
@@ -81,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tls" class="md-skip">
+        <a href="#mqtt" class="md-skip">
           Skip to content
         </a>
       
@@ -118,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TLS
+              MQTT
             
           </span>
         </div>
@@ -1621,10 +1623,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../mqtt/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MQTT
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1640,6 +1669,225 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqtt-vs-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MQTT vs HTTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-mosquitto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Mosquitto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publishing-and-subscribing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publishing and subscribing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kubernetes integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS encryption
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-control-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Access control lists
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqtt-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MQTT 5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iot-sensors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IoT sensors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1733,37 +1981,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    TLS
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../tls/" class="md-nav__link">
         
   
   
@@ -1779,92 +2000,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ssl-vs-tls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SSL vs TLS
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tls-handshake-simplified" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        TLS handshake (simplified)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#certificate-inspection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Certificate inspection
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#self-signed-certificate-devtesting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Self-signed certificate (dev/testing)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#kubernetes-tls-secret" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kubernetes TLS secret
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common issues
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1904,10 +2039,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#ssl-vs-tls" class="md-nav__link">
+  <a href="#core-concepts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SSL vs TLS
+        Core concepts
       
     </span>
   </a>
@@ -1915,10 +2050,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tls-handshake-simplified" class="md-nav__link">
+  <a href="#message-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TLS handshake (simplified)
+        Message flow
       
     </span>
   </a>
@@ -1926,10 +2061,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#certificate-inspection" class="md-nav__link">
+  <a href="#mqtt-vs-http" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Certificate inspection
+        MQTT vs HTTP
       
     </span>
   </a>
@@ -1937,10 +2072,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#self-signed-certificate-devtesting" class="md-nav__link">
+  <a href="#installing-mosquitto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Self-signed certificate (dev/testing)
+        Installing Mosquitto
       
     </span>
   </a>
@@ -1948,10 +2083,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kubernetes-tls-secret" class="md-nav__link">
+  <a href="#publishing-and-subscribing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Kubernetes TLS secret
+        Publishing and subscribing
       
     </span>
   </a>
@@ -1959,10 +2094,143 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
+  <a href="#python-example" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common issues
+        Python example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kubernetes integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS encryption
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-control-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Access control lists
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqtt-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MQTT 5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iot-sensors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IoT sensors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#device-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Device commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
       
     </span>
   </a>
@@ -1990,6 +2258,13 @@
       
       
       
+        <span class="md-tag">iot</span>
+      
+    
+      
+      
+      
+      
         <span class="md-tag">networking</span>
       
     
@@ -1997,14 +2272,7 @@
       
       
       
-        <span class="md-tag">security</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">tls</span>
+        <span class="md-tag">protocols</span>
       
     
   </nav>
@@ -2014,79 +2282,270 @@
   
 
 
-<h1 id="tls">tls</h1>
-<p>Transport Layer Security — encrypts data in transit.
-Successor to SSL. When people say "SSL" they almost always mean TLS.</p>
-<h2 id="ssl-vs-tls">SSL vs TLS</h2>
-<p>SSL (Secure Sockets Layer) was the original protocol. Deprecated due to
-vulnerabilities. TLS (Transport Layer Security) is the modern replacement.</p>
+<h1 id="mqtt">mqtt</h1>
+<p>MQTT (Message Queuing Telemetry Transport) is a lightweight publish-subscribe messaging protocol. Designed in 1999 for oil pipeline monitoring over satellite links, it optimizes for unreliable networks, limited bandwidth, and constrained devices.</p>
+<p>The protocol follows a client-broker architecture. Clients never communicate directly — they publish messages to a broker, which routes them to interested subscribers. This decoupling means publishers don't need to know who (if anyone) receives their messages, and subscribers don't need to know where messages originate.</p>
+<p>MQTT runs over TCP/IP (port 1883) or TLS (port 8883). The binary protocol has minimal overhead — a fixed header of just 2 bytes. Compare this to HTTP's text headers that often exceed the payload size for small messages.</p>
+<h2 id="core-concepts">Core concepts</h2>
+<p><strong>Topics</strong> are hierarchical strings that route messages. They use forward slashes as separators: <code>home/livingroom/temperature</code>, <code>factory/line1/machine3/status</code>. Topics aren't pre-declared — they exist when someone publishes or subscribes.</p>
+<p><strong>Wildcards</strong> allow subscribing to multiple topics. Single-level <code>+</code> matches one level: <code>home/+/temperature</code> matches <code>home/bedroom/temperature</code> and <code>home/kitchen/temperature</code>. Multi-level <code>#</code> matches everything below: <code>home/#</code> catches all messages starting with <code>home/</code>.</p>
+<p><strong>Quality of Service (QoS)</strong> defines delivery guarantees:</p>
 <table>
 <thead>
 <tr>
-<th>Version</th>
-<th>Status</th>
+<th>QoS</th>
+<th>Name</th>
+<th>Guarantee</th>
+<th>Use case</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>SSL 2.0, 3.0</td>
-<td>Deprecated, insecure</td>
+<td>0</td>
+<td>At most once</td>
+<td>Fire and forget, may lose messages</td>
+<td>Sensor readings where loss is acceptable</td>
 </tr>
 <tr>
-<td>TLS 1.0, 1.1</td>
-<td>Deprecated since 2020</td>
+<td>1</td>
+<td>At least once</td>
+<td>Guaranteed delivery, may duplicate</td>
+<td>Commands that must arrive</td>
 </tr>
 <tr>
-<td>TLS 1.2</td>
-<td>Widely used, still secure</td>
-</tr>
-<tr>
-<td>TLS 1.3</td>
-<td>Current, fastest, most secure</td>
+<td>2</td>
+<td>Exactly once</td>
+<td>No loss, no duplicates</td>
+<td>Financial transactions, critical state</td>
 </tr>
 </tbody>
 </table>
-<h2 id="tls-handshake-simplified">TLS handshake (simplified)</h2>
+<p>QoS 0 has lowest overhead. QoS 2 requires four-packet handshake. Choose based on your reliability requirements.</p>
+<p><strong>Retained messages</strong> persist on the broker. When you publish with the retain flag, the broker stores the last message for that topic. New subscribers immediately receive the retained message without waiting for the next publish. Useful for status topics — a new client instantly knows the current state.</p>
+<p><strong>Last Will and Testament (LWT)</strong> handles ungraceful disconnects. When connecting, a client can register a "last will" message. If the client disconnects without sending DISCONNECT (network failure, crash), the broker publishes the LWT to notify others. Common pattern: publish <code>online</code> to <code>device/status</code> on connect, set LWT to publish <code>offline</code> on the same topic.</p>
+<h2 id="message-flow">Message flow</h2>
 <pre class="mermaid"><code>sequenceDiagram
-    Client-&gt;&gt;Server: ClientHello (ciphers, version)
-    Server-&gt;&gt;Client: ServerHello (cipher, cert)
-    Client-&gt;&gt;Client: Verify certificate
-    Client-&gt;&gt;Server: Key exchange
-    Note over Client,Server: Symmetric encryption begins</code></pre>
-<p>TLS 1.3 reduced the handshake from 2 round-trips to 1.</p>
-<h2 id="certificate-inspection">Certificate inspection</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Check remote certificate</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-text
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Expiry date only</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-dates
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Check with curl</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>curl<span class="w"> </span>-vI<span class="w"> </span>https://example.com<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;expire|subject|issuer&#39;</span>
+    Client-&gt;&gt;Broker: CONNECT
+    Broker-&gt;&gt;Client: CONNACK
+    Client-&gt;&gt;Broker: SUBSCRIBE (topic/+)
+    Broker-&gt;&gt;Client: SUBACK
+    Note over Broker: Another client publishes
+    Broker-&gt;&gt;Client: PUBLISH (topic/foo)
+    Client-&gt;&gt;Broker: PUBLISH (other/topic)
+    Client-&gt;&gt;Broker: DISCONNECT</code></pre>
+<h2 id="mqtt-vs-http">MQTT vs HTTP</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>MQTT</th>
+<th>HTTP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td>Pub/Sub</td>
+<td>Request/Response</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>Persistent</td>
+<td>Per-request</td>
+</tr>
+<tr>
+<td>Header overhead</td>
+<td>2 bytes minimum</td>
+<td>Hundreds of bytes</td>
+</tr>
+<tr>
+<td>Direction</td>
+<td>Bidirectional</td>
+<td>Client-initiated</td>
+</tr>
+<tr>
+<td>Power consumption</td>
+<td>Low (long-lived connection)</td>
+<td>High (repeated handshakes)</td>
+</tr>
+<tr>
+<td>Real-time</td>
+<td>Native (push)</td>
+<td>Polling or WebSocket</td>
+</tr>
+</tbody>
+</table>
+<p>For IoT devices that send frequent small messages, MQTT dramatically reduces bandwidth and battery usage.</p>
+<h2 id="installing-mosquitto">Installing Mosquitto</h2>
+<p>On Debian/Ubuntu:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>apt<span class="w"> </span>install<span class="w"> </span>mosquitto<span class="w"> </span>mosquitto-clients
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>mosquitto
 </code></pre></div>
-<h2 id="self-signed-certificate-devtesting">Self-signed certificate (dev/testing)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-nodes<span class="w"> </span>-days<span class="w"> </span><span class="m">365</span><span class="w"> </span>-newkey<span class="w"> </span>rsa:2048<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>-keyout<span class="w"> </span>tls.key<span class="w"> </span>-out<span class="w"> </span>tls.crt<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=localhost&quot;</span>
+<p>On Fedora:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dnf<span class="w"> </span>install<span class="w"> </span>mosquitto
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>mosquitto
 </code></pre></div>
-<h2 id="kubernetes-tls-secret">Kubernetes TLS secret</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>tls<span class="w"> </span>my-tls-secret<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--cert<span class="o">=</span>tls.crt<span class="w"> </span>--key<span class="o">=</span>tls.key<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span>
+<p>Default configuration listens on localhost:1883. Edit <code>/etc/mosquitto/mosquitto.conf</code> for network access:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>listener 1883
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>allow_anonymous true
 </code></pre></div>
-<h2 id="common-issues">Common issues</h2>
-<p><strong>Certificate expired:</strong>
-- Check with <code>openssl s_client</code> above
-- In Kubernetes: check cert-manager logs, Certificate and CertificateRequest resources</p>
-<p><strong>ERR_CERT_AUTHORITY_INVALID:</strong>
-- Self-signed cert or missing intermediate CA in chain
-- Chain must include: leaf cert → intermediate(s) → root CA</p>
-<p><strong>TLS version mismatch:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Test specific TLS version</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>-tls1_2
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>-tls1_3
-</code></pre></div></p>
+<p>For production, configure authentication and TLS.</p>
+<h2 id="publishing-and-subscribing">Publishing and subscribing</h2>
+<p>Open two terminals. In the first, subscribe:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;test/topic&quot;</span>
+</code></pre></div>
+<p>In the second, publish:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;test/topic&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Hello MQTT&quot;</span>
+</code></pre></div>
+<p>With QoS and retained messages:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Publish retained message with QoS 1</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mosquitto_pub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;device/status&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;online&quot;</span><span class="w"> </span>-q<span class="w"> </span><span class="m">1</span><span class="w"> </span>-r
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># New subscriber gets retained message immediately</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;device/status&quot;</span><span class="w"> </span>-v
+</code></pre></div>
+<h2 id="python-example">Python example</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pip<span class="w"> </span>install<span class="w"> </span>paho-mqtt
+</code></pre></div>
+<p>Publisher:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">paho.mqtt.client</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mqtt</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">client</span> <span class="o">=</span> <span class="n">mqtt</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="mi">1883</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">client</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="s2">&quot;sensors/temperature&quot;</span><span class="p">,</span> <span class="s2">&quot;23.5&quot;</span><span class="p">,</span> <span class="n">qos</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">client</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+</code></pre></div>
+<p>Subscriber:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">paho.mqtt.client</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mqtt</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">on_message</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">userdata</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">topic</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">client</span> <span class="o">=</span> <span class="n">mqtt</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">client</span><span class="o">.</span><span class="n">on_message</span> <span class="o">=</span> <span class="n">on_message</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="mi">1883</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">client</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s2">&quot;sensors/#&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">client</span><span class="o">.</span><span class="n">loop_forever</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="kubernetes-integration">Kubernetes integration</h2>
+<p>Deploy Mosquitto in Kubernetes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mosquitto</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mosquitto</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mosquitto</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mosquitto</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eclipse-mosquitto:2</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">          </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1883</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9001</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mosquitto/config</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">          </span><span class="nt">configMap</span><span class="p">:</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mosquitto-config</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="nn">---</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mosquitto</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mosquitto</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mqtt</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1883</span>
+<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">websocket</span>
+<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9001</span>
+</code></pre></div>
+<p>For production, use EMQX or HiveMQ operators that handle clustering and persistence.</p>
+<h2 id="security">Security</h2>
+<h3 id="authentication">Authentication</h3>
+<p>Mosquitto supports password files:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Create password file</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>mosquitto_passwd<span class="w"> </span>-c<span class="w"> </span>/etc/mosquitto/passwd<span class="w"> </span>username
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Configure broker</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;password_file /etc/mosquitto/passwd&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/mosquitto/mosquitto.conf
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;allow_anonymous false&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/mosquitto/mosquitto.conf
+</code></pre></div>
+<p>Connect with credentials:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;test/#&quot;</span><span class="w"> </span>-u<span class="w"> </span>username<span class="w"> </span>-P<span class="w"> </span>password
+</code></pre></div>
+<h3 id="tls-encryption">TLS encryption</h3>
+<p>Configure the broker:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>listener 8883
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>cafile /etc/mosquitto/certs/ca.crt
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>certfile /etc/mosquitto/certs/server.crt
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>keyfile /etc/mosquitto/certs/server.key
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>require_certificate false
+</code></pre></div>
+<p>Connect with TLS:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mosquitto_sub<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>-p<span class="w"> </span><span class="m">8883</span><span class="w"> </span>--cafile<span class="w"> </span>ca.crt<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;test/#&quot;</span>
+</code></pre></div>
+<h3 id="access-control-lists">Access control lists</h3>
+<p>Restrict topic access per user:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a># /etc/mosquitto/acl
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>user sensor1
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>topic read sensors/sensor1/#
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>topic write sensors/sensor1/data
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>user admin
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>topic readwrite #
+</code></pre></div>
+<h2 id="mqtt-50">MQTT 5.0</h2>
+<p>Version 5.0 (2019) added significant improvements:</p>
+<ul>
+<li><strong>Shared Subscriptions</strong> — load-balance messages across multiple subscribers</li>
+<li><strong>Message Expiry</strong> — messages auto-delete after TTL</li>
+<li><strong>Topic Aliases</strong> — reduce bandwidth by replacing topics with integers</li>
+<li><strong>Request/Response</strong> — correlation data and response topics for RPC patterns</li>
+<li><strong>User Properties</strong> — custom key-value metadata on messages</li>
+<li><strong>Reason Codes</strong> — detailed error information in all acknowledgments</li>
+</ul>
+<p>Most modern brokers support 5.0 while maintaining 3.1.1 compatibility.</p>
+<h2 id="use-cases">Use cases</h2>
+<h3 id="iot-sensors">IoT sensors</h3>
+<p>Thousands of sensors publishing readings:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sensors/building1/floor2/room201/temperature
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sensors/building1/floor2/room201/humidity
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>sensors/building1/floor2/room201/occupancy
+</code></pre></div>
+<p>Central system subscribes to <code>sensors/#</code> for aggregation.</p>
+<h3 id="device-commands">Device commands</h3>
+<p>Bidirectional communication:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>devices/thermostat1/status    -&gt; device publishes state
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>devices/thermostat1/command   -&gt; server publishes commands
+</code></pre></div>
+<p>Device subscribes to its command topic, publishes to status.</p>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="../dns/">dns</a></li>
+<li><a href="../http/">http</a></li>
+<li><a href="../tls/">tls</a></li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">MQTT 5.0 Specification</a></li>
+<li><a href="https://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.html">MQTT 3.1.1 Specification</a></li>
+<li><a href="https://www.hivemq.com/mqtt-essentials/">HiveMQ MQTT Essentials</a></li>
+<li><a href="https://mosquitto.org/">Mosquitto</a></li>
+<li><a href="https://eclipse.dev/paho/">Paho MQTT Client</a></li>
+<li><a href="http://mqtt-explorer.com/">MQTT Explorer</a></li>
+</ul>
 
 
 
@@ -2125,7 +2584,7 @@ vulnerabilities. TLS (Transport Layer Security) is the modern replacement.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../tcp_ip_model/" class="md-footer__link md-footer__link--prev" aria-label="Previous: TCP/IP Model">
+          <a href="../http/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HTTP">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2135,11 +2594,27 @@ vulnerabilities. TLS (Transport Layer Security) is the modern replacement.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                TCP/IP Model
+                HTTP
               </div>
             </div>
           </a>
         
+        
+          
+          <a href="../osi_model/" class="md-footer__link md-footer__link--next" aria-label="Next: OSI Model">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                OSI Model
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     

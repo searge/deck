@@ -6,44 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="rsync recipes for deployment and backup.">
+        <meta name="description" content="Elasticsearch administration — cluster health, index management, queries, and troubleshooting.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/bash/rsync/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/elasticsearch/">
       
       
-        <link rel="prev" href="../find/">
+        <link rel="prev" href="../drush/">
       
       
-        <link rel="next" href="../ssh/">
+        <link rel="next" href="../net_info/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/logo.webp">
+      <link rel="icon" href="../../assets/images/logo.webp">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>rsync - Cyberdeck</title>
+        <title>Elasticsearch - Cyberdeck</title>
       
     
     
   
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-  <link rel="stylesheet" href="../../../assets/stylesheets/nord.css">
+  <link rel="stylesheet" href="../../assets/stylesheets/nord.css">
 
     
       
@@ -53,12 +53,12 @@
         
         
         
-        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rsync" class="md-skip">
+        <a href="#elasticsearch" class="md-skip">
           Skip to content
         </a>
       
@@ -99,9 +99,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -112,7 +112,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            <a href="../../.." class="md-header__topic-link">
+            <a href="../.." class="md-header__topic-link">
               Cyberdeck
             </a>
           </span>
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              rsync
+              Elasticsearch
             
           </span>
         </div>
@@ -243,9 +243,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
   </label>
@@ -271,7 +271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -316,7 +316,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../containers/" class="md-nav__link ">
+            <a href="../../containers/" class="md-nav__link ">
               
   
   
@@ -382,7 +382,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../embedded/" class="md-nav__link ">
+            <a href="../../embedded/" class="md-nav__link ">
               
   
   
@@ -426,7 +426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../embedded/yocto/" class="md-nav__link">
+      <a href="../../embedded/yocto/" class="md-nav__link">
         
   
   
@@ -505,7 +505,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -549,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../drush/" class="md-nav__link">
+      <a href="../drush/" class="md-nav__link">
         
   
   
@@ -557,276 +557,6 @@
     
   
     Drush
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../elasticsearch/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Elasticsearch
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../net_info/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Network diagnostics
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nginx/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Nginx
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../solr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Solr
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../varnish/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Varnish
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" checked>
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Bash
-  
-
-    
-  </span>
-  
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Bash
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../emacs_mode/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Emacs mode
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../find/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    find
   
 
     
@@ -863,7 +593,7 @@
   <span class="md-ellipsis">
     
   
-    rsync
+    Elasticsearch
   
 
     
@@ -881,7 +611,7 @@
   <span class="md-ellipsis">
     
   
-    rsync
+    Elasticsearch
   
 
     
@@ -907,10 +637,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#with-ssh-config" class="md-nav__link">
+  <a href="#cluster-health" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With SSH config
+        Cluster health
       
     </span>
   </a>
@@ -918,10 +648,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#in-cicd-pipeline" class="md-nav__link">
+  <a href="#node-info" class="md-nav__link">
     <span class="md-ellipsis">
       
-        In CI/CD pipeline
+        Node info
       
     </span>
   </a>
@@ -929,10 +659,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mirror-directory-delete-removed-files" class="md-nav__link">
+  <a href="#index-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mirror directory (delete removed files)
+        Index management
       
     </span>
   </a>
@@ -940,10 +670,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dry-run-preview-changes" class="md-nav__link">
+  <a href="#documents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dry run (preview changes)
+        Documents
       
     </span>
   </a>
@@ -951,13 +681,74 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bandwidth-limit" class="md-nav__link">
+  <a href="#snapshots-and-backup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bandwidth limit
+        Snapshots and backup
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#red-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Red cluster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-disk-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High disk usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slow-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slow queries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -977,7 +768,275 @@
   
   
     <li class="md-nav__item">
-      <a href="../ssh/" class="md-nav__link">
+      <a href="../net_info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network diagnostics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nginx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../varnish/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Varnish
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../bash/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bash
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/emacs_mode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emacs mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/find/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    find
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/rsync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    rsync
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/ssh/" class="md-nav__link">
         
   
   
@@ -1005,7 +1064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user/" class="md-nav__link">
+      <a href="../bash/user/" class="md-nav__link">
         
   
   
@@ -1065,7 +1124,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../databases/" class="md-nav__link ">
+            <a href="../databases/" class="md-nav__link ">
               
   
   
@@ -1109,7 +1168,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mariadb/" class="md-nav__link">
+      <a href="../databases/mariadb/" class="md-nav__link">
         
   
   
@@ -1137,7 +1196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mysql/" class="md-nav__link">
+      <a href="../databases/mysql/" class="md-nav__link">
         
   
   
@@ -1165,7 +1224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/postgresql/" class="md-nav__link">
+      <a href="../databases/postgresql/" class="md-nav__link">
         
   
   
@@ -1219,7 +1278,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../gcp/" class="md-nav__link ">
+            <a href="../gcp/" class="md-nav__link ">
               
   
   
@@ -1286,7 +1345,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../git/" class="md-nav__link ">
+            <a href="../git/" class="md-nav__link ">
               
   
   
@@ -1330,7 +1389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/git_cicd/" class="md-nav__link">
+      <a href="../git/git_cicd/" class="md-nav__link">
         
   
   
@@ -1388,7 +1447,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../kubernetes/" class="md-nav__link ">
+            <a href="../kubernetes/" class="md-nav__link ">
               
   
   
@@ -1432,7 +1491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/helm/" class="md-nav__link">
+      <a href="../kubernetes/helm/" class="md-nav__link">
         
   
   
@@ -1460,7 +1519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/kubectl/" class="md-nav__link">
+      <a href="../kubernetes/kubectl/" class="md-nav__link">
         
   
   
@@ -1514,7 +1573,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../vim/" class="md-nav__link ">
+            <a href="../vim/" class="md-nav__link ">
               
   
   
@@ -1602,7 +1661,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../net/" class="md-nav__link ">
+            <a href="../../net/" class="md-nav__link ">
               
   
   
@@ -1646,7 +1705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dds/" class="md-nav__link">
+      <a href="../../net/dds/" class="md-nav__link">
         
   
   
@@ -1674,7 +1733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dns/" class="md-nav__link">
+      <a href="../../net/dns/" class="md-nav__link">
         
   
   
@@ -1702,7 +1761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/http/" class="md-nav__link">
+      <a href="../../net/http/" class="md-nav__link">
         
   
   
@@ -1730,7 +1789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/mqtt/" class="md-nav__link">
+      <a href="../../net/mqtt/" class="md-nav__link">
         
   
   
@@ -1758,7 +1817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/osi_model/" class="md-nav__link">
+      <a href="../../net/osi_model/" class="md-nav__link">
         
   
   
@@ -1786,7 +1845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/snmp/" class="md-nav__link">
+      <a href="../../net/snmp/" class="md-nav__link">
         
   
   
@@ -1814,7 +1873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tcp_ip_model/" class="md-nav__link">
+      <a href="../../net/tcp_ip_model/" class="md-nav__link">
         
   
   
@@ -1842,7 +1901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tls/" class="md-nav__link">
+      <a href="../../net/tls/" class="md-nav__link">
         
   
   
@@ -1897,10 +1956,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#with-ssh-config" class="md-nav__link">
+  <a href="#cluster-health" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With SSH config
+        Cluster health
       
     </span>
   </a>
@@ -1908,10 +1967,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#in-cicd-pipeline" class="md-nav__link">
+  <a href="#node-info" class="md-nav__link">
     <span class="md-ellipsis">
       
-        In CI/CD pipeline
+        Node info
       
     </span>
   </a>
@@ -1919,10 +1978,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mirror-directory-delete-removed-files" class="md-nav__link">
+  <a href="#index-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mirror directory (delete removed files)
+        Index management
       
     </span>
   </a>
@@ -1930,10 +1989,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dry-run-preview-changes" class="md-nav__link">
+  <a href="#documents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dry run (preview changes)
+        Documents
       
     </span>
   </a>
@@ -1941,13 +2000,74 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bandwidth-limit" class="md-nav__link">
+  <a href="#snapshots-and-backup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bandwidth limit
+        Snapshots and backup
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#red-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Red cluster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-disk-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High disk usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slow-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slow queries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1972,14 +2092,14 @@
       
       
       
-        <span class="md-tag">bash</span>
+        <span class="md-tag">search</span>
       
     
       
       
       
       
-        <span class="md-tag">deployment</span>
+        <span class="md-tag">snippets</span>
       
     
   </nav>
@@ -1989,24 +2109,115 @@
   
 
 
-<h1 id="rsync">rsync</h1>
-<h2 id="with-ssh-config">With SSH config</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>rsync<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;ssh -F ssh.cfg&#39;</span><span class="w"> </span>-azhP<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nv">$host</span>:<span class="nv">$source</span><span class="w"> </span><span class="nv">$destination</span>
+<h1 id="elasticsearch">elasticsearch</h1>
+<h2 id="cluster-health">Cluster health</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Quick status (green/yellow/red)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_cat/health
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Detailed health</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_cluster/health?pretty
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Per-shard health</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_cluster/health?level<span class="o">=</span>shards<span class="p">&amp;</span>pretty
 </code></pre></div>
-<h2 id="in-cicd-pipeline">In CI/CD pipeline</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rsync<span class="w"> </span>-az<span class="w"> </span>--quiet<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--temp-dir<span class="o">=</span>/tmp<span class="w"> </span>--partial-dir<span class="o">=</span>/tmp<span class="w"> </span>--delete-after<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--exclude-from<span class="o">=</span>./.ignore<span class="w"> </span>.<span class="w"> </span>build_dist/<span class="nv">$DEPLOY_VERSION</span>
+<h2 id="node-info">Node info</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># List nodes</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_cat/nodes?v
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Disk usage</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_cat/allocation?v
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Node stats</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_nodes/stats?pretty
 </code></pre></div>
-<h2 id="mirror-directory-delete-removed-files">Mirror directory (delete removed files)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rsync<span class="w"> </span>-avz<span class="w"> </span>--delete<span class="w"> </span><span class="nv">$source</span>/<span class="w"> </span><span class="nv">$destination</span>/
+<h2 id="index-management">Index management</h2>
+<p>List indices:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_cat/indices?v<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>index
 </code></pre></div>
-<h2 id="dry-run-preview-changes">Dry run (preview changes)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rsync<span class="w"> </span>-avzn<span class="w"> </span>--delete<span class="w"> </span><span class="nv">$source</span>/<span class="w"> </span><span class="nv">$destination</span>/
+<p>Create an index:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>localhost:9200/<span class="nv">$INDEX</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="s1">  &quot;settings&quot;: {</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="s1">    &quot;number_of_shards&quot;: 1,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="s1">    &quot;number_of_replicas&quot;: 1</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s1">  }</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s1">}&#39;</span>
 </code></pre></div>
-<h2 id="bandwidth-limit">Bandwidth limit</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rsync<span class="w"> </span>-avz<span class="w"> </span>--bwlimit<span class="o">=</span><span class="m">5000</span><span class="w"> </span><span class="nv">$source</span><span class="w"> </span><span class="nv">$destination</span><span class="w">  </span><span class="c1"># 5MB/s</span>
+<p>Delete an index:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>localhost:9200/<span class="nv">$INDEX</span>
+</code></pre></div>
+<p>Close/open (saves resources for unused indices):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>localhost:9200/<span class="nv">$INDEX</span>/_close
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>localhost:9200/<span class="nv">$INDEX</span>/_open
+</code></pre></div>
+<h2 id="documents">Documents</h2>
+<p>Index a document:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>localhost:9200/<span class="nv">$INDEX</span>/_doc<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="s1">  &quot;title&quot;: &quot;Test&quot;,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="s1">  &quot;timestamp&quot;: &quot;2024-01-01T00:00:00Z&quot;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="s1">}&#39;</span>
+</code></pre></div>
+<p>Search:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/<span class="nv">$INDEX</span>/_search?pretty<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="s1">  &quot;query&quot;: { &quot;match_all&quot;: {} },</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="s1">  &quot;size&quot;: 10</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s1">}&#39;</span>
+</code></pre></div>
+<p>Count documents:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/<span class="nv">$INDEX</span>/_count?pretty
+</code></pre></div>
+<h2 id="snapshots-and-backup">Snapshots and backup</h2>
+<p>Register a repository:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>localhost:9200/_snapshot/<span class="nv">$REPO</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="s1">  &quot;type&quot;: &quot;fs&quot;,</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="s1">  &quot;settings&quot;: { &quot;location&quot;: &quot;/mnt/backups/elasticsearch&quot; }</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="s1">}&#39;</span>
+</code></pre></div>
+<p>Create a snapshot:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;localhost:9200/_snapshot/</span><span class="nv">$REPO</span><span class="s2">/snapshot_</span><span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span><span class="s2">?wait_for_completion=true&quot;</span>
+</code></pre></div>
+<p>List snapshots:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_snapshot/<span class="nv">$REPO</span>/_all?pretty
+</code></pre></div>
+<p>Restore:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>localhost:9200/_snapshot/<span class="nv">$REPO</span>/<span class="nv">$SNAPSHOT</span>/_restore
+</code></pre></div>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="red-cluster">Red cluster</h3>
+<p>Check unassigned shards:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_cat/shards?v<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>UNASSIGNED
+</code></pre></div>
+<p>Explain why a shard is unassigned:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_cluster/allocation/explain?pretty
+</code></pre></div>
+<p>Force reroute (last resort):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>localhost:9200/_cluster/reroute?retry_failed<span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
+<h3 id="high-disk-usage">High disk usage</h3>
+<p>Check watermarks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_cluster/settings?include_defaults<span class="o">=</span>true<span class="p">&amp;</span>pretty<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>watermark
+</code></pre></div>
+<p>Default thresholds: 85% (low), 90% (high), 95% (flood). Indices go read-only at flood.</p>
+<p>Unblock read-only indices:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>localhost:9200/_all/_settings<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="s1">  &quot;index.blocks.read_only_allow_delete&quot;: null</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="s1">}&#39;</span>
+</code></pre></div>
+<h3 id="slow-queries">Slow queries</h3>
+<p>Enable slow log:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>localhost:9200/<span class="nv">$INDEX</span>/_settings<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="s1">  &quot;index.search.slowlog.threshold.query.warn&quot;: &quot;5s&quot;,</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="s1">  &quot;index.search.slowlog.threshold.query.info&quot;: &quot;2s&quot;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="s1">}&#39;</span>
+</code></pre></div>
+<p>Check hot threads:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:9200/_nodes/hot_threads
+</code></pre></div>
+<h3 id="service-management">Service management</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>systemctl<span class="w"> </span>status<span class="w"> </span>elasticsearch
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>elasticsearch
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1"># Check logs</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>elasticsearch<span class="w"> </span>-f
 </code></pre></div>
 
 
@@ -2046,7 +2257,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../find/" class="md-footer__link md-footer__link--prev" aria-label="Previous: find">
+          <a href="../drush/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Drush">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2056,20 +2267,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                find
+                Drush
               </div>
             </div>
           </a>
         
         
           
-          <a href="../ssh/" class="md-footer__link md-footer__link--next" aria-label="Next: SSH">
+          <a href="../net_info/" class="md-footer__link md-footer__link--next" aria-label="Next: Network diagnostics">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                SSH
+                Network diagnostics
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2189,11 +2400,11 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
   
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
 

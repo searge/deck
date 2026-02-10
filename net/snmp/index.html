@@ -6,17 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="TLS handshake, certificates, and debugging commands.">
+        <meta name="description" content="SNMP protocol — network device monitoring with OIDs, MIBs, versions, and Prometheus integration.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/net/tls/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/net/snmp/">
       
       
-        <link rel="prev" href="../tcp_ip_model/">
+        <link rel="prev" href="../osi_model/">
       
+      
+        <link rel="next" href="../tcp_ip_model/">
       
       
         
@@ -27,7 +29,7 @@
     
     
       
-        <title>TLS - Cyberdeck</title>
+        <title>SNMP - Cyberdeck</title>
       
     
     
@@ -81,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tls" class="md-skip">
+        <a href="#snmp" class="md-skip">
           Skip to content
         </a>
       
@@ -118,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TLS
+              SNMP
             
           </span>
         </div>
@@ -1677,10 +1679,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../snmp/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SNMP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1696,6 +1725,219 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oids-and-the-mib-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OIDs and the MIB tree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#protocol-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol operations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmp-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SNMP versions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-net-snmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing Net-SNMP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic queries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmpv3-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SNMPv3 queries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-snmpd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring snmpd
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prometheus-snmp-exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus SNMP exporter
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-oids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common OIDs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#community-string-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Community string risks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snmpv3-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SNMPv3 best practices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#firewall-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firewall rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1733,37 +1975,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    TLS
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../tls/" class="md-nav__link">
         
   
   
@@ -1779,92 +1994,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ssl-vs-tls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SSL vs TLS
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tls-handshake-simplified" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        TLS handshake (simplified)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#certificate-inspection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Certificate inspection
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#self-signed-certificate-devtesting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Self-signed certificate (dev/testing)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#kubernetes-tls-secret" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Kubernetes TLS secret
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common issues
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1904,10 +2033,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#ssl-vs-tls" class="md-nav__link">
+  <a href="#architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SSL vs TLS
+        Architecture
       
     </span>
   </a>
@@ -1915,10 +2044,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tls-handshake-simplified" class="md-nav__link">
+  <a href="#oids-and-the-mib-tree" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TLS handshake (simplified)
+        OIDs and the MIB tree
       
     </span>
   </a>
@@ -1926,10 +2055,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#certificate-inspection" class="md-nav__link">
+  <a href="#protocol-operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Certificate inspection
+        Protocol operations
       
     </span>
   </a>
@@ -1937,10 +2066,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#self-signed-certificate-devtesting" class="md-nav__link">
+  <a href="#snmp-versions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Self-signed certificate (dev/testing)
+        SNMP versions
       
     </span>
   </a>
@@ -1948,10 +2077,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#kubernetes-tls-secret" class="md-nav__link">
+  <a href="#data-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Kubernetes TLS secret
+        Data types
       
     </span>
   </a>
@@ -1959,10 +2088,137 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
+  <a href="#installing-net-snmp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common issues
+        Installing Net-SNMP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic queries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snmpv3-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SNMPv3 queries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-snmpd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring snmpd
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prometheus-snmp-exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prometheus SNMP exporter
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-oids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common OIDs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security considerations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#community-string-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Community string risks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snmpv3-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SNMPv3 best practices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#firewall-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Firewall rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
       
     </span>
   </a>
@@ -1990,6 +2246,13 @@
       
       
       
+        <span class="md-tag">monitoring</span>
+      
+    
+      
+      
+      
+      
         <span class="md-tag">networking</span>
       
     
@@ -1997,14 +2260,7 @@
       
       
       
-        <span class="md-tag">security</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">tls</span>
+        <span class="md-tag">protocols</span>
       
     
   </nav>
@@ -2014,79 +2270,320 @@
   
 
 
-<h1 id="tls">tls</h1>
-<p>Transport Layer Security — encrypts data in transit.
-Successor to SSL. When people say "SSL" they almost always mean TLS.</p>
-<h2 id="ssl-vs-tls">SSL vs TLS</h2>
-<p>SSL (Secure Sockets Layer) was the original protocol. Deprecated due to
-vulnerabilities. TLS (Transport Layer Security) is the modern replacement.</p>
+<h1 id="snmp">snmp</h1>
+<p>SNMP (Simple Network Management Protocol) is a protocol for collecting and organizing information about managed devices on IP networks. Created in 1988, it remains the standard way to monitor network infrastructure — routers, switches, firewalls, servers, printers, UPS systems.</p>
+<p>Despite its name, SNMP isn't simple. The protocol itself is straightforward, but the ecosystem of MIBs, OIDs, and versioning adds complexity. Understanding SNMP requires grasping three components: the protocol operations, the data model (SMI/MIB), and the security model (especially in v3).</p>
+<p>SNMP operates over UDP ports 161 (agent) and 162 (traps). The choice of UDP reflects its design goals: lightweight polling of many devices where occasional packet loss is acceptable.</p>
+<h2 id="architecture">Architecture</h2>
+<p>SNMP uses a manager-agent model:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────┐         ┌─────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│   Manager   │ ──────&gt; │    Agent    │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│  (NMS/etc)  │ &lt;────── │  (device)   │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>└─────────────┘         └─────────────┘
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>     │                        │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>     │ GET/SET requests       │ Responses
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     │ &lt;──────────────────────│
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>     │                        │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>     │ TRAP notifications     │
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>     │ &lt;──────────────────────│
+</code></pre></div>
+<p><strong>Manager</strong> (or NMS — Network Management System) initiates requests. It queries devices, processes responses, and receives traps. Examples: Prometheus with SNMP exporter, LibreNMS, Zabbix, Nagios.</p>
+<p><strong>Agent</strong> runs on managed devices. It responds to queries, provides access to device data, and sends traps when events occur. Most network equipment ships with an SNMP agent. Linux runs <code>snmpd</code>.</p>
+<p><strong>MIB</strong> (Management Information Base) defines what data is available. It's a hierarchical database schema describing variables the agent exposes. Without the MIB, you see raw OIDs; with it, you see meaningful names.</p>
+<h2 id="oids-and-the-mib-tree">OIDs and the MIB tree</h2>
+<p>Every piece of SNMP data has an Object Identifier (OID) — a sequence of numbers forming a path through a global tree:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>iso(1)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>└── org(3)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    └── dod(6)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        └── internet(1)
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            ├── mgmt(2)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>            │   └── mib-2(1)
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            │       ├── system(1)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            │       │   ├── sysDescr(1)      -&gt; .1.3.6.1.2.1.1.1
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            │       │   ├── sysObjectID(2)   -&gt; .1.3.6.1.2.1.1.2
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            │       │   ├── sysUpTime(3)     -&gt; .1.3.6.1.2.1.1.3
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            │       │   └── sysName(5)       -&gt; .1.3.6.1.2.1.1.5
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            │       ├── interfaces(2)
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            │       └── ...
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            └── private(4)
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>                └── enterprises(1)
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>                    ├── cisco(9)
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>                    ├── hp(11)
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>                    └── ...
+</code></pre></div>
+<p>Standard MIBs (under mib-2) work across vendors. Enterprise MIBs (under private.enterprises) contain vendor-specific extensions.</p>
+<h2 id="protocol-operations">Protocol operations</h2>
 <table>
 <thead>
 <tr>
-<th>Version</th>
-<th>Status</th>
+<th>Operation</th>
+<th>Direction</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>SSL 2.0, 3.0</td>
-<td>Deprecated, insecure</td>
+<td>GET</td>
+<td>Manager -&gt; Agent</td>
+<td>Retrieve specific OID value</td>
 </tr>
 <tr>
-<td>TLS 1.0, 1.1</td>
-<td>Deprecated since 2020</td>
+<td>GETNEXT</td>
+<td>Manager -&gt; Agent</td>
+<td>Get next OID in tree (for walking)</td>
 </tr>
 <tr>
-<td>TLS 1.2</td>
-<td>Widely used, still secure</td>
+<td>GETBULK</td>
+<td>Manager -&gt; Agent</td>
+<td>Efficient retrieval of multiple OIDs (v2c+)</td>
 </tr>
 <tr>
-<td>TLS 1.3</td>
-<td>Current, fastest, most secure</td>
+<td>SET</td>
+<td>Manager -&gt; Agent</td>
+<td>Modify a value</td>
+</tr>
+<tr>
+<td>TRAP</td>
+<td>Agent -&gt; Manager</td>
+<td>Unsolicited event notification</td>
+</tr>
+<tr>
+<td>INFORM</td>
+<td>Agent -&gt; Manager</td>
+<td>Acknowledged trap (v2c+)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="tls-handshake-simplified">TLS handshake (simplified)</h2>
-<pre class="mermaid"><code>sequenceDiagram
-    Client-&gt;&gt;Server: ClientHello (ciphers, version)
-    Server-&gt;&gt;Client: ServerHello (cipher, cert)
-    Client-&gt;&gt;Client: Verify certificate
-    Client-&gt;&gt;Server: Key exchange
-    Note over Client,Server: Symmetric encryption begins</code></pre>
-<p>TLS 1.3 reduced the handshake from 2 round-trips to 1.</p>
-<h2 id="certificate-inspection">Certificate inspection</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Check remote certificate</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-text
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Expiry date only</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>&lt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-dates
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Check with curl</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>curl<span class="w"> </span>-vI<span class="w"> </span>https://example.com<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;expire|subject|issuer&#39;</span>
+<p>Most monitoring uses GET and GETNEXT/GETBULK for polling. SET is used for configuration (when supported). TRAP provides real-time alerts.</p>
+<h2 id="snmp-versions">SNMP versions</h2>
+<p>Three versions exist with different security models:</p>
+<p><strong>SNMPv1</strong> (1988): Original version. Authentication via community string (plaintext password). No encryption. Still widely deployed despite security issues.</p>
+<p><strong>SNMPv2c</strong> (1996): Added GETBULK for efficiency and improved error handling. Kept community string authentication ("c" = community-based). Most common version today.</p>
+<p><strong>SNMPv3</strong> (2002): Proper security model with:</p>
+<ul>
+<li>Authentication (MD5, SHA)</li>
+<li>Encryption (DES, AES)</li>
+<li>Access control (views, groups)</li>
+</ul>
+<p>Use v3 for anything security-sensitive. Use v2c only on isolated management networks.</p>
+<h2 id="data-types">Data types</h2>
+<p>SNMP uses ASN.1 data types:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INTEGER</td>
+<td>Signed 32-bit</td>
+<td>Interface status (1=up, 2=down)</td>
+</tr>
+<tr>
+<td>Counter32</td>
+<td>Monotonic counter, wraps at 2^32</td>
+<td>Bytes transmitted</td>
+</tr>
+<tr>
+<td>Counter64</td>
+<td>64-bit counter (v2c+)</td>
+<td>High-speed interface counters</td>
+</tr>
+<tr>
+<td>Gauge32</td>
+<td>Value that can increase/decrease</td>
+<td>CPU utilization</td>
+</tr>
+<tr>
+<td>TimeTicks</td>
+<td>Hundredths of seconds</td>
+<td>Uptime</td>
+</tr>
+<tr>
+<td>OCTET STRING</td>
+<td>Byte sequence</td>
+<td>System description</td>
+</tr>
+<tr>
+<td>IpAddress</td>
+<td>IPv4 address</td>
+<td>Interface address</td>
+</tr>
+</tbody>
+</table>
+<p>Counter types require rate calculation: <code>(current - previous) / interval</code>. Counters wrap, so handle negative deltas.</p>
+<h2 id="installing-net-snmp">Installing Net-SNMP</h2>
+<p>On Debian/Ubuntu:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>apt<span class="w"> </span>install<span class="w"> </span>snmp<span class="w"> </span>snmpd<span class="w"> </span>snmp-mibs-downloader
 </code></pre></div>
-<h2 id="self-signed-certificate-devtesting">Self-signed certificate (dev/testing)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-nodes<span class="w"> </span>-days<span class="w"> </span><span class="m">365</span><span class="w"> </span>-newkey<span class="w"> </span>rsa:2048<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>-keyout<span class="w"> </span>tls.key<span class="w"> </span>-out<span class="w"> </span>tls.crt<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=localhost&quot;</span>
+<p>On Fedora:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>dnf<span class="w"> </span>install<span class="w"> </span>net-snmp<span class="w"> </span>net-snmp-utils
 </code></pre></div>
-<h2 id="kubernetes-tls-secret">Kubernetes TLS secret</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>tls<span class="w"> </span>my-tls-secret<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--cert<span class="o">=</span>tls.crt<span class="w"> </span>--key<span class="o">=</span>tls.key<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span>
+<p>Download standard MIBs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>download-mibs
 </code></pre></div>
-<h2 id="common-issues">Common issues</h2>
-<p><strong>Certificate expired:</strong>
-- Check with <code>openssl s_client</code> above
-- In Kubernetes: check cert-manager logs, Certificate and CertificateRequest resources</p>
-<p><strong>ERR_CERT_AUTHORITY_INVALID:</strong>
-- Self-signed cert or missing intermediate CA in chain
-- Chain must include: leaf cert → intermediate(s) → root CA</p>
-<p><strong>TLS version mismatch:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Test specific TLS version</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>-tls1_2
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>openssl<span class="w"> </span>s_client<span class="w"> </span>-connect<span class="w"> </span>example.com:443<span class="w"> </span>-tls1_3
-</code></pre></div></p>
+<p>Edit <code>/etc/snmp/snmp.conf</code> to load MIBs automatically:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mibs +ALL
+</code></pre></div>
+<h2 id="basic-queries">Basic queries</h2>
+<p>Query system description:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Using OID</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>snmpget<span class="w"> </span>-v2c<span class="w"> </span>-c<span class="w"> </span>public<span class="w"> </span>localhost<span class="w"> </span>.1.3.6.1.2.1.1.1.0
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Using MIB name</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>snmpget<span class="w"> </span>-v2c<span class="w"> </span>-c<span class="w"> </span>public<span class="w"> </span>localhost<span class="w"> </span>sysDescr.0
+</code></pre></div>
+<p>Walk the system subtree:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>snmpwalk<span class="w"> </span>-v2c<span class="w"> </span>-c<span class="w"> </span>public<span class="w"> </span>localhost<span class="w"> </span>system
+</code></pre></div>
+<p>Get interface table:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>snmpwalk<span class="w"> </span>-v2c<span class="w"> </span>-c<span class="w"> </span>public<span class="w"> </span>localhost<span class="w"> </span>ifTable
+</code></pre></div>
+<p>Bulk retrieval (more efficient):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>snmpbulkwalk<span class="w"> </span>-v2c<span class="w"> </span>-c<span class="w"> </span>public<span class="w"> </span>localhost<span class="w"> </span>interfaces
+</code></pre></div>
+<h2 id="snmpv3-queries">SNMPv3 queries</h2>
+<p>SNMPv3 requires user credentials:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Authentication only (authNoPriv)</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>snmpget<span class="w"> </span>-v3<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>-l<span class="w"> </span>authNoPriv<span class="w"> </span>-a<span class="w"> </span>SHA<span class="w"> </span>-A<span class="w"> </span><span class="s2">&quot;authpassword&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span>localhost<span class="w"> </span>sysUpTime.0
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1"># Authentication + encryption (authPriv)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>snmpget<span class="w"> </span>-v3<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>-l<span class="w"> </span>authPriv<span class="w"> </span>-a<span class="w"> </span>SHA<span class="w"> </span>-A<span class="w"> </span><span class="s2">&quot;authpassword&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span>-x<span class="w"> </span>AES<span class="w"> </span>-X<span class="w"> </span><span class="s2">&quot;privpassword&quot;</span><span class="w"> </span>localhost<span class="w"> </span>sysUpTime.0
+</code></pre></div>
+<p>Security levels:</p>
+<ul>
+<li><code>noAuthNoPriv</code> — username only (not recommended)</li>
+<li><code>authNoPriv</code> — authentication, no encryption</li>
+<li><code>authPriv</code> — authentication + encryption</li>
+</ul>
+<h2 id="configuring-snmpd">Configuring snmpd</h2>
+<p>Basic <code>/etc/snmp/snmpd.conf</code> for monitoring:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a># SNMPv2c read-only access
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>rocommunity public 127.0.0.1
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>rocommunity monitoring 10.0.0.0/8
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a># SNMPv3 user
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>createUser myuser SHA &quot;authpassword&quot; AES &quot;privpassword&quot;
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>rouser myuser authPriv
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a># System information
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>sysLocation &quot;Data Center Rack 5&quot;
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>sysContact &quot;ops@example.com&quot;
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>sysName &quot;server01.example.com&quot;
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a># Extend with custom scripts
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>extend uptime /usr/bin/uptime
+</code></pre></div>
+<p>Restart after changes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>snmpd
+</code></pre></div>
+<h2 id="prometheus-snmp-exporter">Prometheus SNMP exporter</h2>
+<p>For Kubernetes/Prometheus environments:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp-exporter</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp-exporter</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp-exporter</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp-exporter</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prom/snmp-exporter:latest</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">          </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9116</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="w">          </span><span class="nt">volumeMounts</span><span class="p">:</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="w">              </span><span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/snmp_exporter</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="w">      </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="w">          </span><span class="nt">configMap</span><span class="p">:</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a><span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp-exporter-config</span>
+</code></pre></div>
+<p>Configure Prometheus to scrape via the exporter:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">scrape_configs</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;snmp&#39;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.1</span><span class="w">  </span><span class="c1"># Router</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.2</span><span class="w">  </span><span class="c1"># Switch</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/snmp</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">      </span><span class="nt">module</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">if_mib</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">    </span><span class="nt">relabel_configs</span><span class="p">:</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__address__</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__param_target</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">__param_target</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">        </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instance</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__address__</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w">        </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">snmp-exporter:9116</span>
+</code></pre></div>
+<h2 id="common-oids">Common OIDs</h2>
+<p>System information:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sysDescr.0        .1.3.6.1.2.1.1.1.0    System description
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sysUpTime.0       .1.3.6.1.2.1.1.3.0    Uptime in ticks
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>sysName.0         .1.3.6.1.2.1.1.5.0    Hostname
+</code></pre></div>
+<p>Interface statistics:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>ifDescr           .1.3.6.1.2.1.2.2.1.2    Interface name
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>ifOperStatus      .1.3.6.1.2.1.2.2.1.8    Up(1)/Down(2)
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>ifInOctets        .1.3.6.1.2.1.2.2.1.10   Bytes received
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>ifOutOctets       .1.3.6.1.2.1.2.2.1.16   Bytes sent
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>ifInErrors        .1.3.6.1.2.1.2.2.1.14   Input errors
+</code></pre></div>
+<p>Host resources (servers):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>hrSystemUptime    .1.3.6.1.2.1.25.1.1     Host uptime
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>hrMemorySize      .1.3.6.1.2.1.25.2.2     Total memory
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>hrProcessorLoad   .1.3.6.1.2.1.25.3.3.1.2 CPU load per core
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>hrStorageUsed     .1.3.6.1.2.1.25.2.3.1.6 Disk usage
+</code></pre></div>
+<h2 id="security-considerations">Security considerations</h2>
+<h3 id="community-string-risks">Community string risks</h3>
+<p>SNMPv1/v2c community strings are sent in plaintext. Treat community strings as passwords:</p>
+<ul>
+<li>Never use "public" or "private" in production</li>
+<li>Use different strings for read-only and read-write</li>
+<li>Restrict access by IP in snmpd.conf</li>
+<li>Isolate SNMP traffic to management VLANs</li>
+</ul>
+<h3 id="snmpv3-best-practices">SNMPv3 best practices</h3>
+<ul>
+<li>Use <code>authPriv</code> security level</li>
+<li>Prefer SHA over MD5 for authentication</li>
+<li>Prefer AES over DES for encryption</li>
+<li>Use different users for different access levels</li>
+<li>Rotate credentials periodically</li>
+</ul>
+<h3 id="firewall-rules">Firewall rules</h3>
+<p>Block SNMP from untrusted networks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Allow only from monitoring server</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>udp<span class="w"> </span>--dport<span class="w"> </span><span class="m">161</span><span class="w"> </span>-s<span class="w"> </span><span class="m">10</span>.0.0.100<span class="w"> </span>-j<span class="w"> </span>ACCEPT
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>iptables<span class="w"> </span>-A<span class="w"> </span>INPUT<span class="w"> </span>-p<span class="w"> </span>udp<span class="w"> </span>--dport<span class="w"> </span><span class="m">161</span><span class="w"> </span>-j<span class="w"> </span>DROP
+</code></pre></div>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="../dns/">dns</a></li>
+<li><a href="../tcp_ip_model/">tcp_ip_model</a></li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc3411">RFC 3411-3418</a> — SNMPv3 Architecture</li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc1157">RFC 1157</a> — SNMPv1 Specification</li>
+<li><a href="http://www.net-snmp.org/">Net-SNMP</a></li>
+<li><a href="https://github.com/prometheus/snmp_exporter">Prometheus SNMP Exporter</a></li>
+<li><a href="http://oid-info.com/">OID Repository</a></li>
+</ul>
 
 
 
@@ -2125,7 +2622,7 @@ vulnerabilities. TLS (Transport Layer Security) is the modern replacement.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../tcp_ip_model/" class="md-footer__link md-footer__link--prev" aria-label="Previous: TCP/IP Model">
+          <a href="../osi_model/" class="md-footer__link md-footer__link--prev" aria-label="Previous: OSI Model">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2135,11 +2632,27 @@ vulnerabilities. TLS (Transport Layer Security) is the modern replacement.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                TCP/IP Model
+                OSI Model
               </div>
             </div>
           </a>
         
+        
+          
+          <a href="../tcp_ip_model/" class="md-footer__link md-footer__link--next" aria-label="Next: TCP/IP Model">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                TCP/IP Model
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     

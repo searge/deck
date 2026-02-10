@@ -6,44 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="rsync recipes for deployment and backup.">
+        <meta name="description" content="Apache Solr administration — health checks, core management, backup, and troubleshooting.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/bash/rsync/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/solr/">
       
       
-        <link rel="prev" href="../find/">
+        <link rel="prev" href="../nginx/">
       
       
-        <link rel="next" href="../ssh/">
+        <link rel="next" href="../varnish/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/logo.webp">
+      <link rel="icon" href="../../assets/images/logo.webp">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>rsync - Cyberdeck</title>
+        <title>Solr - Cyberdeck</title>
       
     
     
   
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-  <link rel="stylesheet" href="../../../assets/stylesheets/nord.css">
+  <link rel="stylesheet" href="../../assets/stylesheets/nord.css">
 
     
       
@@ -53,12 +53,12 @@
         
         
         
-        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rsync" class="md-skip">
+        <a href="#solr" class="md-skip">
           Skip to content
         </a>
       
@@ -99,9 +99,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -112,7 +112,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            <a href="../../.." class="md-header__topic-link">
+            <a href="../.." class="md-header__topic-link">
               Cyberdeck
             </a>
           </span>
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              rsync
+              Solr
             
           </span>
         </div>
@@ -243,9 +243,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
   </label>
@@ -271,7 +271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -316,7 +316,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../containers/" class="md-nav__link ">
+            <a href="../../containers/" class="md-nav__link ">
               
   
   
@@ -382,7 +382,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../embedded/" class="md-nav__link ">
+            <a href="../../embedded/" class="md-nav__link ">
               
   
   
@@ -426,7 +426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../embedded/yocto/" class="md-nav__link">
+      <a href="../../embedded/yocto/" class="md-nav__link">
         
   
   
@@ -505,7 +505,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -549,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../drush/" class="md-nav__link">
+      <a href="../drush/" class="md-nav__link">
         
   
   
@@ -577,7 +577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elasticsearch/" class="md-nav__link">
+      <a href="../elasticsearch/" class="md-nav__link">
         
   
   
@@ -605,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net_info/" class="md-nav__link">
+      <a href="../net_info/" class="md-nav__link">
         
   
   
@@ -633,7 +633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/" class="md-nav__link">
+      <a href="../nginx/" class="md-nav__link">
         
   
   
@@ -641,192 +641,6 @@
     
   
     Nginx
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../solr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Solr
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../varnish/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Varnish
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" checked>
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Bash
-  
-
-    
-  </span>
-  
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Bash
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../emacs_mode/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Emacs mode
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../find/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    find
   
 
     
@@ -863,7 +677,7 @@
   <span class="md-ellipsis">
     
   
-    rsync
+    Solr
   
 
     
@@ -881,7 +695,7 @@
   <span class="md-ellipsis">
     
   
-    rsync
+    Solr
   
 
     
@@ -907,10 +721,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#with-ssh-config" class="md-nav__link">
+  <a href="#service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With SSH config
+        Service
       
     </span>
   </a>
@@ -918,10 +732,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#in-cicd-pipeline" class="md-nav__link">
+  <a href="#health-and-info" class="md-nav__link">
     <span class="md-ellipsis">
       
-        In CI/CD pipeline
+        Health and info
       
     </span>
   </a>
@@ -929,10 +743,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mirror-directory-delete-removed-files" class="md-nav__link">
+  <a href="#data-directory-and-backup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mirror directory (delete removed files)
+        Data directory and backup
       
     </span>
   </a>
@@ -940,10 +754,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dry-run-preview-changes" class="md-nav__link">
+  <a href="#core-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dry run (preview changes)
+        Core management
       
     </span>
   </a>
@@ -951,10 +765,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bandwidth-limit" class="md-nav__link">
+  <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bandwidth limit
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#not-responding-to-remote-connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not responding to remote connections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-home" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java home
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uninstall
       
     </span>
   </a>
@@ -977,7 +841,191 @@
   
   
     <li class="md-nav__item">
-      <a href="../ssh/" class="md-nav__link">
+      <a href="../varnish/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Varnish
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../bash/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bash
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/emacs_mode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emacs mode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/find/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    find
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/rsync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    rsync
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/ssh/" class="md-nav__link">
         
   
   
@@ -1005,7 +1053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user/" class="md-nav__link">
+      <a href="../bash/user/" class="md-nav__link">
         
   
   
@@ -1065,7 +1113,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../databases/" class="md-nav__link ">
+            <a href="../databases/" class="md-nav__link ">
               
   
   
@@ -1109,7 +1157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mariadb/" class="md-nav__link">
+      <a href="../databases/mariadb/" class="md-nav__link">
         
   
   
@@ -1137,7 +1185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mysql/" class="md-nav__link">
+      <a href="../databases/mysql/" class="md-nav__link">
         
   
   
@@ -1165,7 +1213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/postgresql/" class="md-nav__link">
+      <a href="../databases/postgresql/" class="md-nav__link">
         
   
   
@@ -1219,7 +1267,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../gcp/" class="md-nav__link ">
+            <a href="../gcp/" class="md-nav__link ">
               
   
   
@@ -1286,7 +1334,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../git/" class="md-nav__link ">
+            <a href="../git/" class="md-nav__link ">
               
   
   
@@ -1330,7 +1378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/git_cicd/" class="md-nav__link">
+      <a href="../git/git_cicd/" class="md-nav__link">
         
   
   
@@ -1388,7 +1436,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../kubernetes/" class="md-nav__link ">
+            <a href="../kubernetes/" class="md-nav__link ">
               
   
   
@@ -1432,7 +1480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/helm/" class="md-nav__link">
+      <a href="../kubernetes/helm/" class="md-nav__link">
         
   
   
@@ -1460,7 +1508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/kubectl/" class="md-nav__link">
+      <a href="../kubernetes/kubectl/" class="md-nav__link">
         
   
   
@@ -1514,7 +1562,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../vim/" class="md-nav__link ">
+            <a href="../vim/" class="md-nav__link ">
               
   
   
@@ -1602,7 +1650,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../net/" class="md-nav__link ">
+            <a href="../../net/" class="md-nav__link ">
               
   
   
@@ -1646,7 +1694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dds/" class="md-nav__link">
+      <a href="../../net/dds/" class="md-nav__link">
         
   
   
@@ -1674,7 +1722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dns/" class="md-nav__link">
+      <a href="../../net/dns/" class="md-nav__link">
         
   
   
@@ -1702,7 +1750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/http/" class="md-nav__link">
+      <a href="../../net/http/" class="md-nav__link">
         
   
   
@@ -1730,7 +1778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/mqtt/" class="md-nav__link">
+      <a href="../../net/mqtt/" class="md-nav__link">
         
   
   
@@ -1758,7 +1806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/osi_model/" class="md-nav__link">
+      <a href="../../net/osi_model/" class="md-nav__link">
         
   
   
@@ -1786,7 +1834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/snmp/" class="md-nav__link">
+      <a href="../../net/snmp/" class="md-nav__link">
         
   
   
@@ -1814,7 +1862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tcp_ip_model/" class="md-nav__link">
+      <a href="../../net/tcp_ip_model/" class="md-nav__link">
         
   
   
@@ -1842,7 +1890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tls/" class="md-nav__link">
+      <a href="../../net/tls/" class="md-nav__link">
         
   
   
@@ -1897,10 +1945,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#with-ssh-config" class="md-nav__link">
+  <a href="#service" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With SSH config
+        Service
       
     </span>
   </a>
@@ -1908,10 +1956,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#in-cicd-pipeline" class="md-nav__link">
+  <a href="#health-and-info" class="md-nav__link">
     <span class="md-ellipsis">
       
-        In CI/CD pipeline
+        Health and info
       
     </span>
   </a>
@@ -1919,10 +1967,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mirror-directory-delete-removed-files" class="md-nav__link">
+  <a href="#data-directory-and-backup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mirror directory (delete removed files)
+        Data directory and backup
       
     </span>
   </a>
@@ -1930,10 +1978,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dry-run-preview-changes" class="md-nav__link">
+  <a href="#core-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dry run (preview changes)
+        Core management
       
     </span>
   </a>
@@ -1941,10 +1989,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bandwidth-limit" class="md-nav__link">
+  <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bandwidth limit
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#not-responding-to-remote-connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not responding to remote connections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-home" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java home
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uninstall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uninstall
       
     </span>
   </a>
@@ -1972,14 +2070,14 @@
       
       
       
-        <span class="md-tag">bash</span>
+        <span class="md-tag">search</span>
       
     
       
       
       
       
-        <span class="md-tag">deployment</span>
+        <span class="md-tag">snippets</span>
       
     
   </nav>
@@ -1989,24 +2087,74 @@
   
 
 
-<h1 id="rsync">rsync</h1>
-<h2 id="with-ssh-config">With SSH config</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>rsync<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;ssh -F ssh.cfg&#39;</span><span class="w"> </span>-azhP<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nv">$host</span>:<span class="nv">$source</span><span class="w"> </span><span class="nv">$destination</span>
+<h1 id="solr">solr</h1>
+<h2 id="service">Service</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>systemctl<span class="w"> </span>status<span class="w"> </span>solr
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>solr
 </code></pre></div>
-<h2 id="in-cicd-pipeline">In CI/CD pipeline</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rsync<span class="w"> </span>-az<span class="w"> </span>--quiet<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--temp-dir<span class="o">=</span>/tmp<span class="w"> </span>--partial-dir<span class="o">=</span>/tmp<span class="w"> </span>--delete-after<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--exclude-from<span class="o">=</span>./.ignore<span class="w"> </span>.<span class="w"> </span>build_dist/<span class="nv">$DEPLOY_VERSION</span>
+<h2 id="health-and-info">Health and info</h2>
+<p>Check version:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8983/solr/admin/info/system?wt<span class="o">=</span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.lucene&#39;</span>
 </code></pre></div>
-<h2 id="mirror-directory-delete-removed-files">Mirror directory (delete removed files)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rsync<span class="w"> </span>-avz<span class="w"> </span>--delete<span class="w"> </span><span class="nv">$source</span>/<span class="w"> </span><span class="nv">$destination</span>/
+<p>List cores:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8983/solr/admin/cores?wt<span class="o">=</span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.status&#39;</span>
 </code></pre></div>
-<h2 id="dry-run-preview-changes">Dry run (preview changes)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rsync<span class="w"> </span>-avzn<span class="w"> </span>--delete<span class="w"> </span><span class="nv">$source</span>/<span class="w"> </span><span class="nv">$destination</span>/
+<p>Ping a core:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8983/solr/<span class="nv">$CORE</span>/admin/ping
 </code></pre></div>
-<h2 id="bandwidth-limit">Bandwidth limit</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rsync<span class="w"> </span>-avz<span class="w"> </span>--bwlimit<span class="o">=</span><span class="m">5000</span><span class="w"> </span><span class="nv">$source</span><span class="w"> </span><span class="nv">$destination</span><span class="w">  </span><span class="c1"># 5MB/s</span>
+<h2 id="data-directory-and-backup">Data directory and backup</h2>
+<p>Find data directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8983/solr/admin/info/system?wt<span class="o">=</span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.solr_home&#39;</span>
+</code></pre></div>
+<p>Backup a core via API:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8983/solr/</span><span class="nv">$CORE</span><span class="s2">/replication?command=backup&amp;location=/tmp/solr-backup&quot;</span>
+</code></pre></div>
+<p>Backup data directory manually:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">SOLR_HOME</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8983/solr/admin/info/system?wt<span class="o">=</span>json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.solr_home&#39;</span><span class="k">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>rsync<span class="w"> </span>-azhP<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SOLR_HOME</span><span class="s2">&quot;</span><span class="w"> </span>~/solr-backup/data
+</code></pre></div>
+<h2 id="core-management">Core management</h2>
+<p>Create a core:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>solr<span class="w"> </span>create<span class="w"> </span>-c<span class="w"> </span><span class="nv">$CORE</span><span class="w"> </span>-d<span class="w"> </span>_default
+</code></pre></div>
+<p>Delete a core:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>solr<span class="w"> </span>delete<span class="w"> </span>-c<span class="w"> </span><span class="nv">$CORE</span>
+</code></pre></div>
+<p>Reload a core (after config changes):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>curl<span class="w"> </span><span class="s2">&quot;http://localhost:8983/solr/admin/cores?action=RELOAD&amp;core=</span><span class="nv">$CORE</span><span class="s2">&quot;</span>
+</code></pre></div>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="not-responding-to-remote-connections">Not responding to remote connections</h3>
+<p>Solr binds to localhost by default. To listen on all interfaces, add to <code>/etc/default/solr.in.sh</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">SOLR_JETTY_HOST</span><span class="o">=</span><span class="s2">&quot;0.0.0.0&quot;</span>
+</code></pre></div>
+<p>Then reload:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>systemctl<span class="w"> </span>daemon-reload
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>solr
+</code></pre></div>
+<h3 id="java-home">Java home</h3>
+<p>Find Java path:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>readlink<span class="w"> </span>-f<span class="w"> </span>/usr/bin/javac<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s:/bin/javac::&quot;</span>
+</code></pre></div>
+<p>Set it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s1">&#39;/usr/lib/jvm/java-11-openjdk-amd64&#39;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$JAVA_HOME</span>/bin:<span class="nv">$PATH</span>
+</code></pre></div>
+<p>Or permanently in <code>/etc/default/solr.in.sh</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">SOLR_JAVA_HOME</span><span class="o">=</span><span class="s2">&quot;/usr/lib/jvm/java-11-openjdk-amd64&quot;</span>
+</code></pre></div>
+<h3 id="check-logs">Check logs</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/solr/logs/solr.log
+</code></pre></div>
+<h2 id="uninstall">Uninstall</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>service<span class="w"> </span>solr<span class="w"> </span>stop
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>rm<span class="w"> </span>-r<span class="w"> </span>/var/solr
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>rm<span class="w"> </span>-r<span class="w"> </span>/opt/solr
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>rm<span class="w"> </span>/etc/init.d/solr
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>rm<span class="w"> </span>/etc/default/solr.in.sh
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>deluser<span class="w"> </span>--remove-home<span class="w"> </span>solr
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>deluser<span class="w"> </span>--group<span class="w"> </span>solr
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>update-rc.d<span class="w"> </span>-f<span class="w"> </span>solr<span class="w"> </span>remove
 </code></pre></div>
 
 
@@ -2046,7 +2194,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../find/" class="md-footer__link md-footer__link--prev" aria-label="Previous: find">
+          <a href="../nginx/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Nginx">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2056,20 +2204,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                find
+                Nginx
               </div>
             </div>
           </a>
         
         
           
-          <a href="../ssh/" class="md-footer__link md-footer__link--next" aria-label="Next: SSH">
+          <a href="../varnish/" class="md-footer__link md-footer__link--next" aria-label="Next: Varnish">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                SSH
+                Varnish
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2189,11 +2337,11 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
   
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
 

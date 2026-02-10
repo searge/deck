@@ -6,44 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="rsync recipes for deployment and backup.">
+        <meta name="description" content="Linux containers from first principles — namespaces, cgroups, chroot, unshare, systemd-nspawn, and runc.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/bash/rsync/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/containers/">
       
       
-        <link rel="prev" href="../find/">
+        <link rel="prev" href="..">
       
       
-        <link rel="next" href="../ssh/">
+        <link rel="next" href="../embedded/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/logo.webp">
+      <link rel="icon" href="../assets/images/logo.webp">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>rsync - Cyberdeck</title>
+        <title>Containers - Cyberdeck</title>
       
     
     
   
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-  <link rel="stylesheet" href="../../../assets/stylesheets/nord.css">
+  <link rel="stylesheet" href="../assets/stylesheets/nord.css">
 
     
       
@@ -53,12 +53,12 @@
         
         
         
-        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rsync" class="md-skip">
+        <a href="#containers" class="md-skip">
           Skip to content
         </a>
       
@@ -99,9 +99,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href=".." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../assets/images/logo.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -112,7 +112,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            <a href="../../.." class="md-header__topic-link">
+            <a href=".." class="md-header__topic-link">
               Cyberdeck
             </a>
           </span>
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              rsync
+              Containers
             
           </span>
         </div>
@@ -243,9 +243,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href=".." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../assets/images/logo.webp" alt="logo">
 
     </a>
   </label>
@@ -271,7 +271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -295,6 +295,8 @@
       
   
   
+    
+  
   
   
     
@@ -308,15 +310,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../containers/" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   
@@ -335,7 +337,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -382,7 +384,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../embedded/" class="md-nav__link ">
+            <a href="../embedded/" class="md-nav__link ">
               
   
   
@@ -426,7 +428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../embedded/yocto/" class="md-nav__link">
+      <a href="../embedded/yocto/" class="md-nav__link">
         
   
   
@@ -458,8 +460,6 @@
       
   
   
-    
-  
   
   
     
@@ -497,15 +497,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../hacks/" class="md-nav__link ">
               
   
   
@@ -529,7 +529,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -549,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../drush/" class="md-nav__link">
+      <a href="../hacks/drush/" class="md-nav__link">
         
   
   
@@ -577,7 +577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elasticsearch/" class="md-nav__link">
+      <a href="../hacks/elasticsearch/" class="md-nav__link">
         
   
   
@@ -605,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net_info/" class="md-nav__link">
+      <a href="../hacks/net_info/" class="md-nav__link">
         
   
   
@@ -633,7 +633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/" class="md-nav__link">
+      <a href="../hacks/nginx/" class="md-nav__link">
         
   
   
@@ -661,7 +661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../solr/" class="md-nav__link">
+      <a href="../hacks/solr/" class="md-nav__link">
         
   
   
@@ -689,7 +689,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../varnish/" class="md-nav__link">
+      <a href="../hacks/varnish/" class="md-nav__link">
         
   
   
@@ -714,8 +714,6 @@
                 
   
   
-    
-  
   
   
     
@@ -739,15 +737,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../hacks/bash/" class="md-nav__link ">
               
   
   
@@ -771,7 +769,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -791,7 +789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../emacs_mode/" class="md-nav__link">
+      <a href="../hacks/bash/emacs_mode/" class="md-nav__link">
         
   
   
@@ -819,7 +817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../find/" class="md-nav__link">
+      <a href="../hacks/bash/find/" class="md-nav__link">
         
   
   
@@ -844,37 +842,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    rsync
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../hacks/bash/rsync/" class="md-nav__link">
         
   
   
@@ -890,81 +861,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#with-ssh-config" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        With SSH config
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#in-cicd-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        In CI/CD pipeline
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mirror-directory-delete-removed-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mirror directory (delete removed files)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dry-run-preview-changes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dry run (preview changes)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bandwidth-limit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bandwidth limit
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -977,7 +873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ssh/" class="md-nav__link">
+      <a href="../hacks/bash/ssh/" class="md-nav__link">
         
   
   
@@ -1005,7 +901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user/" class="md-nav__link">
+      <a href="../hacks/bash/user/" class="md-nav__link">
         
   
   
@@ -1065,7 +961,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../databases/" class="md-nav__link ">
+            <a href="../hacks/databases/" class="md-nav__link ">
               
   
   
@@ -1109,7 +1005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mariadb/" class="md-nav__link">
+      <a href="../hacks/databases/mariadb/" class="md-nav__link">
         
   
   
@@ -1137,7 +1033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mysql/" class="md-nav__link">
+      <a href="../hacks/databases/mysql/" class="md-nav__link">
         
   
   
@@ -1165,7 +1061,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/postgresql/" class="md-nav__link">
+      <a href="../hacks/databases/postgresql/" class="md-nav__link">
         
   
   
@@ -1219,7 +1115,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../gcp/" class="md-nav__link ">
+            <a href="../hacks/gcp/" class="md-nav__link ">
               
   
   
@@ -1286,7 +1182,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../git/" class="md-nav__link ">
+            <a href="../hacks/git/" class="md-nav__link ">
               
   
   
@@ -1330,7 +1226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/git_cicd/" class="md-nav__link">
+      <a href="../hacks/git/git_cicd/" class="md-nav__link">
         
   
   
@@ -1388,7 +1284,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../kubernetes/" class="md-nav__link ">
+            <a href="../hacks/kubernetes/" class="md-nav__link ">
               
   
   
@@ -1432,7 +1328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/helm/" class="md-nav__link">
+      <a href="../hacks/kubernetes/helm/" class="md-nav__link">
         
   
   
@@ -1460,7 +1356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/kubectl/" class="md-nav__link">
+      <a href="../hacks/kubernetes/kubectl/" class="md-nav__link">
         
   
   
@@ -1514,7 +1410,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../vim/" class="md-nav__link ">
+            <a href="../hacks/vim/" class="md-nav__link ">
               
   
   
@@ -1602,7 +1498,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../net/" class="md-nav__link ">
+            <a href="../net/" class="md-nav__link ">
               
   
   
@@ -1646,7 +1542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dds/" class="md-nav__link">
+      <a href="../net/dds/" class="md-nav__link">
         
   
   
@@ -1674,7 +1570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dns/" class="md-nav__link">
+      <a href="../net/dns/" class="md-nav__link">
         
   
   
@@ -1702,7 +1598,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/http/" class="md-nav__link">
+      <a href="../net/http/" class="md-nav__link">
         
   
   
@@ -1730,7 +1626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/mqtt/" class="md-nav__link">
+      <a href="../net/mqtt/" class="md-nav__link">
         
   
   
@@ -1758,7 +1654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/osi_model/" class="md-nav__link">
+      <a href="../net/osi_model/" class="md-nav__link">
         
   
   
@@ -1786,7 +1682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/snmp/" class="md-nav__link">
+      <a href="../net/snmp/" class="md-nav__link">
         
   
   
@@ -1814,7 +1710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tcp_ip_model/" class="md-nav__link">
+      <a href="../net/tcp_ip_model/" class="md-nav__link">
         
   
   
@@ -1842,7 +1738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tls/" class="md-nav__link">
+      <a href="../net/tls/" class="md-nav__link">
         
   
   
@@ -1897,10 +1793,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#with-ssh-config" class="md-nav__link">
+  <a href="#foundation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With SSH config
+        Foundation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Foundation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rootfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RootFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#namespaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Namespaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Execution layers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#obtaining-a-base-rootfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Obtaining a base RootFS
       
     </span>
   </a>
@@ -1908,10 +1854,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#in-cicd-pipeline" class="md-nav__link">
+  <a href="#the-manual-way-chroot-unshare" class="md-nav__link">
     <span class="md-ellipsis">
       
-        In CI/CD pipeline
+        The manual way (chroot + unshare)
       
     </span>
   </a>
@@ -1919,10 +1865,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mirror-directory-delete-removed-files" class="md-nav__link">
+  <a href="#the-systemd-way-systemd-nspawn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mirror directory (delete removed files)
+        The systemd way (systemd-nspawn)
       
     </span>
   </a>
@@ -1930,10 +1876,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dry-run-preview-changes" class="md-nav__link">
+  <a href="#the-runc-way-oci-runtime" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dry run (preview changes)
+        The runc way (OCI runtime)
       
     </span>
   </a>
@@ -1941,10 +1887,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bandwidth-limit" class="md-nav__link">
+  <a href="#preparing-for-distribution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bandwidth limit
+        Preparing for distribution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparing for distribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sanitization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sanitization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distribution-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Distribution formats
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historical-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Historical context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
       
     </span>
   </a>
@@ -1972,14 +1979,14 @@
       
       
       
-        <span class="md-tag">bash</span>
+        <span class="md-tag">containers</span>
       
     
       
       
       
       
-        <span class="md-tag">deployment</span>
+        <span class="md-tag">linux</span>
       
     
   </nav>
@@ -1989,25 +1996,270 @@
   
 
 
-<h1 id="rsync">rsync</h1>
-<h2 id="with-ssh-config">With SSH config</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>rsync<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;ssh -F ssh.cfg&#39;</span><span class="w"> </span>-azhP<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nv">$host</span>:<span class="nv">$source</span><span class="w"> </span><span class="nv">$destination</span>
+<h1 id="containers">containers</h1>
+<p>Linux containers are not a single technology — they're a combination of kernel features that isolate processes. Understanding what happens under the hood makes you better at debugging, securing, and operating containerized workloads.</p>
+<h2 id="foundation">Foundation</h2>
+<h3 id="rootfs">RootFS</h3>
+<p>A root filesystem is a self-contained directory tree with everything needed to run a Linux userland: binaries, libraries, configuration files, and the standard Unix hierarchy. The container shares the host kernel but brings its own <code>/bin</code>, <code>/lib</code>, <code>/etc</code>, and so on.</p>
+<p>This decoupling means you can run Alpine on an Ubuntu host, or Ubuntu on Fedora, or any combination — as long as the architecture matches. An x86_64 Alpine RootFS works on any x86_64 kernel. An ARM64 Debian RootFS works on any ARM64 kernel.</p>
+<p>You typically get a RootFS in one of three ways:</p>
+<ul>
+<li><strong>LXC templates</strong> — compressed tarballs (<code>.tar.gz</code>, <code>.tar.zst</code>) containing distribution-specific filesystems</li>
+<li><strong>Bootstrap tools</strong> — <code>debootstrap</code> or <code>dnf --installroot</code> build fresh filesystems from package repositories</li>
+<li><strong>Docker images</strong> — exported with <code>docker export</code>, produce tarballs that work with any OCI-compatible runtime</li>
+</ul>
+<p>Each method gives you the same thing: a directory that becomes <code>/</code> inside the container.</p>
+<h3 id="namespaces">Namespaces</h3>
+<p>Namespaces provide isolation by giving each container its own view of system resources. The kernel maintains separate instances of global resources — process trees, network stacks, mount tables — and each namespace sees only its own instance.</p>
+<table>
+<thead>
+<tr>
+<th>Namespace</th>
+<th>Flag</th>
+<th>Isolates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mount (mnt)</td>
+<td><code>--mount</code></td>
+<td>Filesystem mount table</td>
+</tr>
+<tr>
+<td>Process (pid)</td>
+<td><code>--pid</code></td>
+<td>Process IDs, PID 1</td>
+</tr>
+<tr>
+<td>Network (net)</td>
+<td><code>--net</code></td>
+<td>Interfaces, routing, firewall</td>
+</tr>
+<tr>
+<td>UTS</td>
+<td><code>--uts</code></td>
+<td>Hostname, domain name</td>
+</tr>
+<tr>
+<td>User</td>
+<td><code>--user</code></td>
+<td>UIDs/GIDs mapping</td>
+</tr>
+<tr>
+<td>IPC</td>
+<td><code>--ipc</code></td>
+<td>System V IPC, POSIX message queues</td>
+</tr>
+<tr>
+<td>Cgroup</td>
+<td><code>--cgroup</code></td>
+<td>Cgroup hierarchy visibility</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>user namespace</strong> deserves special attention: a process running as root (UID 0) inside the container maps to an unprivileged UID on the host. This turns privileged containers into unprivileged processes from the host's perspective, reducing the attack surface significantly.</p>
+<h3 id="execution-layers">Execution layers</h3>
+<p>Different tools provide different levels of container abstraction:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chroot</code></td>
+<td>Changes root directory</td>
+<td>Rescue systems, package builds</td>
+</tr>
+<tr>
+<td><code>unshare</code></td>
+<td>Creates new namespaces manually</td>
+<td>Learning, custom isolation</td>
+</tr>
+<tr>
+<td><code>systemd-nspawn</code></td>
+<td>Automated namespace management</td>
+<td>Development, testing</td>
+</tr>
+<tr>
+<td><code>runc</code></td>
+<td>OCI-compliant runtime with config.json</td>
+<td>Production containers</td>
+</tr>
+</tbody>
+</table>
+<p>Each layer builds on the previous one. <code>chroot</code> provides filesystem jail. <code>unshare</code> adds namespace isolation. <code>systemd-nspawn</code> automates the setup. <code>runc</code> standardizes the configuration and lifecycle.</p>
+<h2 id="obtaining-a-base-rootfs">Obtaining a base RootFS</h2>
+<p>Download pre-built LXC templates:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wget<span class="w"> </span>https://images.linuxcontainers.org/images/debian/bookworm/amd64/default/20240101_05:24/rootfs.tar.xz
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>tar<span class="w"> </span>xf<span class="w"> </span>rootfs.tar.xz
 </code></pre></div>
-<h2 id="in-cicd-pipeline">In CI/CD pipeline</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rsync<span class="w"> </span>-az<span class="w"> </span>--quiet<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--temp-dir<span class="o">=</span>/tmp<span class="w"> </span>--partial-dir<span class="o">=</span>/tmp<span class="w"> </span>--delete-after<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--exclude-from<span class="o">=</span>./.ignore<span class="w"> </span>.<span class="w"> </span>build_dist/<span class="nv">$DEPLOY_VERSION</span>
+<p>Build minimal Debian/Ubuntu with <code>debootstrap</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>debootstrap<span class="w"> </span>bookworm<span class="w"> </span>./rootfs<span class="w"> </span>http://deb.debian.org/debian/
 </code></pre></div>
-<h2 id="mirror-directory-delete-removed-files">Mirror directory (delete removed files)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rsync<span class="w"> </span>-avz<span class="w"> </span>--delete<span class="w"> </span><span class="nv">$source</span>/<span class="w"> </span><span class="nv">$destination</span>/
+<p>Build Fedora/RHEL with <code>dnf</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>dnf<span class="w"> </span>--installroot<span class="o">=</span>./rootfs<span class="w"> </span>--releasever<span class="o">=</span><span class="m">39</span><span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>@core
 </code></pre></div>
-<h2 id="dry-run-preview-changes">Dry run (preview changes)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rsync<span class="w"> </span>-avzn<span class="w"> </span>--delete<span class="w"> </span><span class="nv">$source</span>/<span class="w"> </span><span class="nv">$destination</span>/
+<p>Export existing Docker container:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span><span class="nb">export</span><span class="w"> </span>container_name<span class="w"> </span>&gt;<span class="w"> </span>rootfs.tar
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mkdir<span class="w"> </span>rootfs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>tar<span class="w"> </span>xf<span class="w"> </span>rootfs.tar<span class="w"> </span>-C<span class="w"> </span>./rootfs
 </code></pre></div>
-<h2 id="bandwidth-limit">Bandwidth limit</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rsync<span class="w"> </span>-avz<span class="w"> </span>--bwlimit<span class="o">=</span><span class="m">5000</span><span class="w"> </span><span class="nv">$source</span><span class="w"> </span><span class="nv">$destination</span><span class="w">  </span><span class="c1"># 5MB/s</span>
+<h2 id="the-manual-way-chroot-unshare">The manual way (chroot + unshare)</h2>
+<p>Start by creating fresh namespaces. The <code>--fork</code> flag is essential for PID namespace — without it, the current shell tries to become PID 1 in the new namespace, which fails.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>unshare<span class="w"> </span>--uts<span class="w"> </span>--ipc<span class="w"> </span>--pid<span class="w"> </span>--mount<span class="w"> </span>--fork<span class="w"> </span>bash
 </code></pre></div>
+<p>Prepare virtual filesystems:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mount<span class="w"> </span>--bind<span class="w"> </span>/proc<span class="w"> </span>./rootfs/proc
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mount<span class="w"> </span>--bind<span class="w"> </span>/sys<span class="w"> </span>./rootfs/sys
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>mount<span class="w"> </span>--bind<span class="w"> </span>/dev<span class="w"> </span>./rootfs/dev
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>mount<span class="w"> </span>--bind<span class="w"> </span>/dev/pts<span class="w"> </span>./rootfs/dev/pts
+</code></pre></div>
+<p>Configure networking:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cp<span class="w"> </span>/etc/resolv.conf<span class="w"> </span>./rootfs/etc/resolv.conf
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Prevent services from starting during package install</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>./rootfs/usr/sbin/policy-rc.d<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="s">#!/bin/sh</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="s">exit 101</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="s">EOF</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./rootfs/usr/sbin/policy-rc.d
+</code></pre></div>
+<p>Enter the container:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>chroot<span class="w"> </span>./rootfs<span class="w"> </span>/bin/bash
+</code></pre></div>
+<p>When done, unmount in reverse order:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>umount<span class="w"> </span>./rootfs/dev/pts
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>umount<span class="w"> </span>./rootfs/dev
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>umount<span class="w"> </span>./rootfs/sys
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>umount<span class="w"> </span>./rootfs/proc
+</code></pre></div>
+<h2 id="the-systemd-way-systemd-nspawn">The systemd way (systemd-nspawn)</h2>
+<p>Point it at a RootFS and it handles namespaces, mounts, and networking automatically:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Interactive shell</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>systemd-nspawn<span class="w"> </span>-D<span class="w"> </span>./rootfs
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Ephemeral (changes discarded on exit)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>systemd-nspawn<span class="w"> </span>-D<span class="w"> </span>./rootfs<span class="w"> </span>--ephemeral
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># Full boot (starts init as PID 1)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>systemd-nspawn<span class="w"> </span>-D<span class="w"> </span>./rootfs<span class="w"> </span>--boot
+</code></pre></div>
+<p>Shutting down:</p>
+<ul>
+<li>Regular shell: just type <code>exit</code></li>
+<li>Booted container: <code>machinectl poweroff &lt;container-name&gt;</code> from host</li>
+<li>Emergency: <code>machinectl terminate &lt;container-name&gt;</code></li>
+</ul>
+<h2 id="the-runc-way-oci-runtime">The runc way (OCI runtime)</h2>
+<p>Generate default config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>runc<span class="w"> </span>spec
+</code></pre></div>
+<p>Edit <code>config.json</code> for resource limits:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">&quot;resources&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">&quot;memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">&quot;limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">536870912</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="nt">&quot;cpu&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nt">&quot;quota&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50000</span><span class="p">,</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nt">&quot;period&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>This caps memory at 512MB and CPU at 50% of one core.</p>
+<p>Run the container:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>runc<span class="w"> </span>run<span class="w"> </span>mycontainer
+</code></pre></div>
+<p>Lifecycle commands:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>runc<span class="w"> </span>list<span class="w">              </span><span class="c1"># Show running containers</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>runc<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>mycontainer<span class="w">  </span><span class="c1"># Send SIGTERM</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>runc<span class="w"> </span>delete<span class="w"> </span>mycontainer<span class="w"> </span><span class="c1"># Remove container state</span>
+</code></pre></div>
+<h2 id="preparing-for-distribution">Preparing for distribution</h2>
+<h3 id="sanitization">Sanitization</h3>
+<p>Before distributing a RootFS, clean up build artifacts:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Clear package caches</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>apt-get<span class="w"> </span>clean
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># Reset machine-id (each container generates its own)</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>truncate<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span><span class="w"> </span>/etc/machine-id
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="c1"># Remove policy-rc.d if present</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>rm<span class="w"> </span>-f<span class="w"> </span>/usr/sbin/policy-rc.d
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="c1"># Clear history and temp files</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>rm<span class="w"> </span>-f<span class="w"> </span>/root/.bash_history
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>rm<span class="w"> </span>-rf<span class="w"> </span>/tmp/*<span class="w"> </span>/var/tmp/*
+</code></pre></div>
+<h3 id="distribution-formats">Distribution formats</h3>
+<p><strong>Generic tarball</strong> — works everywhere:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>tar<span class="w"> </span>--xattrs<span class="w"> </span>--numeric-owner<span class="w"> </span>-czf<span class="w"> </span>rootfs.tar.gz<span class="w"> </span>-C<span class="w"> </span>./rootfs<span class="w"> </span>.
+</code></pre></div>
+<p><code>--numeric-owner</code> prevents UID/GID mapping issues across systems.</p>
+<p><strong>LXC template</strong> — for Proxmox and LXC:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tar<span class="w"> </span>--xattrs<span class="w"> </span>--numeric-owner<span class="w"> </span>-I<span class="w"> </span><span class="s1">&#39;zstd -9&#39;</span><span class="w"> </span>-cf<span class="w"> </span>rootfs.tar.zst<span class="w"> </span>-C<span class="w"> </span>./rootfs<span class="w"> </span>.
+</code></pre></div>
+<p>Place in <code>/var/lib/vz/template/cache/</code> on Proxmox.</p>
+<p><strong>Docker image</strong> — import into Docker:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>tar<span class="w"> </span>--xattrs<span class="w"> </span>--numeric-owner<span class="w"> </span>-cf<span class="w"> </span>rootfs.tar<span class="w"> </span>-C<span class="w"> </span>./rootfs<span class="w"> </span>.
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>cat<span class="w"> </span>rootfs.tar<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>import<span class="w"> </span>-<span class="w"> </span>myimage:latest
+</code></pre></div>
+<h2 id="historical-context">Historical context</h2>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1979</td>
+<td><code>chroot</code> jail (Unix v7)</td>
+</tr>
+<tr>
+<td>2000</td>
+<td>FreeBSD jails</td>
+</tr>
+<tr>
+<td>2005</td>
+<td>OpenVZ (Linux kernel patch)</td>
+</tr>
+<tr>
+<td>2006</td>
+<td>Google cgroups</td>
+</tr>
+<tr>
+<td>2008</td>
+<td>LXC (first Docker versions used lxc)</td>
+</tr>
+<tr>
+<td>2013</td>
+<td>Docker, Google LMCTFY</td>
+</tr>
+<tr>
+<td>2015</td>
+<td>Kubernetes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="../net/osi_model/">osi_model</a></li>
+<li><a href="../net/tcp_ip_model/">tcp_ip_model</a></li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">Linux Namespaces Overview</a></li>
+<li><a href="https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html">Control Group v2</a></li>
+<li><a href="https://github.com/opencontainers/runtime-spec">OCI Runtime Specification</a></li>
+<li><a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-nspawn.html">systemd-nspawn</a></li>
+<li><a href="https://github.com/opencontainers/runc">runc</a></li>
+<li><a href="https://www.uber.com/en-GB/blog/avoiding-cpu-throttling-in-a-containerized-environment/">Avoiding CPU Throttling in a Containerized Environment</a></li>
+</ul>
 
 
 
@@ -2046,7 +2298,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../find/" class="md-footer__link md-footer__link--prev" aria-label="Previous: find">
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Cyberdeck">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2056,20 +2308,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                find
+                Cyberdeck
               </div>
             </div>
           </a>
         
         
           
-          <a href="../ssh/" class="md-footer__link md-footer__link--next" aria-label="Next: SSH">
+          <a href="../embedded/" class="md-footer__link md-footer__link--next" aria-label="Next: Embedded">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                SSH
+                Embedded
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2189,11 +2441,11 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
   
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
 

@@ -6,44 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="rsync recipes for deployment and backup.">
+        <meta name="description" content="Drush CLI for Drupal — database operations, cache, config, and site management.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/bash/rsync/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/drush/">
       
       
-        <link rel="prev" href="../find/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../ssh/">
+        <link rel="next" href="../elasticsearch/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/logo.webp">
+      <link rel="icon" href="../../assets/images/logo.webp">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>rsync - Cyberdeck</title>
+        <title>Drush - Cyberdeck</title>
       
     
     
   
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-  <link rel="stylesheet" href="../../../assets/stylesheets/nord.css">
+  <link rel="stylesheet" href="../../assets/stylesheets/nord.css">
 
     
       
@@ -53,12 +53,12 @@
         
         
         
-        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rsync" class="md-skip">
+        <a href="#drush" class="md-skip">
           Skip to content
         </a>
       
@@ -99,9 +99,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -112,7 +112,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            <a href="../../.." class="md-header__topic-link">
+            <a href="../.." class="md-header__topic-link">
               Cyberdeck
             </a>
           </span>
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              rsync
+              Drush
             
           </span>
         </div>
@@ -243,9 +243,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
   </label>
@@ -271,7 +271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -316,7 +316,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../containers/" class="md-nav__link ">
+            <a href="../../containers/" class="md-nav__link ">
               
   
   
@@ -382,7 +382,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../embedded/" class="md-nav__link ">
+            <a href="../../embedded/" class="md-nav__link ">
               
   
   
@@ -426,7 +426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../embedded/yocto/" class="md-nav__link">
+      <a href="../../embedded/yocto/" class="md-nav__link">
         
   
   
@@ -505,7 +505,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -546,10 +546,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../drush/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Drush
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -565,6 +592,131 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dump
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database size
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#site-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Site maintenance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watchdog-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Watchdog (logs)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -577,7 +729,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elasticsearch/" class="md-nav__link">
+      <a href="../elasticsearch/" class="md-nav__link">
         
   
   
@@ -605,7 +757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net_info/" class="md-nav__link">
+      <a href="../net_info/" class="md-nav__link">
         
   
   
@@ -633,7 +785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/" class="md-nav__link">
+      <a href="../nginx/" class="md-nav__link">
         
   
   
@@ -661,7 +813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../solr/" class="md-nav__link">
+      <a href="../solr/" class="md-nav__link">
         
   
   
@@ -689,7 +841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../varnish/" class="md-nav__link">
+      <a href="../varnish/" class="md-nav__link">
         
   
   
@@ -714,8 +866,6 @@
                 
   
   
-    
-  
   
   
     
@@ -739,15 +889,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../bash/" class="md-nav__link ">
               
   
   
@@ -771,7 +921,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -791,7 +941,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../emacs_mode/" class="md-nav__link">
+      <a href="../bash/emacs_mode/" class="md-nav__link">
         
   
   
@@ -819,7 +969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../find/" class="md-nav__link">
+      <a href="../bash/find/" class="md-nav__link">
         
   
   
@@ -844,37 +994,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    rsync
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../bash/rsync/" class="md-nav__link">
         
   
   
@@ -890,81 +1013,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#with-ssh-config" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        With SSH config
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#in-cicd-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        In CI/CD pipeline
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mirror-directory-delete-removed-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mirror directory (delete removed files)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dry-run-preview-changes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dry run (preview changes)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bandwidth-limit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bandwidth limit
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -977,7 +1025,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ssh/" class="md-nav__link">
+      <a href="../bash/ssh/" class="md-nav__link">
         
   
   
@@ -1005,7 +1053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user/" class="md-nav__link">
+      <a href="../bash/user/" class="md-nav__link">
         
   
   
@@ -1065,7 +1113,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../databases/" class="md-nav__link ">
+            <a href="../databases/" class="md-nav__link ">
               
   
   
@@ -1109,7 +1157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mariadb/" class="md-nav__link">
+      <a href="../databases/mariadb/" class="md-nav__link">
         
   
   
@@ -1137,7 +1185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mysql/" class="md-nav__link">
+      <a href="../databases/mysql/" class="md-nav__link">
         
   
   
@@ -1165,7 +1213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/postgresql/" class="md-nav__link">
+      <a href="../databases/postgresql/" class="md-nav__link">
         
   
   
@@ -1219,7 +1267,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../gcp/" class="md-nav__link ">
+            <a href="../gcp/" class="md-nav__link ">
               
   
   
@@ -1286,7 +1334,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../git/" class="md-nav__link ">
+            <a href="../git/" class="md-nav__link ">
               
   
   
@@ -1330,7 +1378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/git_cicd/" class="md-nav__link">
+      <a href="../git/git_cicd/" class="md-nav__link">
         
   
   
@@ -1388,7 +1436,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../kubernetes/" class="md-nav__link ">
+            <a href="../kubernetes/" class="md-nav__link ">
               
   
   
@@ -1432,7 +1480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/helm/" class="md-nav__link">
+      <a href="../kubernetes/helm/" class="md-nav__link">
         
   
   
@@ -1460,7 +1508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/kubectl/" class="md-nav__link">
+      <a href="../kubernetes/kubectl/" class="md-nav__link">
         
   
   
@@ -1514,7 +1562,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../vim/" class="md-nav__link ">
+            <a href="../vim/" class="md-nav__link ">
               
   
   
@@ -1602,7 +1650,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../net/" class="md-nav__link ">
+            <a href="../../net/" class="md-nav__link ">
               
   
   
@@ -1646,7 +1694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dds/" class="md-nav__link">
+      <a href="../../net/dds/" class="md-nav__link">
         
   
   
@@ -1674,7 +1722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dns/" class="md-nav__link">
+      <a href="../../net/dns/" class="md-nav__link">
         
   
   
@@ -1702,7 +1750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/http/" class="md-nav__link">
+      <a href="../../net/http/" class="md-nav__link">
         
   
   
@@ -1730,7 +1778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/mqtt/" class="md-nav__link">
+      <a href="../../net/mqtt/" class="md-nav__link">
         
   
   
@@ -1758,7 +1806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/osi_model/" class="md-nav__link">
+      <a href="../../net/osi_model/" class="md-nav__link">
         
   
   
@@ -1786,7 +1834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/snmp/" class="md-nav__link">
+      <a href="../../net/snmp/" class="md-nav__link">
         
   
   
@@ -1814,7 +1862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tcp_ip_model/" class="md-nav__link">
+      <a href="../../net/tcp_ip_model/" class="md-nav__link">
         
   
   
@@ -1842,7 +1890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tls/" class="md-nav__link">
+      <a href="../../net/tls/" class="md-nav__link">
         
   
   
@@ -1897,10 +1945,60 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#with-ssh-config" class="md-nav__link">
+  <a href="#database" class="md-nav__link">
     <span class="md-ellipsis">
       
-        With SSH config
+        Database
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dump
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database size
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cache
       
     </span>
   </a>
@@ -1908,10 +2006,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#in-cicd-pipeline" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        In CI/CD pipeline
+        Configuration
       
     </span>
   </a>
@@ -1919,10 +2017,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mirror-directory-delete-removed-files" class="md-nav__link">
+  <a href="#site-maintenance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mirror directory (delete removed files)
+        Site maintenance
       
     </span>
   </a>
@@ -1930,10 +2028,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dry-run-preview-changes" class="md-nav__link">
+  <a href="#user-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dry run (preview changes)
+        User management
       
     </span>
   </a>
@@ -1941,10 +2039,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bandwidth-limit" class="md-nav__link">
+  <a href="#watchdog-logs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bandwidth limit
+        Watchdog (logs)
       
     </span>
   </a>
@@ -1972,14 +2070,14 @@
       
       
       
-        <span class="md-tag">bash</span>
+        <span class="md-tag">drupal</span>
       
     
       
       
       
       
-        <span class="md-tag">deployment</span>
+        <span class="md-tag">snippets</span>
       
     
   </nav>
@@ -1989,24 +2087,83 @@
   
 
 
-<h1 id="rsync">rsync</h1>
-<h2 id="with-ssh-config">With SSH config</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>rsync<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;ssh -F ssh.cfg&#39;</span><span class="w"> </span>-azhP<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nv">$host</span>:<span class="nv">$source</span><span class="w"> </span><span class="nv">$destination</span>
+<h1 id="drush">drush</h1>
+<h2 id="database">Database</h2>
+<h3 id="dump">Dump</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Drush dump with gzip</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>drush<span class="w"> </span>sql:dump<span class="w"> </span>--gzip<span class="w"> </span>--result-file<span class="o">=</span>/tmp/dump-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.sql
 </code></pre></div>
-<h2 id="in-cicd-pipeline">In CI/CD pipeline</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rsync<span class="w"> </span>-az<span class="w"> </span>--quiet<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--temp-dir<span class="o">=</span>/tmp<span class="w"> </span>--partial-dir<span class="o">=</span>/tmp<span class="w"> </span>--delete-after<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--exclude-from<span class="o">=</span>./.ignore<span class="w"> </span>.<span class="w"> </span>build_dist/<span class="nv">$DEPLOY_VERSION</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Direct mysqldump</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>mysqldump<span class="w"> </span><span class="nv">$DB_NAME</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gzip<span class="w"> </span>&gt;<span class="w"> </span>/tmp/dump-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.sql.gz
 </code></pre></div>
-<h2 id="mirror-directory-delete-removed-files">Mirror directory (delete removed files)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rsync<span class="w"> </span>-avz<span class="w"> </span>--delete<span class="w"> </span><span class="nv">$source</span>/<span class="w"> </span><span class="nv">$destination</span>/
+<h3 id="import">Import</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Decompress and import</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>gzip<span class="w"> </span>-d<span class="w"> </span>/tmp/dump-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.sql.gz
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>drush<span class="w"> </span>sql:cli<span class="w"> </span>&lt;<span class="w"> </span>/tmp/dump-<span class="k">$(</span>date<span class="w"> </span>+%F<span class="k">)</span>.sql
 </code></pre></div>
-<h2 id="dry-run-preview-changes">Dry run (preview changes)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rsync<span class="w"> </span>-avzn<span class="w"> </span>--delete<span class="w"> </span><span class="nv">$source</span>/<span class="w"> </span><span class="nv">$destination</span>/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">-- Or via mysql directly</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">SOURCE</span><span class="w"> </span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">dump</span><span class="o">-</span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="p">.</span><span class="k">sql</span><span class="p">;</span>
 </code></pre></div>
-<h2 id="bandwidth-limit">Bandwidth limit</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rsync<span class="w"> </span>-avz<span class="w"> </span>--bwlimit<span class="o">=</span><span class="m">5000</span><span class="w"> </span><span class="nv">$source</span><span class="w"> </span><span class="nv">$destination</span><span class="w">  </span><span class="c1"># 5MB/s</span>
+<h3 id="database-size">Database size</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="ss">&quot;DB Name&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">       </span><span class="n">ROUND</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">data_length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">index_length</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="ss">&quot;DB Size in MB&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">tables</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">table_schema</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="cache">Cache</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Clear all caches</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>drush<span class="w"> </span>cr
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Rebuild (clear + rebuild routes, containers)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>drush<span class="w"> </span>cache:rebuild
+</code></pre></div>
+<h2 id="configuration">Configuration</h2>
+<p>Export config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>drush<span class="w"> </span>config:export
+</code></pre></div>
+<p>Import config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>drush<span class="w"> </span>config:import
+</code></pre></div>
+<p>Show diff before import:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>drush<span class="w"> </span>config:status
+</code></pre></div>
+<h2 id="site-maintenance">Site maintenance</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Maintenance mode on/off</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>drush<span class="w"> </span>state:set<span class="w"> </span>system.maintenance_mode<span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>drush<span class="w"> </span>state:set<span class="w"> </span>system.maintenance_mode<span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># Run database updates</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>drush<span class="w"> </span>updatedb
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># Check status</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>drush<span class="w"> </span>status
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="c1"># One-time login link</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>drush<span class="w"> </span>uli
+</code></pre></div>
+<h2 id="user-management">User management</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Create user</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>drush<span class="w"> </span>user:create<span class="w"> </span><span class="nv">$USERNAME</span><span class="w"> </span>--mail<span class="o">=</span><span class="s2">&quot;user@example.com&quot;</span><span class="w"> </span>--password<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PASS</span><span class="s2">&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Block/unblock</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>drush<span class="w"> </span>user:block<span class="w"> </span><span class="nv">$USERNAME</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>drush<span class="w"> </span>user:unblock<span class="w"> </span><span class="nv">$USERNAME</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1"># Reset password</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>drush<span class="w"> </span>user:password<span class="w"> </span><span class="nv">$USERNAME</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$NEWPASS</span><span class="s2">&quot;</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="c1"># Add role</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>drush<span class="w"> </span>user:role:add<span class="w"> </span>administrator<span class="w"> </span><span class="nv">$USERNAME</span>
+</code></pre></div>
+<h2 id="watchdog-logs">Watchdog (logs)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Show recent logs</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>drush<span class="w"> </span>watchdog:show
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Show errors only</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>drush<span class="w"> </span>watchdog:show<span class="w"> </span>--severity<span class="o">=</span>error
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1"># Tail logs</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>drush<span class="w"> </span>watchdog:tail
 </code></pre></div>
 
 
@@ -2046,7 +2203,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../find/" class="md-footer__link md-footer__link--prev" aria-label="Previous: find">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quick hacks">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2056,20 +2213,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                find
+                Quick hacks
               </div>
             </div>
           </a>
         
         
           
-          <a href="../ssh/" class="md-footer__link md-footer__link--next" aria-label="Next: SSH">
+          <a href="../elasticsearch/" class="md-footer__link md-footer__link--next" aria-label="Next: Elasticsearch">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                SSH
+                Elasticsearch
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2189,11 +2346,11 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
   
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
 
