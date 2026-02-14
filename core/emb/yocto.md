@@ -431,7 +431,7 @@ bitbake -g recipe-name && dot -Tpng task-depends.dot -o depends.png
 
 ## See also
 
-- [containers](../containers/containers.md)
+- [containers](../ct/ct.md)
 - [dds](../net/dds.md)
 
 ## References

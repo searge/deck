@@ -9,7 +9,7 @@ title: Containers
 description: Linux containers from first principles — namespaces, cgroups, chroot, unshare, systemd-nspawn, and runc.
 ---
 
-# containers
+# Containers
 
 Linux containers are not a single technology — they're a combination of kernel features that isolate processes. Understanding what happens under the hood makes you better at debugging, securing, and operating containerized workloads.
 

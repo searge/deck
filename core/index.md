@@ -19,6 +19,6 @@ Long-term memory of the deck. Everything the ghost learned, mapped, and survived
 
 - [hacks](hacks/hacks.md) — quickhacks: snippets, one-liners, copy-paste commands
 - [net](net/net.md) — networking, DNS, protocols
-- [containers](containers/containers.md) — Linux containers, namespaces, runtimes
-- [embedded](embedded/embedded.md) — embedded Linux, build systems, custom distros
+- [containers](ct/ct.md) — Linux containers, namespaces, runtimes
+- [embedded](emb/emb.md) — embedded Linux, build systems, custom distros
 - [py](py/py.md) — functional Python patterns, project skeleton, coding guidelines
