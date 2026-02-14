@@ -6,44 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Nginx administration — config testing, logs, SSL, and troubleshooting.">
+        <meta name="description" content="Functional Python patterns for ops tooling — project skeleton, coding guidelines, and architecture.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/nginx/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/py/">
       
       
-        <link rel="prev" href="../net_info/">
+        <link rel="prev" href="../net/tls/">
       
       
-        <link rel="next" href="../solr/">
+        <link rel="next" href="coding_guidelines/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/logo.webp">
+      <link rel="icon" href="../assets/images/logo.webp">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Nginx - Cyberdeck</title>
+        <title>Python - Cyberdeck</title>
       
     
     
   
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-  <link rel="stylesheet" href="../../assets/stylesheets/nord.css">
+  <link rel="stylesheet" href="../assets/stylesheets/nord.css">
 
     
       
@@ -53,12 +53,12 @@
         
         
         
-        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -68,17 +68,17 @@
 
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Nginx - Cyberdeck" />
-<meta property="og:description" content="Nginx administration — config testing, logs, SSL, and troubleshooting." />
-<meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/nginx.png" />
+<meta property="og:title" content="Python - Cyberdeck" />
+<meta property="og:description" content="Functional Python patterns for ops tooling — project skeleton, coding guidelines, and architecture." />
+<meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/py/index.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://searge.pp.ua/deck/hacks/nginx/" />
+<meta property="og:url" content="https://searge.pp.ua/deck/py/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Nginx - Cyberdeck" />
-<meta property="twitter:description" content="Nginx administration — config testing, logs, SSL, and troubleshooting." />
-<meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/nginx.png" />
+<meta property="twitter:title" content="Python - Cyberdeck" />
+<meta property="twitter:description" content="Functional Python patterns for ops tooling — project skeleton, coding guidelines, and architecture." />
+<meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/py/index.png" />
 </head>
   
   
@@ -98,7 +98,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#nginx" class="md-skip">
+        <a href="#python" class="md-skip">
           Skip to content
         </a>
       
@@ -114,9 +114,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href=".." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../assets/images/logo.webp" alt="logo">
+  <img src="../assets/images/logo.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -127,7 +127,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            <a href="../.." class="md-header__topic-link">
+            <a href=".." class="md-header__topic-link">
               Cyberdeck
             </a>
           </span>
@@ -135,7 +135,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Nginx
+              Python
             
           </span>
         </div>
@@ -258,9 +258,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href=".." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../assets/images/logo.webp" alt="logo">
+  <img src="../assets/images/logo.webp" alt="logo">
 
     </a>
   </label>
@@ -286,7 +286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -331,7 +331,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../ct/" class="md-nav__link ">
+            <a href="../ct/" class="md-nav__link ">
               
   
   
@@ -397,7 +397,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../emb/" class="md-nav__link ">
+            <a href="../emb/" class="md-nav__link ">
               
   
   
@@ -441,7 +441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../emb/yocto/" class="md-nav__link">
+      <a href="../emb/yocto/" class="md-nav__link">
         
   
   
@@ -473,8 +473,6 @@
       
   
   
-    
-  
   
   
     
@@ -512,15 +510,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../hacks/" class="md-nav__link ">
               
   
   
@@ -544,7 +542,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -564,7 +562,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../drush/" class="md-nav__link">
+      <a href="../hacks/drush/" class="md-nav__link">
         
   
   
@@ -592,7 +590,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../elasticsearch/" class="md-nav__link">
+      <a href="../hacks/elasticsearch/" class="md-nav__link">
         
   
   
@@ -620,7 +618,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../net_info/" class="md-nav__link">
+      <a href="../hacks/net_info/" class="md-nav__link">
         
   
   
@@ -645,37 +643,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Nginx
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../hacks/nginx/" class="md-nav__link">
         
   
   
@@ -691,142 +662,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#basics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Basics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#config-locations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Config locations
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#logs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Logs
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ssltls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SSL/TLS
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#port-conflict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Port conflict
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#server_names_hash_bucket_size" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        server_names_hash_bucket_size
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#502-bad-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        502 Bad Gateway
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#permission-denied-on-logssockets" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Permission denied on logs/sockets
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#update-gpg-keys" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Update GPG keys
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -839,7 +674,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../solr/" class="md-nav__link">
+      <a href="../hacks/solr/" class="md-nav__link">
         
   
   
@@ -867,7 +702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../varnish/" class="md-nav__link">
+      <a href="../hacks/varnish/" class="md-nav__link">
         
   
   
@@ -923,7 +758,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../bash/" class="md-nav__link ">
+            <a href="../hacks/bash/" class="md-nav__link ">
               
   
   
@@ -967,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bash/emacs_mode/" class="md-nav__link">
+      <a href="../hacks/bash/emacs_mode/" class="md-nav__link">
         
   
   
@@ -995,7 +830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bash/find/" class="md-nav__link">
+      <a href="../hacks/bash/find/" class="md-nav__link">
         
   
   
@@ -1023,7 +858,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bash/rsync/" class="md-nav__link">
+      <a href="../hacks/bash/rsync/" class="md-nav__link">
         
   
   
@@ -1051,7 +886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bash/ssh/" class="md-nav__link">
+      <a href="../hacks/bash/ssh/" class="md-nav__link">
         
   
   
@@ -1079,7 +914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bash/user/" class="md-nav__link">
+      <a href="../hacks/bash/user/" class="md-nav__link">
         
   
   
@@ -1139,7 +974,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../databases/" class="md-nav__link ">
+            <a href="../hacks/databases/" class="md-nav__link ">
               
   
   
@@ -1183,7 +1018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../databases/mariadb/" class="md-nav__link">
+      <a href="../hacks/databases/mariadb/" class="md-nav__link">
         
   
   
@@ -1211,7 +1046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../databases/mysql/" class="md-nav__link">
+      <a href="../hacks/databases/mysql/" class="md-nav__link">
         
   
   
@@ -1239,7 +1074,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../databases/postgresql/" class="md-nav__link">
+      <a href="../hacks/databases/postgresql/" class="md-nav__link">
         
   
   
@@ -1293,7 +1128,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../gcp/" class="md-nav__link ">
+            <a href="../hacks/gcp/" class="md-nav__link ">
               
   
   
@@ -1360,7 +1195,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../git/" class="md-nav__link ">
+            <a href="../hacks/git/" class="md-nav__link ">
               
   
   
@@ -1404,7 +1239,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../git/git_cicd/" class="md-nav__link">
+      <a href="../hacks/git/git_cicd/" class="md-nav__link">
         
   
   
@@ -1462,7 +1297,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../kubernetes/" class="md-nav__link ">
+            <a href="../hacks/kubernetes/" class="md-nav__link ">
               
   
   
@@ -1506,7 +1341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kubernetes/helm/" class="md-nav__link">
+      <a href="../hacks/kubernetes/helm/" class="md-nav__link">
         
   
   
@@ -1534,7 +1369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kubernetes/kubectl/" class="md-nav__link">
+      <a href="../hacks/kubernetes/kubectl/" class="md-nav__link">
         
   
   
@@ -1588,7 +1423,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../vim/" class="md-nav__link ">
+            <a href="../hacks/vim/" class="md-nav__link ">
               
   
   
@@ -1676,7 +1511,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../net/" class="md-nav__link ">
+            <a href="../net/" class="md-nav__link ">
               
   
   
@@ -1720,7 +1555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net/dds/" class="md-nav__link">
+      <a href="../net/dds/" class="md-nav__link">
         
   
   
@@ -1748,7 +1583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net/dns/" class="md-nav__link">
+      <a href="../net/dns/" class="md-nav__link">
         
   
   
@@ -1776,7 +1611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net/http/" class="md-nav__link">
+      <a href="../net/http/" class="md-nav__link">
         
   
   
@@ -1804,7 +1639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net/mqtt/" class="md-nav__link">
+      <a href="../net/mqtt/" class="md-nav__link">
         
   
   
@@ -1832,7 +1667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net/osi_model/" class="md-nav__link">
+      <a href="../net/osi_model/" class="md-nav__link">
         
   
   
@@ -1860,7 +1695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net/snmp/" class="md-nav__link">
+      <a href="../net/snmp/" class="md-nav__link">
         
   
   
@@ -1888,7 +1723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net/tcp_ip_model/" class="md-nav__link">
+      <a href="../net/tcp_ip_model/" class="md-nav__link">
         
   
   
@@ -1916,7 +1751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net/tls/" class="md-nav__link">
+      <a href="../net/tls/" class="md-nav__link">
         
   
   
@@ -1948,6 +1783,8 @@
       
   
   
+    
+  
   
   
     
@@ -1965,15 +1802,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../py/" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   
@@ -1991,13 +1828,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+              <label class="md-nav__link md-nav__link--active" for="__nav_6" id="__nav_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2017,7 +1854,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../py/coding_guidelines/" class="md-nav__link">
+      <a href="coding_guidelines/" class="md-nav__link">
         
   
   
@@ -2045,7 +1882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../py/project_skeleton/" class="md-nav__link">
+      <a href="project_skeleton/" class="md-nav__link">
         
   
   
@@ -2100,115 +1937,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#basics" class="md-nav__link">
+  <a href="#topics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#config-locations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Config locations
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#logs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Logs
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ssltls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SSL/TLS
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#port-conflict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Port conflict
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#server_names_hash_bucket_size" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        server_names_hash_bucket_size
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#502-bad-gateway" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        502 Bad Gateway
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#permission-denied-on-logssockets" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Permission denied on logs/sockets
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#update-gpg-keys" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Update GPG keys
+        Topics
       
     </span>
   </a>
@@ -2236,14 +1968,14 @@
       
       
       
-        <span class="md-tag">nginx</span>
+        <span class="md-tag">architecture</span>
       
     
       
       
       
       
-        <span class="md-tag">snippets</span>
+        <span class="md-tag">python</span>
       
     
   </nav>
@@ -2253,91 +1985,16 @@
   
 
 
-<h1 id="nginx">nginx</h1>
-<h2 id="basics">Basics</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Test config before reload</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>nginx<span class="w"> </span>-t
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Reload (graceful, no downtime)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>systemctl<span class="w"> </span>reload<span class="w"> </span>nginx
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Full restart</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>nginx
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Check version and build flags</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>nginx<span class="w"> </span>-V
-</code></pre></div>
-<h2 id="config-locations">Config locations</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/etc/nginx/nginx.conf<span class="w">           </span><span class="c1"># Main config</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>/etc/nginx/conf.d/*.conf<span class="w">        </span><span class="c1"># Server blocks (Debian/upstream)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>/etc/nginx/sites-enabled/<span class="w">       </span><span class="c1"># Server blocks (Ubuntu)</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>/var/log/nginx/access.log<span class="w">       </span><span class="c1"># Access log</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>/var/log/nginx/error.log<span class="w">        </span><span class="c1"># Error log</span>
-</code></pre></div>
-<h2 id="logs">Logs</h2>
-<p>Tail error log:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/nginx/error.log
-</code></pre></div>
-<p>Top requested URLs:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>awk<span class="w"> </span><span class="s1">&#39;{print $7}&#39;</span><span class="w"> </span>/var/log/nginx/access.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
-</code></pre></div>
-<p>Top IPs:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span>/var/log/nginx/access.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
-</code></pre></div>
-<p>Status codes distribution:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>awk<span class="w"> </span><span class="s1">&#39;{print $9}&#39;</span><span class="w"> </span>/var/log/nginx/access.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-rn
-</code></pre></div>
-<h2 id="ssltls">SSL/TLS</h2>
-<p>Check certificate expiry:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">echo</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>s_client<span class="w"> </span>-servername<span class="w"> </span><span class="nv">$HOST</span><span class="w"> </span>-connect<span class="w"> </span><span class="nv">$HOST</span>:443<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>openssl<span class="w"> </span>x509<span class="w"> </span>-noout<span class="w"> </span>-dates
-</code></pre></div>
-<p>Generate self-signed cert (testing):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-nodes<span class="w"> </span>-days<span class="w"> </span><span class="m">365</span><span class="w"> </span>-newkey<span class="w"> </span>rsa:2048<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>-keyout<span class="w"> </span>/etc/nginx/ssl/selfsigned.key<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>-out<span class="w"> </span>/etc/nginx/ssl/selfsigned.crt
-</code></pre></div>
-<h2 id="troubleshooting">Troubleshooting</h2>
-<h3 id="port-conflict">Port conflict</h3>
-<p>Kill processes holding ports 80/443:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>fuser<span class="w"> </span>-k<span class="w"> </span><span class="m">80</span>/tcp<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>fuser<span class="w"> </span>-k<span class="w"> </span><span class="m">443</span>/tcp
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>service<span class="w"> </span>nginx<span class="w"> </span>restart
-</code></pre></div>
-<h3 id="server_names_hash_bucket_size">server_names_hash_bucket_size</h3>
-<p>Error:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nginx: [emerg] could not build the server_names_hash, you should increase server_names_hash_bucket_size: 64
-</code></pre></div>
-<p>Fix — double the reported value in <code>nginx.conf</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">http</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="kn">server_names_hash_bucket_size</span><span class="w">  </span><span class="mi">128</span><span class="p">;</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">}</span>
-</code></pre></div>
-<h3 id="502-bad-gateway">502 Bad Gateway</h3>
-<p>Backend is down or not responding:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Check if backend is listening</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>ss<span class="w"> </span>-tulpn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="nv">$BACKEND_PORT</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Check nginx error log for upstream errors</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>grep<span class="w"> </span>upstream<span class="w"> </span>/var/log/nginx/error.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-20
-</code></pre></div>
-<h3 id="permission-denied-on-logssockets">Permission denied on logs/sockets</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Check nginx worker user</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>grep<span class="w"> </span><span class="s2">&quot;^user&quot;</span><span class="w"> </span>/etc/nginx/nginx.conf
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Fix socket permissions</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>chmod<span class="w"> </span><span class="m">660</span><span class="w"> </span>/var/run/php-fpm.sock
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>chown<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/run/php-fpm.sock
-</code></pre></div>
-<h2 id="update-gpg-keys">Update GPG keys</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>curl<span class="w"> </span>https://nginx.org/keys/nginx_signing.key<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/usr/share/keyrings/nginx-archive-keyring.gpg<span class="w"> </span>&gt;/dev/null
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="s2">  http://nginx.org/packages/debian bookworm nginx&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/nginx_org_packages_debian.list
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>list<span class="w"> </span>--upgradable
-</code></pre></div>
+<h1 id="python">Python</h1>
+<p>Patterns for building Python CLI tools with a functional approach.
+Optimized for platform engineering and sysadmin tooling — things that
+need to be readable, testable, and maintainable by people who aren't
+full-time developers.</p>
+<h2 id="topics">Topics</h2>
+<ul>
+<li><a href="project_skeleton/">project_skeleton</a> — directory layout, pyproject.toml, Taskfile, skel</li>
+<li><a href="coding_guidelines/">coding_guidelines</a> — functions over classes, frozen dataclasses, typing</li>
+</ul>
 
 
 
@@ -2376,7 +2033,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../net_info/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Network diagnostics">
+          <a href="../net/tls/" class="md-footer__link md-footer__link--prev" aria-label="Previous: TLS">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2386,20 +2043,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Network diagnostics
+                TLS
               </div>
             </div>
           </a>
         
         
           
-          <a href="../solr/" class="md-footer__link md-footer__link--next" aria-label="Next: Solr">
+          <a href="coding_guidelines/" class="md-footer__link md-footer__link--next" aria-label="Next: Coding Guidelines">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Solr
+                Coding Guidelines
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2519,11 +2176,11 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
   
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
 
