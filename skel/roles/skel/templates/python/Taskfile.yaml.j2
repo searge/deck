@@ -1,0 +1,31 @@
+---
+version: "3"
+
+tasks:
+  install:
+    desc: Install dependencies
+    cmds:
+      - uv sync
+
+  lint:
+    desc: Format and lint
+    cmds:
+      - uv run ruff format src/ tests/
+      - uv run ruff check --fix src/ tests/
+
+  typecheck:
+    desc: Static type checking
+    cmds:
+      - uv run mypy src/
+
+  test:
+    desc: Run all quality checks
+    cmds:
+      - task: lint
+      - task: typecheck
+      - uv run pytest
+
+  app:
+    desc: Run the application
+    cmds:
+      - uv run {{ project_name }} {% raw %}{{.CLI_ARGS}}{% endraw %}

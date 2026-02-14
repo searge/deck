@@ -1,0 +1,66 @@
+---
+- name: Validate required variables
+  ansible.builtin.assert:
+    that:
+      - project_name is defined
+      - target_dir is defined
+      - skel_type is defined
+    fail_msg: "project_name, target_dir, and skel_type are required"
+
+- name: Load skeleton-specific defaults
+  ansible.builtin.include_vars:
+    file: "{{ role_path }}/defaults/{{ skel_type }}.yml"
+
+- name: Discover templates
+  ansible.builtin.find:
+    paths: "{{ role_path }}/templates/{{ skel_type }}"
+    patterns: "*.j2"
+    recurse: true
+  register: _found
+
+- name: Build file manifest
+  ansible.builtin.set_fact:
+    _files: "{{ _files | default([]) + [{'src': _src, 'dest': _dest}] }}"
+  vars:
+    _src: "{{ item.path | relpath(role_path + '/templates') }}"
+    _rel: "{{ item.path | relpath(role_path + '/templates/' + skel_type) | regex_replace('\\.j2$', '') }}"
+    _dotted: "{{ _rel | regex_replace('(^|/)dot_', '\\1.') }}"
+    _dest: "{{ _dotted | regex_replace('(^|/)pkg/', '\\1' + app_name + '/') }}"
+  loop: "{{ _found.files }}"
+  loop_control:
+    label: "{{ item.path | basename }}"
+
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ target_dir }}/{{ item }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ _files | map(attribute='dest') | map('dirname') | unique | select | list }}"
+  loop_control:
+    label: "{{ item }}/"
+
+- name: Create data directory
+  ansible.builtin.file:
+    path: "{{ target_dir }}/data"
+    state: directory
+    mode: "0755"
+
+- name: Render templates
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ target_dir }}/{{ item.dest }}"
+    mode: "0644"
+  loop: "{{ _files }}"
+  loop_control:
+    label: "{{ item.dest }}"
+
+- name: Display result
+  ansible.builtin.debug:
+    msg: |
+      Project scaffolded: {{ target_dir }}
+      Skeleton: {{ skel_type }}
+      Files: {{ _files | length }}
+
+      Next steps:
+        cd {{ target_dir }}
+        git init

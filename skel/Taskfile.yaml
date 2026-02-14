@@ -1,0 +1,32 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+env:
+  ANSIBLE_CONFIG: "{{.TASKFILE_DIR}}/ansible.cfg"
+
+tasks:
+  default:
+    desc: Show available skeletons
+    cmds:
+      - task --list-all
+    silent: true
+
+  python:
+    desc: Scaffold a functional Python project
+    summary: |
+      Scaffold a functional Python project
+
+      Usage:
+        task python -- '{"project_name":"my-tool","target_dir":"~/Code/lrn/func/my-tool"}'
+
+      With description:
+        task python -- '{"project_name":"my-tool","description":"What it does","target_dir":"~/Code/lrn/func/my-tool"}'
+
+      Optional JSON keys:
+        "app_name":       "my_tool"     (default: project_name with - → _)
+        "author":         "Searge"      (default)
+        "python_version": "3.13"        (default)
+    cmds:
+      - uv run ansible-playbook playbooks/python.yaml -e {{.CLI_ARGS}}
+    dir: "{{.TASKFILE_DIR}}"

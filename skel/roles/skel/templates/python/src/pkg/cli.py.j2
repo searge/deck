@@ -1,0 +1,20 @@
+"""CLI entry point."""
+
+import typer
+from rich.console import Console
+
+app = typer.Typer(
+    add_completion=False,
+    rich_markup_mode="markdown",
+    help="{{ description }}",
+)
+console = Console()
+
+
+@app.command()
+def run() -> None:
+    """Execute the main operation."""
+    from {{ app_name }}.config import load_config
+
+    config = load_config()
+    console.print(f"[green]{{ project_name }}[/green] loaded with config: {config}")

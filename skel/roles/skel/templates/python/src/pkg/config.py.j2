@@ -1,0 +1,35 @@
+"""Configuration — load once, pass everywhere."""
+
+import os
+from dataclasses import dataclass
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+
+@dataclass(frozen=True)
+class Config:
+    """Application configuration. Immutable after creation."""
+
+    project_root: Path
+    # Add your config fields here:
+    # api_url: str
+    # api_token: str
+    # timeout: int = 30
+
+
+def load_config() -> Config:
+    """Load config from environment. Fail fast on missing values."""
+    load_dotenv()
+
+    project_root = Path(__file__).resolve().parent.parent.parent
+
+    # Example validation:
+    # api_url = os.environ.get("APP_API_URL", "")
+    # if not api_url:
+    #     msg = "APP_API_URL is required"
+    #     raise ValueError(msg)
+
+    return Config(
+        project_root=project_root,
+    )

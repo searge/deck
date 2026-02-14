@@ -1,0 +1,45 @@
+[project]
+name = "{{ project_name }}"
+version = "0.1.0"
+description = "{{ description }}"
+requires-python = ">={{ python_version }}"
+dependencies = [
+    "typer>=0.21",
+    "rich>=14",
+]
+
+[project.scripts]
+{{ project_name }} = "{{ app_name }}.cli:app"
+
+[tool.uv]
+package = true
+
+# --- Quality ---
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19",
+    "ruff>=0.14",
+    "pytest>=8",
+]
+
+[tool.mypy]
+python_version = "{{ python_version }}"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.ruff]
+line-length = 88
+target-version = "{{ python_target }}"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "N", "UP", "S", "B", "SIM", "RUF"]
+ignore = ["S101", "UP040"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

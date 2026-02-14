@@ -1,0 +1,24 @@
+# {{ project_name }}
+
+## What this is
+
+{{ description }}
+
+## Architecture
+
+- Functional approach: pure functions, frozen dataclasses
+- Layers: CLI → Domain → Infrastructure
+- Config loaded once, passed as frozen dataclass
+
+## Commands
+
+- `task test` — lint + typecheck + pytest
+- `task app -- <args>` — run the app
+
+## Hard rules
+
+- No classes for logic (only frozen dataclasses for data)
+- No `subprocess` outside `infrastructure/`
+- No `os.getenv()` outside `config.py`
+- All dataclasses are `frozen=True`
+- Python {{ python_version }}+, type hints on every function

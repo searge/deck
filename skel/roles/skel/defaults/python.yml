@@ -1,0 +1,5 @@
+---
+# Python skeleton defaults
+python_version: "3.13"
+python_target: "py{{ python_version | replace('.', '') }}"
+app_name: "{{ project_name | replace('-', '_') }}"

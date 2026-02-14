@@ -1,0 +1,34 @@
+# Coding Guidelines
+
+This project follows the functional Python approach described in the
+[Cyberdeck coding guidelines](https://searge.pp.ua/deck/python/coding_guidelines/).
+
+## Quick reference
+
+1. **Functions over classes** — classes only for `@dataclass(frozen=True)`
+2. **Immutable data** — frozen dataclasses, NamedTuples
+3. **Pure logic, impure edges** — domain has no side effects
+4. **Config loaded once** — `config.py` → frozen dataclass → passed down
+5. **Type everything** — mypy strict, no `Any`
+
+## Layers
+
+```text
+CLI (side effects)
+ ↓
+Domain (pure logic, no IO)
+ ↓
+Infrastructure (external systems)
+```
+
+## Hard rules
+
+- No `subprocess` outside `infrastructure/`
+- No `os.getenv()` outside `config.py`
+- No `shell=True` — use `shlex.split()`
+- All dataclasses are `frozen=True`
+
+## Full guidelines
+
+See [coding_guidelines](https://searge.pp.ua/deck/python/coding_guidelines/)
+for the complete reference with examples.

@@ -1,0 +1,8 @@
+---
+- name: Scaffold Python project
+  hosts: localhost
+  gather_facts: false
+  vars:
+    skel_type: python
+  roles:
+    - skel
