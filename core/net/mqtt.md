@@ -288,9 +288,9 @@ Device subscribes to its command topic, publishes to status.
 
 ## See also
 
-- [[dns]]
-- [[http]]
-- [[tls]]
+- [dns](dns.md)
+- [http](http.md)
+- [tls](tls.md)
 
 ## References
 

@@ -324,8 +324,8 @@ For high-bandwidth data (images, point clouds):
 
 ## See also
 
-- [[mqtt]]
-- [[tcp_ip_model]]
+- [mqtt](mqtt.md)
+- [tcp_ip_model](tcp_ip_model.md)
 
 ## References
 

@@ -15,4 +15,4 @@ Build systems, BSPs, and the tooling around 64MB flash and 10-year lifecycles.
 
 ## Topics
 
-- [[yocto]]
+- [yocto](yocto.md)

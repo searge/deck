@@ -10,8 +10,8 @@ description: Kubernetes cheat sheet — kubectl, helm, and cluster operations.
 
 # kubernetes
 
-- [[kubectl]]
-- [[helm]]
+- [kubectl](kubectl.md)
+- [helm](helm.md)
 
 ## Basics
 

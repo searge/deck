@@ -330,8 +330,8 @@ iptables -A INPUT -p udp --dport 161 -j DROP
 
 ## See also
 
-- [[dns]]
-- [[tcp_ip_model]]
+- [dns](dns.md)
+- [tcp_ip_model](tcp_ip_model.md)
 
 ## References
 

@@ -53,8 +53,8 @@ apt list --installed 2>/dev/null |
 
 ## See also
 
-- [[ssh]]
-- [[find]]
-- [[rsync]]
-- [[user]]
-- [[emacs_mode]]
+- [ssh](ssh.md)
+- [find](find.md)
+- [rsync](rsync.md)
+- [user](user.md)
+- [emacs_mode](emacs_mode.md)

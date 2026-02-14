@@ -20,7 +20,8 @@ core/
 │   ├── git/
 │   ├── kubernetes/
 │   └── vim/
-└── net/            # networking models, protocols, diagnostics
+├── net/            # networking models, protocols, diagnostics
+└── python/         # functional patterns, project skeleton, guidelines
 ```
 
 ## Local development

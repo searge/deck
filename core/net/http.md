@@ -12,7 +12,7 @@ description: HTTP methods, status codes, and protocol versions.
 # http
 
 Hypertext Transfer Protocol — the language of the web.
-HTTPS is HTTP over [[tls]].
+HTTPS is HTTP over [tls](tls.md).
 
 ## Request structure
 
@@ -84,6 +84,6 @@ curl -o /dev/null -s -w "\
 
 ## See also
 
-- [[tls]]
-- [[dns]]
-- [[nginx]]
+- [tls](tls.md)
+- [dns](dns.md)
+- [nginx](../hacks/nginx.md)

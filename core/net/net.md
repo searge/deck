@@ -14,14 +14,14 @@ plumbing that holds the net together.
 
 ## Models
 
-- [[osi_model]]
-- [[tcp_ip_model]]
+- [osi_model](osi_model.md)
+- [tcp_ip_model](tcp_ip_model.md)
 
 ## Protocols
 
-- [[dns]]
-- [[tls]]
-- [[http]]
-- [[mqtt]]
-- [[snmp]]
-- [[dds]]
+- [dns](dns.md)
+- [tls](tls.md)
+- [http](http.md)
+- [mqtt](mqtt.md)
+- [snmp](snmp.md)
+- [dds](dds.md)

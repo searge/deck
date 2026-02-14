@@ -13,11 +13,11 @@ and field-tested commands. Grab it and go.
 
 ## Modules
 
-- [[bash]] — shell commands, system administration
-- [[databases]] — MariaDB, PostgreSQL, MySQL
-- [[gcp]] — Google Cloud Platform
-- [[git]] — version control, CI/CD operations
-- [[kubernetes]] — kubectl, helm
-- [[vim]] — editor survival kit
-- [[net_info]] — network diagnostics
-- [[nginx]] — web server troubleshooting
+- [bash](bash/bash.md) — shell commands, system administration
+- [databases](databases/databases.md) — MariaDB, PostgreSQL, MySQL
+- [gcp](gcp/gcp.md) — Google Cloud Platform
+- [git](git/git.md) — version control, CI/CD operations
+- [kubernetes](kubernetes/kubernetes.md) — kubectl, helm
+- [vim](vim/vim.md) — editor survival kit
+- [net_info](net_info.md) — network diagnostics
+- [nginx](nginx.md) — web server troubleshooting

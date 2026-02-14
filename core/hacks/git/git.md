@@ -89,7 +89,7 @@ git push origin --tags                     # push all tags
 
 ## See also
 
-- [[git_cicd]]
+- [git_cicd](git_cicd.md)
 
 ## References
 

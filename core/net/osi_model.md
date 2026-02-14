@@ -67,7 +67,7 @@ Note: in practice, Presentation (6) and Session (5) are often folded into Applic
 
 ## See also
 
-- [[tcp_ip_model]]
+- [tcp_ip_model](tcp_ip_model.md)
 
 ## References
 

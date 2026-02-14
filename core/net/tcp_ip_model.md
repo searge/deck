@@ -63,7 +63,7 @@ sequenceDiagram
 
 ## See also
 
-- [[osi_model]]
+- [osi_model](osi_model.md)
 
 ## References
 

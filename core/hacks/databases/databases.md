@@ -10,6 +10,6 @@ description: MariaDB, PostgreSQL, and MySQL cheat sheets.
 
 # databases
 
-- [[mariadb]]
-- [[postgresql]]
-- [[mysql]]
+- [mariadb](mariadb.md)
+- [postgresql](postgresql.md)
+- [mysql](mysql.md)
