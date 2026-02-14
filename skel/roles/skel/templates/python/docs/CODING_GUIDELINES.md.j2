@@ -7,24 +7,13 @@ This project follows the functional Python approach described in the
 
 1. **Functions over classes** — classes only for `@dataclass(frozen=True)`
 2. **Immutable data** — frozen dataclasses, NamedTuples
-3. **Pure logic, impure edges** — domain has no side effects
+3. **Pure logic, impure edges** — keep side effects at the boundary
 4. **Config loaded once** — `config.py` → frozen dataclass → passed down
 5. **Type everything** — mypy strict, no `Any`
 
-## Layers
-
-```text
-CLI (side effects)
- ↓
-Domain (pure logic, no IO)
- ↓
-Infrastructure (external systems)
-```
-
 ## Hard rules
 
-- No `subprocess` outside `infrastructure/`
-- No `os.getenv()` outside `config.py`
+- Side effects only in CLI layer and config
 - No `shell=True` — use `shlex.split()`
 - All dataclasses are `frozen=True`
 

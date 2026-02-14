@@ -39,12 +39,6 @@
   loop_control:
     label: "{{ item }}/"
 
-- name: Create data directory
-  ansible.builtin.file:
-    path: "{{ target_dir }}/data"
-    state: directory
-    mode: "0755"
-
 - name: Render templates
   ansible.builtin.template:
     src: "{{ item.src }}"

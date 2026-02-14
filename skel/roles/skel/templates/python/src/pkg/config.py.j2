@@ -12,10 +12,8 @@ class Config:
     """Application configuration. Immutable after creation."""
 
     project_root: Path
-    # Add your config fields here:
     # api_url: str
     # api_token: str
-    # timeout: int = 30
 
 
 def load_config() -> Config:
@@ -24,12 +22,8 @@ def load_config() -> Config:
 
     project_root = Path(__file__).resolve().parent.parent.parent
 
-    # Example validation:
-    # api_url = os.environ.get("APP_API_URL", "")
-    # if not api_url:
-    #     msg = "APP_API_URL is required"
-    #     raise ValueError(msg)
-
     return Config(
         project_root=project_root,
+        # api_url=os.environ["APP_API_URL"],
+        # api_token=os.environ["APP_API_TOKEN"],
     )
