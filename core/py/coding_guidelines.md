@@ -254,7 +254,7 @@ Rules:
 | -------------------- | ----------------------------------------------------------------------- |
 | **External systems** | Typed exceptions: `KubectlError`, `ApiError`                            |
 | **Logic**            | Return error data in result types; raise `ValueError` for invalid input |
-| **CLI**              | Map to exit codes (0 = ok, 1 = user error, 2 = runtime error)          |
+| **CLI**              | Map to exit codes (0 = ok, 1 = user error, 2 = runtime error)           |
 
 ## Typing
 

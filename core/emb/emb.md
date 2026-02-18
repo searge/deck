@@ -7,7 +7,6 @@ aliases:
 title: Embedded
 description: Embedded Linux, custom distributions, and build systems for constrained devices.
 ---
-
 # Embedded Linux
 
 Custom Linux for hardware that doesn't run off-the-shelf distros.

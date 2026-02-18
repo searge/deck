@@ -53,7 +53,7 @@ do_install() {
 
 **Layers** organize recipes by function or hardware. Layer names start with `meta-`:
 
-```text
+```bash
 meta-poky/           # Distribution policy
 meta-openembedded/   # Community packages
 meta-raspberrypi/    # RPi BSP
@@ -71,7 +71,7 @@ meta-custom/         # Your project-specific recipes
 
 After sourcing the environment:
 
-```text
+```bash
 build/
 ├── conf/
 │   ├── local.conf      # Build configuration
