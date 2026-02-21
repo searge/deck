@@ -1,5 +1,5 @@
 ---
 # Go skeleton defaults
-go_version: "1.24"
+go_version: "1.26"
 go_module: "github.com/{{ author }}/{{ project_name }}"
 binary_name: "{{ project_name }}"
