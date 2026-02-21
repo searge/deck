@@ -22,3 +22,4 @@ Long-term memory of the deck. Everything the ghost learned, mapped, and survived
 - [containers](ct/ct.md) — Linux containers, namespaces, runtimes
 - [embedded](emb/emb.md) — embedded Linux, build systems, custom distros
 - [py](py/py.md) — functional Python patterns, project skeleton, coding guidelines
+- [go](go/go.md) — functional Go patterns, Cobra + Lipgloss, project skeleton
