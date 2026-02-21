@@ -29,7 +29,7 @@ func Execute() {
 
 func init() {
 	rootCmd.Version = version
-	rootCmd.SetVersionTemplate("{{"{{"}}".Version{{"}}"}}\n")
+	rootCmd.SetVersionTemplate("{% raw %}{{.Version}}{% endraw %}\n")
 	rootCmd.SilenceUsage = true
 	rootCmd.SilenceErrors = true
 }

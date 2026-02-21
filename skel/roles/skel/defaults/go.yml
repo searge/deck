@@ -3,3 +3,5 @@
 go_version: "1.26"
 go_module: "github.com/{{ author }}/{{ project_name }}"
 binary_name: "{{ project_name }}"
+# app_name keeps the generic tasks/main.yml happy (pkg/ → pkg/, no-op for Go)
+app_name: "pkg"
