@@ -1,0 +1,8 @@
+---
+- name: Scaffold Go project
+  hosts: localhost
+  gather_facts: false
+  vars:
+    skel_type: go
+  roles:
+    - skel

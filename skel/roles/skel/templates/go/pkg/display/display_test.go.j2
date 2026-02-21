@@ -1,0 +1,36 @@
+package display_test
+
+import (
+	"strings"
+	"testing"
+
+	"{{ go_module }}/pkg/display"
+)
+
+func TestHeader(t *testing.T) {
+	out := display.Header("Test")
+	if !strings.Contains(out, "Test") {
+		t.Error("Header output should contain the title")
+	}
+	lines := strings.Split(strings.TrimSpace(out), "\n")
+	if len(lines) != 3 {
+		t.Errorf("Header should produce 3 lines, got %d", len(lines))
+	}
+}
+
+func TestSuccess(t *testing.T) {
+	out := display.Success("done")
+	if !strings.Contains(out, "done") {
+		t.Error("Success should contain the message")
+	}
+	if !strings.Contains(out, "COMPLETE") {
+		t.Error("Success should contain COMPLETE label")
+	}
+}
+
+func TestKeyValue(t *testing.T) {
+	out := display.KeyValue("Status", "active")
+	if !strings.Contains(out, "Status") || !strings.Contains(out, "active") {
+		t.Error("KeyValue should contain both key and value")
+	}
+}

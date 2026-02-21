@@ -1,0 +1,42 @@
+// hello.go — example command demonstrating CLI + display patterns.
+// Delete or rename this file when adding real commands.
+package cmd
+
+import (
+	"fmt"
+
+	"github.com/spf13/cobra"
+
+	"{{ go_module }}/pkg/display"
+)
+
+var helloCmd = &cobra.Command{
+	Use:   "hello [name]",
+	Short: "Greet someone (example command)",
+	Args:  cobra.MaximumNArgs(1),
+	RunE: func(_ *cobra.Command, args []string) error {
+		name := parseName(args)
+		fmt.Println(display.Header("Hello"))
+		fmt.Println(display.Success(greet(name)))
+		return nil
+	},
+}
+
+// parseName extracts the name from args or returns a default.
+// Pure function.
+func parseName(args []string) string {
+	if len(args) > 0 {
+		return args[0]
+	}
+	return "World"
+}
+
+// greet formats a greeting message.
+// Pure function: same input → same output, no side effects.
+func greet(name string) string {
+	return fmt.Sprintf("Hello, %s!", name)
+}
+
+func init() {
+	rootCmd.AddCommand(helloCmd)
+}

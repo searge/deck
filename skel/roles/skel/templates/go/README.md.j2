@@ -1,0 +1,47 @@
+# {{ project_name }}
+
+{{ description }}
+
+## Quick start
+
+```bash
+task setup       # go mod tidy + download
+task run -- hello World
+task dev         # fmt + lint + test + build
+```
+
+## Structure
+
+```text
+.
+├── cmd/                    # Cobra commands (thin wrappers)
+│   ├── root.go
+│   ├── version.go
+│   └── hello.go            # example — rename or delete
+├── internal/
+│   └── config/             # app-private config (pure functions)
+├── pkg/
+│   └── display/            # Lipgloss output helpers (pure functions)
+├── main.go                 # cmd.Execute() only
+├── Taskfile.yaml
+└── .golangci.yaml
+```
+
+## Commands
+
+```bash
+task setup      # install dependencies
+task fmt        # go fmt ./...
+task lint       # go vet + golangci-lint
+task test       # go test -v ./...
+task build      # build to bin/{{ binary_name }}
+task run        # go run . [args after --]
+task dev        # full cycle: fmt lint test build
+```
+
+## Customise
+
+1. Replace module name: `{{ go_module }}`
+2. Rename binary in `Taskfile.yaml`: `BINARY_NAME`
+3. Add commands in `cmd/`, logic in `internal/` or `pkg/`
+4. For HTTP backend: add `internal/handler/`, `internal/service/`, `internal/store/`

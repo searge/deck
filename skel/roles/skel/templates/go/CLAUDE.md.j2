@@ -1,0 +1,24 @@
+# {{ project_name }}
+
+{{ description }}
+
+## Architecture
+
+- Functional core: pure functions for logic, side effects at edges
+- `cmd/` — Cobra commands, thin wrappers only
+- `internal/` — app-private packages
+- `pkg/` — reusable packages (display, helpers)
+
+## Commands
+
+- `task dev` — fmt + lint + test + build
+- `task run -- <args>` — run without building
+- `task test` — go test -v ./...
+
+## Hard rules
+
+- No business logic in `cmd/` — delegate to `internal/` or `pkg/`
+- Pass `context.Context` as first parameter to all I/O functions
+- Always wrap errors: `fmt.Errorf("context: %w", err)`
+- No global mutable state — pass dependencies explicitly
+- Go {{ go_version }}+, type hints on every exported function

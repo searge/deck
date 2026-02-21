@@ -30,3 +30,22 @@ tasks:
     cmds:
       - uv run ansible-playbook playbooks/python.yaml -e {{.CLI_ARGS}}
     dir: "{{.TASKFILE_DIR}}"
+
+  go:
+    desc: Scaffold a functional Go CLI project
+    summary: |
+      Scaffold a functional Go CLI project
+
+      Usage:
+        task go -- '{"project_name":"my-tool","target_dir":"~/Code/lrn/my-tool"}'
+
+      With description:
+        task go -- '{"project_name":"my-tool","description":"What it does","target_dir":"~/Code/lrn/my-tool"}'
+
+      Optional JSON keys:
+        "go_module":  "github.com/Searge/my-tool"  (default: github.com/Searge/project_name)
+        "author":     "Searge"                      (default)
+        "go_version": "1.24"                        (default)
+    cmds:
+      - uv run ansible-playbook playbooks/go.yaml -e {{.CLI_ARGS}}
+    dir: "{{.TASKFILE_DIR}}"

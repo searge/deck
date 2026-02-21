@@ -1,0 +1,71 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  BINARY_NAME: {{ binary_name }}
+  MODULE: {{ go_module }}
+  VERSION:
+    sh: git describe --tags --always --dirty 2>/dev/null || echo "dev"
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds: [task --list]
+    silent: true
+
+  setup:
+    desc: Download and tidy dependencies
+    cmds:
+      - go mod tidy
+      - go mod download
+
+  fmt:
+    desc: Format code
+    cmds: [go fmt ./...]
+
+  lint:
+    desc: Run linters (go vet + golangci-lint)
+    cmds:
+      - go vet ./...
+      - golangci-lint run
+
+  lint:md:
+    desc: Lint markdown files
+    cmds: [markdownlint '**/*.md' --ignore node_modules --ignore .git]
+
+  test:
+    desc: Run tests
+    cmds: [go test -v ./...]
+
+  coverage:
+    desc: Run tests with coverage report
+    cmds:
+      - go test -coverprofile=coverage.out ./...
+      - go tool cover -func=coverage.out
+
+  build:
+    desc: Build binary to bin/
+    deps: [fmt]
+    cmds:
+      - >-
+        go build
+        -ldflags "-X {{ go_module }}/cmd.version={{"{{"}}.VERSION{{"}}"}}"
+        -o bin/{{ binary_name }}
+        .
+
+  run:
+    desc: Run without building (pass args after --)
+    cmds: [go run . {{"{{"}}.CLI_ARGS{{"}}"}}]
+
+  dev:
+    desc: Full development cycle (fmt, lint, test, build)
+    cmds:
+      - task: fmt
+      - task: lint
+      - task: test
+      - task: build
+
+  clean:
+    desc: Remove build artifacts
+    cmds: [rm -rf bin/ coverage.out]
