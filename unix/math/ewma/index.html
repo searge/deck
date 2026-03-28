@@ -6,19 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="PostgreSQL dump, restore, and Kubernetes operations.">
+        <meta name="description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/databases/postgresql/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/unix/math/ewma/">
       
       
-        <link rel="prev" href="../mysql/">
+        <link rel="prev" href="../">
       
-      
-        <link rel="next" href="../../gcp/">
       
       
         
@@ -29,7 +27,7 @@
     
     
       
-        <title>PostgreSQL - Cyberdeck</title>
+        <title>Exponential Weighted Moving Average - Cyberdeck</title>
       
     
     
@@ -68,17 +66,17 @@
 
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="PostgreSQL - Cyberdeck" />
-<meta property="og:description" content="PostgreSQL dump, restore, and Kubernetes operations." />
-<meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/databases/postgresql.png" />
+<meta property="og:title" content="Exponential Weighted Moving Average - Cyberdeck" />
+<meta property="og:description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands." />
+<meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/unix/math/ewma.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://searge.pp.ua/deck/hacks/databases/postgresql/" />
+<meta property="og:url" content="https://searge.pp.ua/deck/unix/math/ewma/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="PostgreSQL - Cyberdeck" />
-<meta property="twitter:description" content="PostgreSQL dump, restore, and Kubernetes operations." />
-<meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/databases/postgresql.png" />
+<meta property="twitter:title" content="Exponential Weighted Moving Average - Cyberdeck" />
+<meta property="twitter:description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands." />
+<meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/unix/math/ewma.png" />
 </head>
   
   
@@ -98,7 +96,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#postgresql" class="md-skip">
+        <a href="#exponential-weighted-moving-average" class="md-skip">
           Skip to content
         </a>
       
@@ -135,7 +133,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              PostgreSQL
+              Exponential Weighted Moving Average
             
           </span>
         </div>
@@ -800,8 +798,6 @@
       
   
   
-    
-  
   
   
     
@@ -839,15 +835,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../../hacks/" class="md-nav__link ">
               
   
   
@@ -871,7 +867,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -891,7 +887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../drush/" class="md-nav__link">
+      <a href="../../../hacks/drush/" class="md-nav__link">
         
   
   
@@ -919,7 +915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elasticsearch/" class="md-nav__link">
+      <a href="../../../hacks/elasticsearch/" class="md-nav__link">
         
   
   
@@ -947,7 +943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net_info/" class="md-nav__link">
+      <a href="../../../hacks/net_info/" class="md-nav__link">
         
   
   
@@ -975,7 +971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/" class="md-nav__link">
+      <a href="../../../hacks/nginx/" class="md-nav__link">
         
   
   
@@ -1003,7 +999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../solr/" class="md-nav__link">
+      <a href="../../../hacks/solr/" class="md-nav__link">
         
   
   
@@ -1031,7 +1027,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../varnish/" class="md-nav__link">
+      <a href="../../../hacks/varnish/" class="md-nav__link">
         
   
   
@@ -1087,7 +1083,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../bash/" class="md-nav__link ">
+            <a href="../../../hacks/bash/" class="md-nav__link ">
               
   
   
@@ -1131,7 +1127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/emacs_mode/" class="md-nav__link">
+      <a href="../../../hacks/bash/emacs_mode/" class="md-nav__link">
         
   
   
@@ -1159,7 +1155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/find/" class="md-nav__link">
+      <a href="../../../hacks/bash/find/" class="md-nav__link">
         
   
   
@@ -1187,7 +1183,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/rsync/" class="md-nav__link">
+      <a href="../../../hacks/bash/rsync/" class="md-nav__link">
         
   
   
@@ -1215,7 +1211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/ssh/" class="md-nav__link">
+      <a href="../../../hacks/bash/ssh/" class="md-nav__link">
         
   
   
@@ -1243,7 +1239,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/user/" class="md-nav__link">
+      <a href="../../../hacks/bash/user/" class="md-nav__link">
         
   
   
@@ -1276,8 +1272,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1297,15 +1291,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../../hacks/databases/" class="md-nav__link ">
               
   
   
@@ -1329,7 +1323,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1349,7 +1343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mariadb/" class="md-nav__link">
+      <a href="../../../hacks/databases/mariadb/" class="md-nav__link">
         
   
   
@@ -1377,7 +1371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mysql/" class="md-nav__link">
+      <a href="../../../hacks/databases/mysql/" class="md-nav__link">
         
   
   
@@ -1402,37 +1396,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../hacks/databases/postgresql/" class="md-nav__link">
         
   
   
@@ -1448,70 +1415,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#dump-and-restore" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dump and restore
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#copy-between-kubernetes-clusters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Copy between Kubernetes clusters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#interactive-session" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Interactive session
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#drop-and-recreate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Drop and recreate
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1550,7 +1453,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../gcp/" class="md-nav__link ">
+            <a href="../../../hacks/gcp/" class="md-nav__link ">
               
   
   
@@ -1617,7 +1520,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../git/" class="md-nav__link ">
+            <a href="../../../hacks/git/" class="md-nav__link ">
               
   
   
@@ -1661,7 +1564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/git_cicd/" class="md-nav__link">
+      <a href="../../../hacks/git/git_cicd/" class="md-nav__link">
         
   
   
@@ -1719,7 +1622,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../kubernetes/" class="md-nav__link ">
+            <a href="../../../hacks/kubernetes/" class="md-nav__link ">
               
   
   
@@ -1763,7 +1666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/helm/" class="md-nav__link">
+      <a href="../../../hacks/kubernetes/helm/" class="md-nav__link">
         
   
   
@@ -1791,7 +1694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/kubectl/" class="md-nav__link">
+      <a href="../../../hacks/kubernetes/kubectl/" class="md-nav__link">
         
   
   
@@ -1845,7 +1748,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../vim/" class="md-nav__link ">
+            <a href="../../../hacks/vim/" class="md-nav__link ">
               
   
   
@@ -2334,6 +2237,8 @@
       
   
   
+    
+  
   
   
     
@@ -2351,15 +2256,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../unix/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   
@@ -2383,7 +2288,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2403,7 +2308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../unix/load_average/" class="md-nav__link">
+      <a href="../../load_average/" class="md-nav__link">
         
   
   
@@ -2428,6 +2333,8 @@
                 
   
   
+    
+  
   
   
     
@@ -2443,15 +2350,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../unix/math/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -2475,7 +2382,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2492,10 +2399,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../unix/math/ewma/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exponential Weighted Moving Average
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2511,6 +2445,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Formula
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decay-factor-by-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decay Factor by Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-lives-in-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where This Lives in Linux
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2558,10 +2567,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#dump-and-restore" class="md-nav__link">
+  <a href="#the-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dump and restore
+        The Problem
       
     </span>
   </a>
@@ -2569,10 +2578,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#copy-between-kubernetes-clusters" class="md-nav__link">
+  <a href="#the-formula" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Copy between Kubernetes clusters
+        The Formula
       
     </span>
   </a>
@@ -2580,10 +2589,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#interactive-session" class="md-nav__link">
+  <a href="#python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Interactive session
+        Python
       
     </span>
   </a>
@@ -2591,10 +2600,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#drop-and-recreate" class="md-nav__link">
+  <a href="#decay-factor-by-window" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Drop and recreate
+        Decay Factor by Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-lives-in-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where This Lives in Linux
       
     </span>
   </a>
@@ -2622,14 +2642,28 @@
       
       
       
-        <span class="md-tag">databases</span>
+        <span class="md-tag">interview</span>
       
     
       
       
       
       
-        <span class="md-tag">postgresql</span>
+        <span class="md-tag">linux</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">math</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">performance</span>
       
     
   </nav>
@@ -2639,28 +2673,149 @@
   
 
 
-<h1 id="postgresql">postgresql</h1>
-<h2 id="dump-and-restore">Dump and restore</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Dump into custom-format archive</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pg_dump<span class="w"> </span>-U<span class="w"> </span><span class="nv">$user</span><span class="w"> </span>-Fc<span class="w"> </span><span class="nv">$database</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/db-prod.dump
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Restore into existing database</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>pg_restore<span class="w"> </span>-d<span class="w"> </span><span class="nv">$database</span><span class="w"> </span>-c<span class="w"> </span>--if-exists<span class="w"> </span>-O<span class="w"> </span>-U<span class="w"> </span><span class="nv">$user</span><span class="w"> </span>/tmp/db-prod.dump
+<h1 id="exponential-weighted-moving-average">Exponential Weighted Moving Average</h1>
+<h2 id="the-problem">The Problem</h2>
+<p>The kernel needs a single number that answers: <em>how loaded was this machine
+recently?</em> A naive approach — store the last 300 samples and divide — wastes
+memory and produces jarring jumps when an old spike drops off the window edge.</p>
+<p>EWMA solves both: <strong>O(1) memory, O(1) compute, smooth response.</strong></p>
+<h2 id="the-formula">The Formula</h2>
+<div class="arithmatex">\[
+\text{LA}_{t} = \text{LA}_{t-1} \cdot e^{-\Delta t / T} + n \cdot \left(1 - e^{-\Delta t / T}\right)
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\Delta t\)</span></td>
+<td>sampling interval — 5 s</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T\)</span></td>
+<td>window size — 60 / 300 / 900 s for 1 / 5 / 15 min</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n\)</span></td>
+<td>run queue length at sample time</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(e^{-\Delta t / T}\)</span></td>
+<td>decay factor — weight of the past</td>
+</tr>
+</tbody>
+</table>
+<p>The decay factor <span class="arithmatex">\(\alpha = e^{-\Delta t / T}\)</span> is why Euler's number appears:
+it is the only function whose rate of forgetting is proportional to what
+remains — a natural fit for a memory that fades continuously, not in steps.</p>
+<h2 id="python">Python</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_dataclass</span><span class="p">,</span> <span class="n">field</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">accumulate</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">exp</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">SAMPLE_INTERVAL_SECONDS</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># kernel samples run queue every 5 s</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">LoadWindow</span> <span class="o">=</span> <span class="n">make_dataclass</span><span class="p">(</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="s2">&quot;LoadWindow&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="p">[</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>      <span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>      <span class="p">(</span><span class="s2">&quot;window_seconds&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      <span class="p">(</span><span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">))</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="p">],</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">decay_factor</span><span class="p">(</span><span class="n">window_seconds</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">SAMPLE_INTERVAL_SECONDS</span> <span class="o">/</span> <span class="n">window_seconds</span><span class="p">)</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">next_load</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="n">LoadWindow</span><span class="p">,</span> <span class="n">runnable_processes</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LoadWindow</span><span class="p">:</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">alpha</span> <span class="o">=</span> <span class="n">decay_factor</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">window_seconds</span><span class="p">)</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="k">return</span> <span class="n">LoadWindow</span><span class="p">(</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="n">label</span><span class="o">=</span><span class="n">window</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="n">window_seconds</span><span class="o">=</span><span class="n">window</span><span class="o">.</span><span class="n">window_seconds</span><span class="p">,</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="n">load</span><span class="o">=</span><span class="n">window</span><span class="o">.</span><span class="n">load</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">runnable_processes</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">),</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="p">)</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="n">windows</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">LoadWindow</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="n">runnable_processes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">LoadWindow</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">next_load</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">runnable_processes</span><span class="p">)</span> <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">)</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="c1"># --- usage ---</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="n">LOAD_WINDOWS</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="n">LoadWindow</span><span class="p">(</span><span class="s2">&quot;1min&quot;</span><span class="p">,</span>  <span class="n">window_seconds</span><span class="o">=</span><span class="mi">60</span><span class="p">),</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    <span class="n">LoadWindow</span><span class="p">(</span><span class="s2">&quot;5min&quot;</span><span class="p">,</span>  <span class="n">window_seconds</span><span class="o">=</span><span class="mi">300</span><span class="p">),</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="n">LoadWindow</span><span class="p">(</span><span class="s2">&quot;15min&quot;</span><span class="p">,</span> <span class="n">window_seconds</span><span class="o">=</span><span class="mi">900</span><span class="p">),</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="p">)</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="c1"># processes in R/D state</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="n">run_queue_samples</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="c1"># final state — like Haskell&#39;s foldl</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="n">final</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">run_queue_samples</span><span class="p">,</span> <span class="n">LOAD_WINDOWS</span><span class="p">)</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="c1"># full history — like Haskell&#39;s scanl</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="n">history</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">accumulate</span><span class="p">(</span><span class="n">run_queue_samples</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="n">LOAD_WINDOWS</span><span class="p">))</span>
 </code></pre></div>
-<h2 id="copy-between-kubernetes-clusters">Copy between Kubernetes clusters</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Export from source cluster</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span><span class="nv">$pod</span><span class="w"> </span>--<span class="w"> </span>tar<span class="w"> </span>cf<span class="w"> </span>-<span class="w"> </span>/tmp/db.dump<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>xf<span class="w"> </span>-<span class="w"> </span>-C<span class="w"> </span>/tmp/
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Import to target cluster</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>kubectl<span class="w"> </span>cp<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span>/tmp/tmp/db.dump<span class="w"> </span><span class="nv">$pod</span>:/tmp/
-</code></pre></div>
-<h2 id="interactive-session">Interactive session</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>psql<span class="w"> </span>-U<span class="w"> </span><span class="nv">$user</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$database</span>
-</code></pre></div>
-<h2 id="drop-and-recreate">Drop and recreate</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">\</span><span class="k">c</span><span class="w"> </span><span class="n">postgres</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">mydb</span><span class="p">;</span>
-</code></pre></div>
+<p><code>reduce</code> — fold over time, one final answer.
+<code>accumulate</code> — same fold, but keeps every intermediate state: useful for plotting how LA converges.</p>
+<h2 id="decay-factor-by-window">Decay Factor by Window</h2>
+<p>Each window "forgets" the past at a different rate:</p>
+<div class="arithmatex">\[
+\alpha = e^{-5/T}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>Window</th>
+<th><span class="arithmatex">\(T\)</span></th>
+<th><span class="arithmatex">\(\alpha\)</span></th>
+<th>Present weight</th>
+<th>Half-life</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 min</td>
+<td>60 s</td>
+<td>≈ 0.9200</td>
+<td>8.0 %</td>
+<td>~43 s</td>
+</tr>
+<tr>
+<td>5 min</td>
+<td>300 s</td>
+<td>≈ 0.9835</td>
+<td>1.6 %</td>
+<td>~3.6 min</td>
+</tr>
+<tr>
+<td>15 min</td>
+<td>900 s</td>
+<td>≈ 0.9945</td>
+<td>0.6 %</td>
+<td>~10.4 min</td>
+</tr>
+</tbody>
+</table>
+<p>A spike in the run queue affects the <strong>1-minute window immediately</strong> but
+takes over 10 minutes to fully show in the 15-minute average.</p>
+<h2 id="where-this-lives-in-linux">Where This Lives in Linux</h2>
+<p>The kernel updates all three windows in <code>calc_load()</code> inside
+<code>kernel/sched/loadavg.c</code>, called from the <code>TIMER_SOFTIRQ</code> every 5 seconds.
+The constants are precomputed as fixed-point integers to avoid floating-point
+arithmetic in interrupt context.</p>
 
 
 
@@ -2699,7 +2854,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../mysql/" class="md-footer__link md-footer__link--prev" aria-label="Previous: MySQL">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Math in Unix / Linux">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2709,27 +2864,11 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                MySQL
+                Math in Unix / Linux
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../../gcp/" class="md-footer__link md-footer__link--next" aria-label="Next: Google Cloud Platform">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Google Cloud Platform
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
         
       </nav>
     

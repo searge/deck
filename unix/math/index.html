@@ -6,44 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="PostgreSQL dump, restore, and Kubernetes operations.">
+        <meta name="description" content="Mathematical concepts behind Linux internals — with formulas and readable Python.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/databases/postgresql/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/unix/math/">
       
       
-        <link rel="prev" href="../mysql/">
+        <link rel="prev" href="../load_average/">
       
       
-        <link rel="next" href="../../gcp/">
+        <link rel="next" href="ewma/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/logo.webp">
+      <link rel="icon" href="../../assets/images/logo.webp">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>PostgreSQL - Cyberdeck</title>
+        <title>Math in Unix / Linux - Cyberdeck</title>
       
     
     
   
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-  <link rel="stylesheet" href="../../../assets/stylesheets/nord.css">
+  <link rel="stylesheet" href="../../assets/stylesheets/nord.css">
 
     
       
@@ -53,12 +53,12 @@
         
         
         
-        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -68,17 +68,17 @@
 
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="PostgreSQL - Cyberdeck" />
-<meta property="og:description" content="PostgreSQL dump, restore, and Kubernetes operations." />
-<meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/databases/postgresql.png" />
+<meta property="og:title" content="Math in Unix / Linux - Cyberdeck" />
+<meta property="og:description" content="Mathematical concepts behind Linux internals — with formulas and readable Python." />
+<meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/unix/math/index.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://searge.pp.ua/deck/hacks/databases/postgresql/" />
+<meta property="og:url" content="https://searge.pp.ua/deck/unix/math/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="PostgreSQL - Cyberdeck" />
-<meta property="twitter:description" content="PostgreSQL dump, restore, and Kubernetes operations." />
-<meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/databases/postgresql.png" />
+<meta property="twitter:title" content="Math in Unix / Linux - Cyberdeck" />
+<meta property="twitter:description" content="Mathematical concepts behind Linux internals — with formulas and readable Python." />
+<meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/unix/math/index.png" />
 </head>
   
   
@@ -98,7 +98,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#postgresql" class="md-skip">
+        <a href="#math-in-unix-linux" class="md-skip">
           Skip to content
         </a>
       
@@ -114,9 +114,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -127,7 +127,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            <a href="../../.." class="md-header__topic-link">
+            <a href="../.." class="md-header__topic-link">
               Cyberdeck
             </a>
           </span>
@@ -135,7 +135,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              PostgreSQL
+              Math in Unix / Linux
             
           </span>
         </div>
@@ -258,9 +258,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
   </label>
@@ -286,7 +286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -333,7 +333,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../ci/" class="md-nav__link ">
+            <a href="../../ci/" class="md-nav__link ">
               
   
   
@@ -377,7 +377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ci/gitlab_ci/" class="md-nav__link">
+      <a href="../../ci/gitlab_ci/" class="md-nav__link">
         
   
   
@@ -432,7 +432,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../cloud/" class="md-nav__link ">
+            <a href="../../cloud/" class="md-nav__link ">
               
   
   
@@ -476,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/gcloud/" class="md-nav__link">
+      <a href="../../cloud/gcloud/" class="md-nav__link">
         
   
   
@@ -529,7 +529,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../ct/" class="md-nav__link ">
+            <a href="../../ct/" class="md-nav__link ">
               
   
   
@@ -595,7 +595,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../emb/" class="md-nav__link ">
+            <a href="../../emb/" class="md-nav__link ">
               
   
   
@@ -639,7 +639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../emb/yocto/" class="md-nav__link">
+      <a href="../../emb/yocto/" class="md-nav__link">
         
   
   
@@ -696,7 +696,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../go/" class="md-nav__link ">
+            <a href="../../go/" class="md-nav__link ">
               
   
   
@@ -740,7 +740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/coding_guidelines/" class="md-nav__link">
+      <a href="../../go/coding_guidelines/" class="md-nav__link">
         
   
   
@@ -768,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/project_skeleton/" class="md-nav__link">
+      <a href="../../go/project_skeleton/" class="md-nav__link">
         
   
   
@@ -800,8 +800,6 @@
       
   
   
-    
-  
   
   
     
@@ -839,15 +837,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../hacks/" class="md-nav__link ">
               
   
   
@@ -871,7 +869,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -891,7 +889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../drush/" class="md-nav__link">
+      <a href="../../hacks/drush/" class="md-nav__link">
         
   
   
@@ -919,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elasticsearch/" class="md-nav__link">
+      <a href="../../hacks/elasticsearch/" class="md-nav__link">
         
   
   
@@ -947,7 +945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net_info/" class="md-nav__link">
+      <a href="../../hacks/net_info/" class="md-nav__link">
         
   
   
@@ -975,7 +973,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/" class="md-nav__link">
+      <a href="../../hacks/nginx/" class="md-nav__link">
         
   
   
@@ -1003,7 +1001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../solr/" class="md-nav__link">
+      <a href="../../hacks/solr/" class="md-nav__link">
         
   
   
@@ -1031,7 +1029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../varnish/" class="md-nav__link">
+      <a href="../../hacks/varnish/" class="md-nav__link">
         
   
   
@@ -1087,7 +1085,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../bash/" class="md-nav__link ">
+            <a href="../../hacks/bash/" class="md-nav__link ">
               
   
   
@@ -1131,7 +1129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/emacs_mode/" class="md-nav__link">
+      <a href="../../hacks/bash/emacs_mode/" class="md-nav__link">
         
   
   
@@ -1159,7 +1157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/find/" class="md-nav__link">
+      <a href="../../hacks/bash/find/" class="md-nav__link">
         
   
   
@@ -1187,7 +1185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/rsync/" class="md-nav__link">
+      <a href="../../hacks/bash/rsync/" class="md-nav__link">
         
   
   
@@ -1215,7 +1213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/ssh/" class="md-nav__link">
+      <a href="../../hacks/bash/ssh/" class="md-nav__link">
         
   
   
@@ -1243,7 +1241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../bash/user/" class="md-nav__link">
+      <a href="../../hacks/bash/user/" class="md-nav__link">
         
   
   
@@ -1276,8 +1274,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1297,15 +1293,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../hacks/databases/" class="md-nav__link ">
               
   
   
@@ -1329,7 +1325,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1349,7 +1345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mariadb/" class="md-nav__link">
+      <a href="../../hacks/databases/mariadb/" class="md-nav__link">
         
   
   
@@ -1377,7 +1373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mysql/" class="md-nav__link">
+      <a href="../../hacks/databases/mysql/" class="md-nav__link">
         
   
   
@@ -1402,37 +1398,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../hacks/databases/postgresql/" class="md-nav__link">
         
   
   
@@ -1448,70 +1417,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#dump-and-restore" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dump and restore
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#copy-between-kubernetes-clusters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Copy between Kubernetes clusters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#interactive-session" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Interactive session
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#drop-and-recreate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Drop and recreate
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1550,7 +1455,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../gcp/" class="md-nav__link ">
+            <a href="../../hacks/gcp/" class="md-nav__link ">
               
   
   
@@ -1617,7 +1522,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../git/" class="md-nav__link ">
+            <a href="../../hacks/git/" class="md-nav__link ">
               
   
   
@@ -1661,7 +1566,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/git_cicd/" class="md-nav__link">
+      <a href="../../hacks/git/git_cicd/" class="md-nav__link">
         
   
   
@@ -1719,7 +1624,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../kubernetes/" class="md-nav__link ">
+            <a href="../../hacks/kubernetes/" class="md-nav__link ">
               
   
   
@@ -1763,7 +1668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/helm/" class="md-nav__link">
+      <a href="../../hacks/kubernetes/helm/" class="md-nav__link">
         
   
   
@@ -1791,7 +1696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/kubectl/" class="md-nav__link">
+      <a href="../../hacks/kubernetes/kubectl/" class="md-nav__link">
         
   
   
@@ -1845,7 +1750,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../vim/" class="md-nav__link ">
+            <a href="../../hacks/vim/" class="md-nav__link ">
               
   
   
@@ -1933,7 +1838,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../net/" class="md-nav__link ">
+            <a href="../../net/" class="md-nav__link ">
               
   
   
@@ -1977,7 +1882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dds/" class="md-nav__link">
+      <a href="../../net/dds/" class="md-nav__link">
         
   
   
@@ -2005,7 +1910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dns/" class="md-nav__link">
+      <a href="../../net/dns/" class="md-nav__link">
         
   
   
@@ -2033,7 +1938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/http/" class="md-nav__link">
+      <a href="../../net/http/" class="md-nav__link">
         
   
   
@@ -2061,7 +1966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/mqtt/" class="md-nav__link">
+      <a href="../../net/mqtt/" class="md-nav__link">
         
   
   
@@ -2089,7 +1994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/osi_model/" class="md-nav__link">
+      <a href="../../net/osi_model/" class="md-nav__link">
         
   
   
@@ -2117,7 +2022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/snmp/" class="md-nav__link">
+      <a href="../../net/snmp/" class="md-nav__link">
         
   
   
@@ -2145,7 +2050,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tcp_ip_model/" class="md-nav__link">
+      <a href="../../net/tcp_ip_model/" class="md-nav__link">
         
   
   
@@ -2173,7 +2078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tls/" class="md-nav__link">
+      <a href="../../net/tls/" class="md-nav__link">
         
   
   
@@ -2230,7 +2135,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../py/" class="md-nav__link ">
+            <a href="../../py/" class="md-nav__link ">
               
   
   
@@ -2274,7 +2179,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../py/coding_guidelines/" class="md-nav__link">
+      <a href="../../py/coding_guidelines/" class="md-nav__link">
         
   
   
@@ -2302,7 +2207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../py/project_skeleton/" class="md-nav__link">
+      <a href="../../py/project_skeleton/" class="md-nav__link">
         
   
   
@@ -2334,6 +2239,8 @@
       
   
   
+    
+  
   
   
     
@@ -2351,15 +2258,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../unix/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -2383,7 +2290,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2403,7 +2310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../unix/load_average/" class="md-nav__link">
+      <a href="../load_average/" class="md-nav__link">
         
   
   
@@ -2428,6 +2335,8 @@
                 
   
   
+    
+  
   
   
     
@@ -2443,15 +2352,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../unix/math/" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   
@@ -2469,13 +2378,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
+              <label class="md-nav__link md-nav__link--active" for="__nav_10_3" id="__nav_10_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2495,7 +2404,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../unix/math/ewma/" class="md-nav__link">
+      <a href="ewma/" class="md-nav__link">
         
   
   
@@ -2558,43 +2467,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#dump-and-restore" class="md-nav__link">
+  <a href="#topics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dump and restore
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#copy-between-kubernetes-clusters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Copy between Kubernetes clusters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#interactive-session" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Interactive session
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#drop-and-recreate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Drop and recreate
+        Topics
       
     </span>
   </a>
@@ -2616,51 +2492,19 @@
                 
                   
 
-  <nav class="md-tags" >
-    
-      
-      
-      
-      
-        <span class="md-tag">databases</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">postgresql</span>
-      
-    
-  </nav>
-
 
   
   
 
 
-<h1 id="postgresql">postgresql</h1>
-<h2 id="dump-and-restore">Dump and restore</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Dump into custom-format archive</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pg_dump<span class="w"> </span>-U<span class="w"> </span><span class="nv">$user</span><span class="w"> </span>-Fc<span class="w"> </span><span class="nv">$database</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/db-prod.dump
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Restore into existing database</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>pg_restore<span class="w"> </span>-d<span class="w"> </span><span class="nv">$database</span><span class="w"> </span>-c<span class="w"> </span>--if-exists<span class="w"> </span>-O<span class="w"> </span>-U<span class="w"> </span><span class="nv">$user</span><span class="w"> </span>/tmp/db-prod.dump
-</code></pre></div>
-<h2 id="copy-between-kubernetes-clusters">Copy between Kubernetes clusters</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Export from source cluster</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span><span class="nv">$pod</span><span class="w"> </span>--<span class="w"> </span>tar<span class="w"> </span>cf<span class="w"> </span>-<span class="w"> </span>/tmp/db.dump<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>xf<span class="w"> </span>-<span class="w"> </span>-C<span class="w"> </span>/tmp/
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Import to target cluster</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>kubectl<span class="w"> </span>cp<span class="w"> </span>-n<span class="w"> </span><span class="nv">$ns</span><span class="w"> </span>/tmp/tmp/db.dump<span class="w"> </span><span class="nv">$pod</span>:/tmp/
-</code></pre></div>
-<h2 id="interactive-session">Interactive session</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>psql<span class="w"> </span>-U<span class="w"> </span><span class="nv">$user</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$database</span>
-</code></pre></div>
-<h2 id="drop-and-recreate">Drop and recreate</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">\</span><span class="k">c</span><span class="w"> </span><span class="n">postgres</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">mydb</span><span class="p">;</span>
-</code></pre></div>
+<h1 id="math-in-unix-linux">Math in Unix / Linux</h1>
+<p>The kernel is full of elegant mathematics. This section explains the concepts
+behind real Linux mechanisms — with formulas, intuition, and Python that reads
+like a proof.</p>
+<h2 id="topics">Topics</h2>
+<ul>
+<li><a href="ewma/">EWMA</a> — exponential weighted moving average: load average, TCP smoothing</li>
+</ul>
 
 
 
@@ -2699,7 +2543,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../mysql/" class="md-footer__link md-footer__link--prev" aria-label="Previous: MySQL">
+          <a href="../load_average/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Load Average">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2709,20 +2553,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                MySQL
+                Load Average
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../gcp/" class="md-footer__link md-footer__link--next" aria-label="Next: Google Cloud Platform">
+          <a href="ewma/" class="md-footer__link md-footer__link--next" aria-label="Next: Exponential Weighted Moving Average">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Google Cloud Platform
+                Exponential Weighted Moving Average
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2842,15 +2686,15 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
   
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="../../../assets/external/unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../assets/external/unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
 
