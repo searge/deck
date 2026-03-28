@@ -19,7 +19,10 @@ Long-term memory of the deck. Everything the ghost learned, mapped, and survived
 
 - [hacks](hacks/hacks.md) — quickhacks: snippets, one-liners, copy-paste commands
 - [net](net/net.md) — networking, DNS, protocols
+- [cloud](cloud/cloud.md) — cloud platforms, GCP, deployment patterns
 - [containers](ct/ct.md) — Linux containers, namespaces, runtimes
 - [embedded](emb/emb.md) — embedded Linux, build systems, custom distros
 - [py](py/py.md) — functional Python patterns, project skeleton, coding guidelines
 - [go](go/go.md) — functional Go patterns, Cobra + Lipgloss, project skeleton
+- [ci](ci/ci.md) — CI/CD patterns, GitLab CI pipelines, automation
+- [unix](unix/unix.md) — Unix/Linux internals, diagnostics, concepts
