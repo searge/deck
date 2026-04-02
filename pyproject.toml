@@ -1,8 +1,8 @@
 [project]
 name = "deck"
 version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
+description = "Personal Cyberdeck"
+readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.13"
 dependencies = [
     "ansible-core>=2.20.2",
@@ -28,3 +28,37 @@ dev = [
     "ty>=0.0.15",
     "yamllint>=1.38.0",
 ]
+
+[tool.ruff]
+line-length = 79
+exclude = [".venv"]
+include = ["*.py"]
+fix = true
+# Group violations by containing file.
+target-version = "py313"
+output-format = "grouped"
+
+[tool.ruff.lint]
+select = [
+    "I",    # isort
+    "F",    # pyflakes
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "ARG",  # flake8-unused-arguments
+    "SIM",  # flake8-simplify
+    "ICN",  # flake8-import-conventions
+    "RET",  # flake8-return
+    "UP",   # pyupgrade
+    "FURB", # refurb
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.mypy]
+python_version = "3.13"
+warn_unused_configs = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+cache_dir = ".mypy_cache"
+disable_error_code = ["import-untyped"]
