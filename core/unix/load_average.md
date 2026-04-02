@@ -21,20 +21,9 @@ $ uptime
 
 ## How It Is Calculated
 
-The kernel uses an exponentially decaying formula for each window:
-
-$$
-\text{LA}_{t} = \text{LA}_{t-1} \cdot e^{-t/T} + n \cdot \left(1 - e^{-t/T}\right)
-$$
-
-| Symbol | Meaning |
-|--------|---------|
-| \(t\) | sampling interval — 5 seconds |
-| \(T\) | window size — 60 s / 300 s / 900 s for 1 / 5 / 15 min |
-| \(n\) | number of processes in run queue at sample time |
-
-In practice you never compute this by hand — the kernel does it.
-What matters is **interpretation**.
+The kernel uses an [exponentially weighted moving average](math/ewma.md) —
+updated every 5 seconds, one value per window. In practice you never compute
+this by hand. What matters is **interpretation**.
 
 ## Interpreting the Numbers
 
@@ -85,24 +74,64 @@ High LA there is more directly a signal of **CPU saturation**.
 ```bash
 # 1. Check LA
 uptime
-# or
 cat /proc/loadavg
 
-# 2. Check CPU count
+# 2. Check CPU count — without this the numbers mean nothing
 nproc
+```
 
-# 3. If LA_norm > 1.0 — find out why
-# CPU bound?
-top        # look at %CPU column, check for R-state processes
+If `LA / nCPU > 1.0`, the machine is overloaded. Next question: **why?**
+
+### CPU-bound
+
+Processes actively consuming CPU cycles — `%us` + `%sy` is high,
+`%wa` is low.
+
+```bash
+# Overall CPU breakdown — look for high %us (user) or %sy (system)
 mpstat 1
 
-# I/O bound? (Linux only)
-iostat -x 1
-vmstat 1   # look at 'b' column (blocked) and 'wa' (iowait)
+# Which processes are burning CPU?
+top        # sort by %CPU, watch for R-state in the S column
+pidstat 1  # per-process CPU usage over time
 
-# Which processes are in D state?
-ps aux | awk '$8 ~ /^D/ { print }'
+# Count processes currently running or waiting for CPU
+ps aux | awk '$8 == "R" { count++ } END { print count " running" }'
 ```
+
+**Fix direction:** profile the application, optimise hot paths,
+scale horizontally, or add CPU cores.
+
+### I/O-bound (Linux only)
+
+Processes blocked waiting for disk or network I/O — stuck in `D` state
+(uninterruptible sleep). LA is high but `%wa` is elevated, not `%us`.
+
+```bash
+# CPU iowait — if %wa is consistently > 10–20 %, suspect I/O
+vmstat 1   # 'wa' column: CPU time spent waiting for I/O
+           # 'b'  column: processes blocked on I/O right now
+
+# Which disks are saturated?
+iostat -x 1   # %util → 100 % means the device is the bottleneck
+              # await → average I/O latency in ms
+
+# Which processes are stuck in D state?
+ps aux | awk '$8 ~ /^D/ { print $0 }'
+
+# Continuous watch for D-state processes
+watch -n 1 "ps aux | awk '\$8 ~ /^D/'"
+```
+
+**Fix direction:** faster storage, reduce fsync calls, add caching,
+check for NFS hangs or network-backed mounts.
+
+> [!tip] CPU-bound vs I/O-bound — quick rule
+> ```
+> high LA + low %wa  →  CPU-bound
+> high LA + high %wa →  I/O-bound (Linux only)
+> ```
+> On BSD / macOS the distinction is simpler: high LA always means CPU pressure.
 
 ## Quick Reference
 

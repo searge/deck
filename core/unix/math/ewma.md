@@ -36,110 +36,29 @@ remains — a natural fit for a memory that fades continuously, not in steps.
 
 ## Python
 
+Direct translation of the formula — nothing more:
+
 ```python
-from dataclasses import make_dataclass, field
-from functools import reduce
-from itertools import accumulate
 from math import exp
-from rich import print
 
-SAMPLE_INTERVAL_SECONDS = 5  # kernel samples run queue every 5 s
-
-LoadWindow = make_dataclass(
-    "LoadWindow",
-    [
-      ("label", str),
-      ("window_seconds", int),
-      ("load", float, field(default=0.0))
-    ],
-    frozen=True,
-)
+SAMPLE_INTERVAL_SECONDS = 5
 
 
 def decay_factor(window_seconds: int) -> float:
     return exp(-SAMPLE_INTERVAL_SECONDS / window_seconds)
 
 
-def next_load(window: LoadWindow, runnable_processes: int) -> LoadWindow:
-    alpha = decay_factor(window.window_seconds)
-    return LoadWindow(
-        label=window.label,
-        window_seconds=window.window_seconds,
-        load=window.load * alpha + runnable_processes * (1 - alpha),
-    )
-
-
-def step(
-    windows: tuple[LoadWindow, ...],
+def next_load(
+    previous_load: float,
     runnable_processes: int,
-) -> tuple[LoadWindow, ...]:
-    return tuple(next_load(window, runnable_processes) for window in windows)
-
-
-# --- simulation ---
-
-LOAD_WINDOWS = (
-    LoadWindow("1min",  window_seconds=60),
-    LoadWindow("5min",  window_seconds=300),
-    LoadWindow("15min", window_seconds=900),
-)
-
-# Number of runnable instances per process at each 5-second sample.
-# /app/worker dominates — typical for a containerised service under load.
-runnable_by_process = {
-    "kworker":     [0, 0, 1, 0, 0, 1, 0, 0],
-    "sshd":        [1, 1, 1, 1, 1, 1, 1, 1],
-    "postgres":    [1, 1, 2, 2, 1, 1, 1, 1],
-    "nginx":       [1, 2, 2, 3, 2, 2, 1, 1],
-    "/app/worker": [0, 2, 8, 8, 8, 4, 2, 0],
-}
-
-runnable_per_sample = [
-    sum(counts[i] for counts in runnable_by_process.values())
-    for i in range(8)
-]
-# → [3, 6, 14, 14, 12, 9, 5, 3]
-
-# final state — like Haskell's foldl
-final = reduce(step, runnable_per_sample, LOAD_WINDOWS)
-
-# full history — like Haskell's scanl
-history = list(accumulate(runnable_per_sample, step, initial=LOAD_WINDOWS))
+    window_seconds: int,
+) -> float:
+    alpha = decay_factor(window_seconds)
+    return previous_load * alpha + runnable_processes * (1 - alpha)
 ```
 
-`reduce` — fold over time, one final answer.
-`accumulate` — same fold, but keeps every intermediate state: useful for plotting how LA converges.
-
-### Interpreting the Result
-
-```python
-# 12 CPUs: clean divisors (1, 2, 3, 4, 6, 12) make mental math easy.
-# LA / CPU_COUNT tells what fraction of compute capacity is in use.
-CPU_COUNT = 12
-
-def cpu_utilization(load: float, cpu_count: int) -> float:
-    return load / cpu_count * 100
-
-
-def load_state(utilization_percent: float) -> str:
-    if utilization_percent < 70:
-        return "healthy"
-    if utilization_percent <= 100:
-        return "saturated"
-    return "overloaded"
-
-
-for window in final:
-    utilization = cpu_utilization(window.load, CPU_COUNT)
-    print(f"{window.label:>5}  LA={window.load:5.2f}  {utilization:6.1f}%  {load_state(utilization)}")
-
-# 1min  LA=10.43   86.9%  saturated
-# 5min  LA= 4.21   35.1%  healthy
-# 15min LA= 1.62   13.5%  healthy
-```
-
-The 1-minute window caught the spike. The 15-minute window barely noticed —
-which is exactly what the decay table above predicts.
+For a full simulation with realistic process data and plots,
+see `scripts/unix/ewma.py` in the repository root.
 
 ## Decay Factor by Window
 
