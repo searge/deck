@@ -2411,6 +2411,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Diagnosis Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cpu-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-bound
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io-bound-linux-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I/O-bound (Linux only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2608,6 +2636,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Diagnosis Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cpu-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CPU-bound
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#io-bound-linux-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        I/O-bound (Linux only)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2682,34 +2738,9 @@ length, sampled every 5 seconds and reported for 1, 5, and 15-minute windows.</p
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">                                                       </span>1min<span class="w">  </span>5min<span class="w">  </span>15min
 </code></pre></div>
 <h2 id="how-it-is-calculated">How It Is Calculated</h2>
-<p>The kernel uses an exponentially decaying formula for each window:</p>
-<div class="arithmatex">\[
-\text{LA}_{t} = \text{LA}_{t-1} \cdot e^{-t/T} + n \cdot \left(1 - e^{-t/T}\right)
-\]</div>
-<table>
-<thead>
-<tr>
-<th>Symbol</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(t\)</span></td>
-<td>sampling interval — 5 seconds</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(T\)</span></td>
-<td>window size — 60 s / 300 s / 900 s for 1 / 5 / 15 min</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(n\)</span></td>
-<td>number of processes in run queue at sample time</td>
-</tr>
-</tbody>
-</table>
-<p>In practice you never compute this by hand — the kernel does it.
-What matters is <strong>interpretation</strong>.</p>
+<p>The kernel uses an <a href="../math/ewma/">exponentially weighted moving average</a> —
+updated every 5 seconds, one value per window. In practice you never compute
+this by hand. What matters is <strong>interpretation</strong>.</p>
 <h2 id="interpreting-the-numbers">Interpreting the Numbers</h2>
 <p>A single LA value is meaningless without knowing the CPU count.
 <strong>Always check <code>nproc</code> first.</strong></p>
@@ -2785,31 +2816,60 @@ Ask: <strong>how many CPUs does the machine have?</strong> And: is this I/O load
 <h2 id="diagnosis-workflow">Diagnosis Workflow</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 1. Check LA</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>uptime
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># or</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>cat<span class="w"> </span>/proc/loadavg
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># 2. Check CPU count</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>nproc
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># 3. If LA_norm &gt; 1.0 — find out why</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># CPU bound?</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>top<span class="w">        </span><span class="c1"># look at %CPU column, check for R-state processes</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>mpstat<span class="w"> </span><span class="m">1</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1"># I/O bound? (Linux only)</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>iostat<span class="w"> </span>-x<span class="w"> </span><span class="m">1</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>vmstat<span class="w"> </span><span class="m">1</span><span class="w">   </span><span class="c1"># look at &#39;b&#39; column (blocked) and &#39;wa&#39; (iowait)</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1"># Which processes are in D state?</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;$8 ~ /^D/ { print }&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>cat<span class="w"> </span>/proc/loadavg
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># 2. Check CPU count — without this the numbers mean nothing</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>nproc
 </code></pre></div>
+<p>If <code>LA / nCPU &gt; 1.0</code>, the machine is overloaded. Next question: <strong>why?</strong></p>
+<h3 id="cpu-bound">CPU-bound</h3>
+<p>Processes actively consuming CPU cycles — <code>%us</code> + <code>%sy</code> is high,
+<code>%wa</code> is low.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Overall CPU breakdown — look for high %us (user) or %sy (system)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>mpstat<span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Which processes are burning CPU?</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>top<span class="w">        </span><span class="c1"># sort by %CPU, watch for R-state in the S column</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>pidstat<span class="w"> </span><span class="m">1</span><span class="w">  </span><span class="c1"># per-process CPU usage over time</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Count processes currently running or waiting for CPU</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;$8 == &quot;R&quot; { count++ } END { print count &quot; running&quot; }&#39;</span>
+</code></pre></div>
+<p><strong>Fix direction:</strong> profile the application, optimise hot paths,
+scale horizontally, or add CPU cores.</p>
+<h3 id="io-bound-linux-only">I/O-bound (Linux only)</h3>
+<p>Processes blocked waiting for disk or network I/O — stuck in <code>D</code> state
+(uninterruptible sleep). LA is high but <code>%wa</code> is elevated, not <code>%us</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># CPU iowait — if %wa is consistently &gt; 10–20 %, suspect I/O</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>vmstat<span class="w"> </span><span class="m">1</span><span class="w">   </span><span class="c1"># &#39;wa&#39; column: CPU time spent waiting for I/O</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">           </span><span class="c1"># &#39;b&#39;  column: processes blocked on I/O right now</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># Which disks are saturated?</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>iostat<span class="w"> </span>-x<span class="w"> </span><span class="m">1</span><span class="w">   </span><span class="c1"># %util → 100 % means the device is the bottleneck</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">              </span><span class="c1"># await → average I/O latency in ms</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Which processes are stuck in D state?</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;$8 ~ /^D/ { print $0 }&#39;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># Continuous watch for D-state processes</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>watch<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;ps aux | awk &#39;\$8 ~ /^D/&#39;&quot;</span>
+</code></pre></div>
+<p><strong>Fix direction:</strong> faster storage, reduce fsync calls, add caching,
+check for NFS hangs or network-backed mounts.</p>
+<div class="admonition tip">
+<p class="admonition-title">CPU-bound vs I/O-bound — quick rule</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>high LA + low %wa  →  CPU-bound
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>high LA + high %wa →  I/O-bound (Linux only)
+</code></pre></div>
+On BSD / macOS the distinction is simpler: high LA always means CPU pressure.</p>
+</div>
 <h2 id="quick-reference">Quick Reference</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uptime<span class="w">                     </span><span class="c1"># LA 1/5/15 min</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>cat<span class="w"> </span>/proc/loadavg<span class="w">          </span><span class="c1"># same + running/total processes + last PID</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>nproc<span class="w">                      </span><span class="c1"># logical CPU count</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>nproc<span class="w"> </span>--all<span class="w">                </span><span class="c1"># all CPUs including offline</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^CPU(s):&quot;</span><span class="w">    </span><span class="c1"># same</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>grep<span class="w"> </span>-c<span class="w"> </span>processor<span class="w"> </span>/proc/cpuinfo<span class="w">  </span><span class="c1"># same, works everywhere</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>uptime<span class="w">                     </span><span class="c1"># LA 1/5/15 min</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>cat<span class="w"> </span>/proc/loadavg<span class="w">          </span><span class="c1"># same + running/total processes + last PID</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>nproc<span class="w">                      </span><span class="c1"># logical CPU count</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>nproc<span class="w"> </span>--all<span class="w">                </span><span class="c1"># all CPUs including offline</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^CPU(s):&quot;</span><span class="w">    </span><span class="c1"># same</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>grep<span class="w"> </span>-c<span class="w"> </span>processor<span class="w"> </span>/proc/cpuinfo<span class="w">  </span><span class="c1"># same, works everywhere</span>
 </code></pre></div>
 
 
