@@ -2,6 +2,27 @@
 
 {% block extrahead %}
   <meta name="fediverse:creator" content="@Searge@hachyderm.io">
+  {% if page.meta and page.meta.keywords %}
+    <meta name="keywords" content="{{ page.meta.keywords }}">
+  {% endif %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "{{ page.title | e }}",
+    "description": "{% if page.meta and page.meta.description %}{{ page.meta.description | e }}{% else %}{{ config.site_description | e }}{% endif %}",
+    "url": "{{ page.canonical_url }}",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "{{ config.site_name | e }}",
+      "url": "{{ config.site_url }}"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "{{ config.site_author | e }}"
+    }
+  }
+  </script>
 {% endblock %}
 
 {% block styles %}
