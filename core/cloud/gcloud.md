@@ -81,57 +81,92 @@ gcloud info --format='value(config.paths.global_config_dir)'
 
 ### Named Configurations
 
-For managing multiple projects/accounts, use named configurations instead of constantly switching accounts:
+Each configuration bundles account + project + region/zone. One command switches the entire context — no browser re-auth needed, tokens are stored locally.
+
+> Note: configuration names allow only lowercase letters, digits, and hyphens (no underscores).
 
 ```bash
-# Create a configuration for each project/account combo
-gcloud config configurations create sqor-dev
-gcloud config configurations create sqor-prod
-gcloud config configurations create personal-account
+# Create a configuration (do once per account/project combo)
+gcloud config configurations create <name>
+gcloud config configurations activate <name>
+gcloud config set account <email>
+gcloud config set project <project-id>
+gcloud config set compute/region <region>   # e.g. europe-west9
+gcloud config set compute/zone <zone>       # e.g. europe-west9-a
 
-# Activate and configure sqor-dev
-gcloud config configurations activate sqor-dev
-gcloud config set project sqor-dev-463118
-gcloud config set account terraform@sqor-dev-463118.iam.gserviceaccount.com
-gcloud config set compute/zone us-central1-a
+# Switch between configurations
+gcloud config configurations activate <name>
 
-# Activate and configure sqor-prod
-gcloud config configurations activate sqor-prod
-gcloud config set project sqor-prod-xxxxx
-gcloud config set account terraform@sqor-prod-xxxxx.iam.gserviceaccount.com
-gcloud config set compute/zone us-central1-a
-
-# Activate and configure personal account
-gcloud config configurations activate personal-account
-gcloud config set project my-personal-project
-gcloud config set account user@gmail.com
-gcloud config set compute/zone us-central1-a
-
-# List configurations
+# List all configurations
 gcloud config configurations list
 
-# Delete unused configuration
+# Delete a configuration
 gcloud config configurations delete <name>
 ```
 
-**Key points:**
-- Each configuration bundles account + project + region/zone together
-- Switch entire context with one command: `gcloud config configurations activate <name>`
-- Always verify active config before running commands: `gcloud config list`
+**Region reference:**
+
+| Location               | Region             | Zone               |
+|------------------------|--------------------|--------------------|
+| Paris                  | `europe-west9`     | `europe-west9-a`   |
+| Warsaw (closest to UA) | `europe-central2`  | `europe-central2-a`|
+| US Central             | `us-central1`      | `us-central1-a`    |
+
+### Quick Switching with Fish Shell
+
+Add to `~/.config/fish/conf.d/gcloud.fish`:
+
+```fish
+# Switch config + sync ADC quota project, suppress noisy warnings
+function gca
+    gcloud config configurations activate $argv[1] 2>/dev/null
+    set -l project (gcloud config get project 2>/dev/null)
+    if test -n "$project"
+        gcloud auth application-default set-quota-project $project --quiet 2>/dev/null
+    end
+    echo "Active: "(gcloud config get account 2>/dev/null)" / $project"
+end
+
+# Tab completions
+complete -c gca -f -a "(gcloud config configurations list --format='value(name)')"
+```
+
+```bash
+gca work      # → Active: user@company.com / my-project-id
+gca personal  # → Active: user@gmail.com / personal-project
+```
+
+The function suppresses two common noisy warnings:
+
+- `WARNING: Your active project does not match the quota project in your local Application Default Credentials file` — fixed by syncing ADC quota project automatically
+- `[environment: untagged]` — cosmetic GCP tag prompt, safely ignored
+
+### Per-Session Isolation (without affecting global config)
+
+Use `CLOUDSDK_ACTIVE_CONFIG_NAME` to override the active config for a single terminal only:
+
+```bash
+# Fish
+set -x CLOUDSDK_ACTIVE_CONFIG_NAME work
+gcloud config list  # confirms "work" is active in this terminal only
+
+# Unset to return to global active config
+set -e CLOUDSDK_ACTIVE_CONFIG_NAME
+```
 
 ### Using Configurations with Kubernetes
 
 **Critical:** When switching configurations for kubectl, always re-fetch cluster credentials:
 
 ```bash
-# Switch to sqor-dev config
-gcloud config configurations activate sqor-dev
+# Switch config
+gcloud config configurations activate <name>
 
-# UPDATE kubeconfig (this copies new credentials into ~/.kube/config)
-gcloud container clusters get-credentials sqor-gke-autopilot-dev --zone us-central1-a
+# Update kubeconfig with credentials for the new account
+gcloud container clusters get-credentials <cluster-name> --zone <zone>
 
 # Now kubectl uses the correct account
-kubectl -n mongodb get svc mongodb-lb
+kubectl get pods -n <namespace>
 ```
 
 Without `get-credentials`, kubectl uses stale credentials from kubeconfig.
@@ -446,6 +481,142 @@ gcloud logging read "resource.type=k8s_cluster" --limit=100
 
 # Write to logs
 gcloud logging write <log-name> "message"
+```
+
+## Terraform
+
+### Authentication options
+
+There are three ways to authenticate the Terraform Google provider, in order of preference for local development:
+
+#### 1. Application Default Credentials (ADC) — recommended for local dev
+
+```bash
+gcloud auth application-default login
+```
+
+Terraform picks up ADC automatically — no `credentials` field needed in the provider block. Works with named configurations.
+
+#### 2. Service account impersonation — no key files, audit-friendly
+
+```bash
+# One-time setup: grant yourself the Token Creator role
+gcloud iam service-accounts add-iam-policy-binding terraform@<project>.iam.gserviceaccount.com \
+  --member="user:<your-email>" \
+  --role="roles/iam.serviceAccountTokenCreator"
+```
+
+```hcl
+provider "google" {
+  impersonate_service_account = "terraform@<project>.iam.gserviceaccount.com"
+}
+```
+
+Or via env var (useful for CI or switching SAs without touching .tf files):
+
+```bash
+export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=terraform@<project>.iam.gserviceaccount.com
+```
+
+#### 3. Service account key file — avoid if possible, last resort for CI without Workload Identity
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS=/path/to/key.json
+```
+
+### Environment variables
+
+Avoid hardcoding values in provider blocks — use env vars instead. Terraform Google provider reads these automatically:
+
+| Variable                             | Equivalent provider field      | Notes                             |
+|--------------------------------------|--------------------------------|-----------------------------------|
+| `GOOGLE_PROJECT`                     | `project`                      | Default project for all resources |
+| `GOOGLE_REGION`                      | `region`                       | Default region                    |
+| `GOOGLE_ZONE`                        | `zone`                         | Default zone                      |
+| `GOOGLE_APPLICATION_CREDENTIALS`     | `credentials`                  | Path to SA key JSON               |
+| `GOOGLE_IMPERSONATE_SERVICE_ACCOUNT` | `impersonate_service_account`  | SA email to impersonate           |
+
+### `GOOGLE_CLOUD_QUOTA_PROJECT`
+
+Controls which project is billed for API calls made by ADC. Needed when:
+
+- Your user account has access to many projects and GCP can't determine which one to charge
+- You get `quota exceeded` or `billing not enabled` errors despite the target project being fine
+- You're running Terraform with ADC and the project in context differs from the one being managed
+
+```bash
+# Set quota project to the project you're deploying into
+export GOOGLE_CLOUD_QUOTA_PROJECT=<project-id>
+terraform plan
+```
+
+When **not** to set it:
+
+- Using a service account key (`GOOGLE_APPLICATION_CREDENTIALS`) — quota project is inferred from the SA
+- Using impersonation — same, inferred from the target SA's project
+
+### Tips & Tricks
+
+#### Minimal provider block — let env vars do the work
+
+```hcl
+provider "google" {}
+
+provider "google-beta" {}
+```
+
+#### Per-workspace project isolation with Fish
+
+```fish
+# Activate gcloud config + set Terraform env vars in one step
+function tf-env
+    gca $argv[1]
+    set -x GOOGLE_PROJECT (gcloud config get project 2>/dev/null)
+    set -x GOOGLE_CLOUD_QUOTA_PROJECT $GOOGLE_PROJECT
+    set -x GOOGLE_REGION (gcloud config get compute/region 2>/dev/null)
+    set -x GOOGLE_ZONE (gcloud config get compute/zone 2>/dev/null)
+    echo "TF env: $GOOGLE_PROJECT / $GOOGLE_REGION"
+end
+```
+
+```bash
+tf-env my-gcp-project   # switches gcloud + exports GOOGLE_* for terraform
+terraform plan
+```
+
+#### Debug provider auth issues
+
+```bash
+TF_LOG=DEBUG terraform plan 2>&1 | grep -i "credential\|token\|auth\|quota"
+```
+
+#### Check what credentials Terraform will actually use
+
+```bash
+gcloud auth application-default print-access-token
+# If this fails → terraform will also fail to auth
+```
+
+#### Enable required APIs before `terraform apply`
+
+```bash
+gcloud services enable compute.googleapis.com \
+  container.googleapis.com \
+  iam.googleapis.com \
+  cloudresourcemanager.googleapis.com
+```
+
+Or manage it in Terraform itself:
+
+```hcl
+resource "google_project_service" "apis" {
+  for_each = toset([
+    "compute.googleapis.com",
+    "container.googleapis.com",
+  ])
+  service            = each.value
+  disable_on_destroy = false
+}
 ```
 
 ## Tips
