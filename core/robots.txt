@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://searge.pp.ua/deck/sitemap.xml
