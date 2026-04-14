@@ -1,3 +1,9 @@
+---
+name: cross-ref
+description: Audit cross-references for a deck page — find missing inbound and outbound links. Report only, no edits.
+user-invocable: true
+---
+
 Audit cross-references for the deck page at $ARGUMENTS.
 
 Read the target file. Then search core/ for related pages.

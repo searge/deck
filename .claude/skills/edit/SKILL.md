@@ -1,3 +1,9 @@
+---
+name: edit
+description: Edit a deck page for clarity and structure without changing technical substance or voice.
+user-invocable: true
+---
+
 Edit the deck page at $ARGUMENTS for clarity and structure. Do not change technical substance.
 
 Read the file first. Then apply these rules:

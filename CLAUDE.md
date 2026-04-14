@@ -49,7 +49,11 @@ core/                ← published knowledge (docs_dir for MkDocs)
 raw/                 ← local only, not in git
   current_focus/     ← active working material: notes, bookmarks, rough ideas
 .claude/
-  commands/          ← project slash commands for deck workflows
+  skills/            ← project slash commands for deck workflows
+    review/SKILL.md
+    edit/SKILL.md
+    process-raw/SKILL.md
+    cross-ref/SKILL.md
 hooks/               ← MkDocs build hooks (Python)
 ```
 

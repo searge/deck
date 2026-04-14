@@ -1,3 +1,9 @@
+---
+name: review
+description: Review a deck page for accuracy, field-tested content, gaps, and consistency. Assess only — no rewriting.
+user-invocable: true
+---
+
 Review the deck page at $ARGUMENTS as a technical editor with one rule: only field-tested content belongs here.
 
 Read the file. Then check for:

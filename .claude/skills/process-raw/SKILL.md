@@ -1,3 +1,9 @@
+---
+name: process-raw
+description: Transform raw/current_focus/ notes into a properly structured deck page in core/. Does not invent content.
+user-invocable: true
+---
+
 Transform notes from raw/current_focus/ into a deck page for core/.
 
 Read all files in raw/current_focus/. Then:
