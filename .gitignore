@@ -15,6 +15,13 @@ wheels/
 tmp
 site/
 
+# Raw working directory — local only, not published
+raw/*
+!raw/.keep
+!raw/current_focus/
+raw/current_focus/*
+!raw/current_focus/.keep
+
 # Obsidian workspace file
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
