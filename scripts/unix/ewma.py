@@ -238,6 +238,60 @@ report("after 5 min:", final, CPU_COUNT)
 
 
 # %%
+# @title Trace: step-by-step EWMA
+
+
+def trace_ewma(
+    runnable_per_sample: np.ndarray,
+    window_seconds: int = 60,
+    n_steps: int = 8,
+) -> None:
+    """Print a step-by-step EWMA walkthrough for one load window.
+
+    Shows how each new load value is computed from the previous one and the
+    current run queue, making the formula concrete and easy to follow.
+
+    Args:
+        runnable_per_sample: Run queue length at each sample step.
+        window_seconds: Window to trace — defaults to 60 s (1-min load).
+        n_steps: How many sample steps to print before truncating.
+    """
+    alpha = decay_factor(window_seconds)
+    label = f"{window_seconds // 60}min"
+
+    print(f"EWMA step-by-step  ({label} window)\n")
+    print(f"  formula : new = old × α  +  queue × (1 − α)")
+    print(f"  α       = exp(−5 / {window_seconds})  = {alpha:.6f}   ← weight on history")
+    print(f"  1 − α   =                   {1 - alpha:.6f}   ← weight on current queue")
+    print()
+
+    header = (
+        f"{'i':>3}  {'t':>4}  {'queue':>5}  "
+        f"{'old':>7}  {'old×α':>7}  {'q×(1−α)':>8}  {'new':>7}"
+    )
+    print(header)
+    print("─" * len(header))
+
+    load = 0.0
+    for i, q in enumerate(runnable_per_sample[:n_steps]):
+        old = load
+        decay = old * alpha
+        signal = int(q) * (1 - alpha)
+        load = decay + signal
+        t = i * SAMPLE_INTERVAL_SECONDS
+        print(
+            f"{i:>3}  {t:>3}s  {int(q):>5}  "
+            f"{old:>7.4f}  {decay:>7.4f}  {signal:>8.4f}  {load:>7.4f}"
+        )
+
+    remaining = len(runnable_per_sample) - n_steps
+    print(f"  … ({remaining} more samples)")
+
+
+trace_ewma(runnable_per_sample)
+
+
+# %%
 # @title Process snapshot (htop-style)
 
 
