@@ -5,7 +5,7 @@
 Personal operational knowledge base for platform engineering.
 Long-term memory of the deck. Everything the ghost learned, mapped, and survived.
 
-Published at searge.pp.ua/deck via GitHub Actions → MkDocs Material → static site.
+Published at searge.pp.ua/deck via GitHub Actions -> MkDocs Material -> static site.
 
 ## Philosophy
 
@@ -44,17 +44,17 @@ description: One-line description of what this covers.
 
 ## Project structure
 
-```
-core/                ← published knowledge (docs_dir for MkDocs)
-raw/                 ← local only, not in git
-  current_focus/     ← active working material: notes, bookmarks, rough ideas
+```bash
+core/                     # published knowledge (docs_dir for MkDocs)
+raw/                      # local only, not in git
+  {{ current_focus }}/    # subject of current wip active working material: notes, bookmarks, rough ideas
 .claude/
-  skills/            ← project slash commands for deck workflows
+  skills/                 # project slash commands for deck workflows
     review/SKILL.md
     edit/SKILL.md
     process-raw/SKILL.md
     cross-ref/SKILL.md
-hooks/               ← MkDocs build hooks (Python)
+hooks/                    # MkDocs build hooks (Python)
 ```
 
 ## Claude's roles in this project
@@ -62,12 +62,12 @@ hooks/               ← MkDocs build hooks (Python)
 Claude operates in one of four modes depending on the slash command used.
 Each role has hard boundaries — do not cross them:
 
-| Command         | Role       | Boundary                              |
-|-----------------|------------|---------------------------------------|
-| `/review`       | Reviewer   | Assess only. Do not rewrite.          |
-| `/edit`         | Editor     | Structure and clarity only. No new content. |
-| `/process-raw`  | Processor  | Use raw/ input only. Do not invent.   |
-| `/cross-ref`    | Navigator  | Report only. Do not edit files.       |
+| Command        | Role      | Boundary                                    |
+| -------------- | --------- | ------------------------------------------- |
+| `/review`      | Reviewer  | Assess only. Do not rewrite.                |
+| `/edit`        | Editor    | Structure and clarity only. No new content. |
+| `/process-raw` | Processor | Use raw/ input only. Do not invent.         |
+| `/cross-ref`   | Navigator | Report only. Do not edit files.             |
 
 ## What Claude must NOT do
 
