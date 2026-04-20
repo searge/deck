@@ -53,6 +53,7 @@ apt list --installed 2>/dev/null |
 
 ## See also
 
+- [parallel](parallel.md)
 - [ssh](ssh.md)
 - [find](find.md)
 - [rsync](rsync.md)
