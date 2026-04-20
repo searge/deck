@@ -6,38 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Long-term memory of the deck. Quickhacks, networking, and field-tested commands.">
+        <meta name="description" content="Running multiple commands in parallel from bash — jobs, parallel, coproc.">
       
       
         <meta name="author" content="searge">
       
       
+        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/bash/parallel/">
       
+      
+        <link rel="prev" href="../find/">
+      
+      
+        <link rel="next" href="../rsync/">
       
       
         
       
       
-      <link rel="icon" href="/deck/assets/images/logo.webp">
+      <link rel="icon" href="../../../assets/images/logo.webp">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Cyberdeck</title>
+        <title>Bash Parallel - Cyberdeck</title>
       
     
     
   
-      <link rel="stylesheet" href="/deck/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/deck/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-  <link rel="stylesheet" href="/deck/assets/stylesheets/nord.css">
+  <link rel="stylesheet" href="../../../assets/stylesheets/nord.css">
 
     
       
@@ -47,12 +53,12 @@
         
         
         
-        <link rel="stylesheet" href="/deck/assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    <script>__md_scope=new URL("/deck/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,9 +70,9 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "name": "",
-    "description": "Long-term memory of the deck. Quickhacks, networking, and field-tested commands.",
-    "url": "",
+    "name": "Bash Parallel",
+    "description": "Running multiple commands in parallel from bash — jobs, parallel, coproc.",
+    "url": "https://searge.pp.ua/deck/hacks/bash/parallel/",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Cyberdeck",
@@ -79,7 +85,20 @@
   }
   </script>
 
-  </head>
+  
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Bash Parallel - Cyberdeck" />
+<meta property="og:description" content="Running multiple commands in parallel from bash — jobs, parallel, coproc." />
+<meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/bash/parallel.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://searge.pp.ua/deck/hacks/bash/parallel/" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Bash Parallel - Cyberdeck" />
+<meta property="twitter:description" content="Running multiple commands in parallel from bash — jobs, parallel, coproc." />
+<meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/bash/parallel.png" />
+</head>
   
   
     
@@ -97,6 +116,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#bash-parallel" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,9 +133,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/deck/." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="/deck/assets/images/logo.webp" alt="logo">
+  <img src="../../../assets/images/logo.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -122,7 +146,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            <a href="/deck/." class="md-header__topic-link">
+            <a href="../../.." class="md-header__topic-link">
               Cyberdeck
             </a>
           </span>
@@ -130,7 +154,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Bash Parallel
             
           </span>
         </div>
@@ -253,9 +277,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/deck/." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="/deck/assets/images/logo.webp" alt="logo">
+  <img src="../../../assets/images/logo.webp" alt="logo">
 
     </a>
   </label>
@@ -281,7 +305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -328,7 +352,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/ci/" class="md-nav__link ">
+            <a href="../../../ci/" class="md-nav__link ">
               
   
   
@@ -372,7 +396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/ci/gitlab_ci/" class="md-nav__link">
+      <a href="../../../ci/gitlab_ci/" class="md-nav__link">
         
   
   
@@ -427,7 +451,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/cloud/" class="md-nav__link ">
+            <a href="../../../cloud/" class="md-nav__link ">
               
   
   
@@ -471,7 +495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/cloud/gcloud/" class="md-nav__link">
+      <a href="../../../cloud/gcloud/" class="md-nav__link">
         
   
   
@@ -524,7 +548,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/ct/" class="md-nav__link ">
+            <a href="../../../ct/" class="md-nav__link ">
               
   
   
@@ -590,7 +614,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/emb/" class="md-nav__link ">
+            <a href="../../../emb/" class="md-nav__link ">
               
   
   
@@ -634,7 +658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/emb/yocto/" class="md-nav__link">
+      <a href="../../../emb/yocto/" class="md-nav__link">
         
   
   
@@ -691,7 +715,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/go/" class="md-nav__link ">
+            <a href="../../../go/" class="md-nav__link ">
               
   
   
@@ -735,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/go/coding_guidelines/" class="md-nav__link">
+      <a href="../../../go/coding_guidelines/" class="md-nav__link">
         
   
   
@@ -763,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/go/project_skeleton/" class="md-nav__link">
+      <a href="../../../go/project_skeleton/" class="md-nav__link">
         
   
   
@@ -795,6 +819,8 @@
       
   
   
+    
+  
   
   
     
@@ -832,15 +858,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/hacks/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   
@@ -864,7 +890,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -884,7 +910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/drush/" class="md-nav__link">
+      <a href="../../drush/" class="md-nav__link">
         
   
   
@@ -912,7 +938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/elasticsearch/" class="md-nav__link">
+      <a href="../../elasticsearch/" class="md-nav__link">
         
   
   
@@ -940,7 +966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/net_info/" class="md-nav__link">
+      <a href="../../net_info/" class="md-nav__link">
         
   
   
@@ -968,7 +994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/nginx/" class="md-nav__link">
+      <a href="../../nginx/" class="md-nav__link">
         
   
   
@@ -996,7 +1022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/solr/" class="md-nav__link">
+      <a href="../../solr/" class="md-nav__link">
         
   
   
@@ -1024,7 +1050,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/varnish/" class="md-nav__link">
+      <a href="../../varnish/" class="md-nav__link">
         
   
   
@@ -1049,6 +1075,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1074,15 +1102,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/hacks/bash/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -1106,7 +1134,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1126,7 +1154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/bash/emacs_mode/" class="md-nav__link">
+      <a href="../emacs_mode/" class="md-nav__link">
         
   
   
@@ -1154,7 +1182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/bash/find/" class="md-nav__link">
+      <a href="../find/" class="md-nav__link">
         
   
   
@@ -1179,10 +1207,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/deck/hacks/bash/parallel/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash Parallel
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1198,6 +1253,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#wait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        &amp; + wait
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bounded-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bounded parallelism
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gnu-parallel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GNU parallel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#named-pipes-fan-out-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        named pipes (fan-out + sync)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coproc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        coproc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1210,7 +1351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/bash/rsync/" class="md-nav__link">
+      <a href="../rsync/" class="md-nav__link">
         
   
   
@@ -1238,7 +1379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/bash/ssh/" class="md-nav__link">
+      <a href="../ssh/" class="md-nav__link">
         
   
   
@@ -1266,7 +1407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/bash/user/" class="md-nav__link">
+      <a href="../user/" class="md-nav__link">
         
   
   
@@ -1326,7 +1467,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/hacks/databases/" class="md-nav__link ">
+            <a href="../../databases/" class="md-nav__link ">
               
   
   
@@ -1370,7 +1511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/databases/mariadb/" class="md-nav__link">
+      <a href="../../databases/mariadb/" class="md-nav__link">
         
   
   
@@ -1398,7 +1539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/databases/mysql/" class="md-nav__link">
+      <a href="../../databases/mysql/" class="md-nav__link">
         
   
   
@@ -1426,7 +1567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/databases/postgresql/" class="md-nav__link">
+      <a href="../../databases/postgresql/" class="md-nav__link">
         
   
   
@@ -1480,7 +1621,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/hacks/gcp/" class="md-nav__link ">
+            <a href="../../gcp/" class="md-nav__link ">
               
   
   
@@ -1547,7 +1688,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/hacks/git/" class="md-nav__link ">
+            <a href="../../git/" class="md-nav__link ">
               
   
   
@@ -1591,7 +1732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/git/git_cicd/" class="md-nav__link">
+      <a href="../../git/git_cicd/" class="md-nav__link">
         
   
   
@@ -1649,7 +1790,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/hacks/kubernetes/" class="md-nav__link ">
+            <a href="../../kubernetes/" class="md-nav__link ">
               
   
   
@@ -1693,7 +1834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/kubernetes/helm/" class="md-nav__link">
+      <a href="../../kubernetes/helm/" class="md-nav__link">
         
   
   
@@ -1721,7 +1862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/hacks/kubernetes/kubectl/" class="md-nav__link">
+      <a href="../../kubernetes/kubectl/" class="md-nav__link">
         
   
   
@@ -1775,7 +1916,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/hacks/vim/" class="md-nav__link ">
+            <a href="../../vim/" class="md-nav__link ">
               
   
   
@@ -1863,7 +2004,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/net/" class="md-nav__link ">
+            <a href="../../../net/" class="md-nav__link ">
               
   
   
@@ -1907,7 +2048,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/net/dds/" class="md-nav__link">
+      <a href="../../../net/dds/" class="md-nav__link">
         
   
   
@@ -1935,7 +2076,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/net/dns/" class="md-nav__link">
+      <a href="../../../net/dns/" class="md-nav__link">
         
   
   
@@ -1963,7 +2104,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/net/http/" class="md-nav__link">
+      <a href="../../../net/http/" class="md-nav__link">
         
   
   
@@ -1991,7 +2132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/net/mqtt/" class="md-nav__link">
+      <a href="../../../net/mqtt/" class="md-nav__link">
         
   
   
@@ -2019,7 +2160,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/net/osi_model/" class="md-nav__link">
+      <a href="../../../net/osi_model/" class="md-nav__link">
         
   
   
@@ -2047,7 +2188,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/net/snmp/" class="md-nav__link">
+      <a href="../../../net/snmp/" class="md-nav__link">
         
   
   
@@ -2075,7 +2216,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/net/tcp_ip_model/" class="md-nav__link">
+      <a href="../../../net/tcp_ip_model/" class="md-nav__link">
         
   
   
@@ -2103,7 +2244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/net/tls/" class="md-nav__link">
+      <a href="../../../net/tls/" class="md-nav__link">
         
   
   
@@ -2160,7 +2301,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/py/" class="md-nav__link ">
+            <a href="../../../py/" class="md-nav__link ">
               
   
   
@@ -2204,7 +2345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/py/coding_guidelines/" class="md-nav__link">
+      <a href="../../../py/coding_guidelines/" class="md-nav__link">
         
   
   
@@ -2232,7 +2373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/py/project_skeleton/" class="md-nav__link">
+      <a href="../../../py/project_skeleton/" class="md-nav__link">
         
   
   
@@ -2289,7 +2430,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/unix/" class="md-nav__link ">
+            <a href="../../../unix/" class="md-nav__link ">
               
   
   
@@ -2333,7 +2474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/unix/load_average/" class="md-nav__link">
+      <a href="../../../unix/load_average/" class="md-nav__link">
         
   
   
@@ -2381,7 +2522,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="/deck/unix/math/" class="md-nav__link ">
+            <a href="../../../unix/math/" class="md-nav__link ">
               
   
   
@@ -2425,7 +2566,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/deck/unix/math/ewma/" class="md-nav__link">
+      <a href="../../../unix/math/ewma/" class="md-nav__link">
         
   
   
@@ -2478,6 +2619,82 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#wait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        &amp; + wait
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bounded-parallelism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        bounded parallelism
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gnu-parallel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GNU parallel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#named-pipes-fan-out-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        named pipes (fan-out + sync)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coproc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        coproc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2490,8 +2707,144 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">bash</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">linux</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">parallel</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<h1 id="bash-parallel">bash parallel</h1>
+<p>Run multiple commands simultaneously from bash. No external orchestration — just shell primitives.</p>
+<h2 id="wait">&amp; + wait</h2>
+<p>Background each job, prefix output with label, wait for all:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">MODELS</span><span class="o">=(</span>gemma4:31b<span class="w"> </span>gemma4:e4b<span class="w"> </span>gemma4:e2b<span class="o">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">for</span><span class="w"> </span>m<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">MODELS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>ollama<span class="w"> </span>pull<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$m</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/^/[</span><span class="nv">$m</span><span class="s2">] /&quot;</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">done</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">wait</span>
+</code></pre></div>
+<p>Same pattern for ssh:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">SERVERS</span><span class="o">=(</span>web1<span class="w"> </span>web2<span class="w"> </span>web3<span class="o">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;apt update &amp;&amp; apt upgrade -y&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">for</span><span class="w"> </span>host<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SERVERS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span>ssh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$host</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CMD</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/^/[</span><span class="nv">$host</span><span class="s2">] /&quot;</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">done</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">wait</span>
+</code></pre></div>
+<h2 id="bounded-parallelism">bounded parallelism</h2>
+<p>Don't spawn unlimited jobs — cap with <code>wait -n</code> (bash 4.3+):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">N</span><span class="o">=</span><span class="m">3</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">for</span><span class="w"> </span>m<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">MODELS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span>ollama<span class="w"> </span>pull<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$m</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="o">((</span><span class="w"> </span><span class="k">$(</span><span class="nb">jobs</span><span class="w"> </span>-r<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span>&gt;<span class="o">=</span><span class="w"> </span>N<span class="w"> </span><span class="o">))</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">wait</span><span class="w"> </span>-n
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">done</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nb">wait</span>
+</code></pre></div>
+<h2 id="gnu-parallel">GNU parallel</h2>
+<p>Cleaner syntax, same result:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>parallel<span class="w"> </span>ollama<span class="w"> </span>pull<span class="w"> </span>:::<span class="w"> </span>gemma4:31b<span class="w"> </span>gemma4:e4b<span class="w"> </span>gemma4:e2b
+</code></pre></div>
+<p>With real-time output and labels:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">MODELS</span><span class="o">=(</span>gemma4:31b<span class="w"> </span>gemma4:e4b<span class="w"> </span>gemma4:e2b<span class="o">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>parallel<span class="w"> </span>--tag<span class="w"> </span>--line-buffer<span class="w"> </span>ollama<span class="w"> </span>pull<span class="w"> </span>:::<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">MODELS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p><code>--line-buffer</code> — streams output line by line instead of buffering until job completion.<br />
+<code>--tag</code> — prefixes each line with the job argument.</p>
+<h2 id="named-pipes-fan-out-sync">named pipes (fan-out + sync)</h2>
+<p>Use FIFOs as signals between parallel processes. Three phases — create, fan out, sync:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">IMAGE</span><span class="o">=</span><span class="s2">&quot;myapp:1.0&quot;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">REGISTRIES</span><span class="o">=(</span>registry1.io<span class="w"> </span>registry2.io<span class="o">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 1. create signal pipes</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">for</span><span class="w"> </span>reg<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGISTRIES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span>mkfifo<span class="w"> </span><span class="s2">&quot;/tmp/</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">.fifo&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">done</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># 2. fan out — each job signals done via its pipe</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="k">for</span><span class="w"> </span>reg<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGISTRIES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="o">(</span>docker<span class="w"> </span>push<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">IMAGE</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;/tmp/</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">.fifo&quot;</span><span class="o">)</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="k">done</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1"># 3. sync — block until each pipe signals</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="k">for</span><span class="w"> </span>reg<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGISTRIES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span>cat<span class="w"> </span><span class="s2">&quot;/tmp/</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">.fifo&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span>rm<span class="w"> </span><span class="s2">&quot;/tmp/</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">.fifo&quot;</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="k">done</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>trigger_webhook<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IMAGE</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>Collapsed into one loop — each iteration owns its pipe lifecycle (create → use → cleanup):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">for</span><span class="w"> </span>reg<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">REGISTRIES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>mkfifo<span class="w"> </span><span class="s2">&quot;/tmp/</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">.fifo&quot;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="o">(</span>docker<span class="w"> </span>push<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">IMAGE</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;/tmp/</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">.fifo&quot;</span><span class="o">)</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="o">(</span>cat<span class="w"> </span><span class="s2">&quot;/tmp/</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">.fifo&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span><span class="s2">&quot;/tmp/</span><span class="si">${</span><span class="nv">reg</span><span class="si">}</span><span class="s2">.fifo&quot;</span><span class="o">)</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">done</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nb">wait</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>trigger_webhook<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IMAGE</span><span class="s2">&quot;</span>
+</code></pre></div>
+<h2 id="coproc">coproc</h2>
+<p>Bidirectional channel to a persistent background process:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>coproc<span class="w"> </span>PROC<span class="w"> </span><span class="o">{</span><span class="w"> </span>python3<span class="w"> </span>-u<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="s2">import sys</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="s2">for line in sys.stdin:</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s2">    print(line.strip().upper())</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s2">    sys.stdout.flush()</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PROC</span><span class="p">[1]</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="nb">read</span><span class="w"> </span>result<span class="w"> </span>&lt;<span class="p">&amp;</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PROC</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$result</span><span class="s2">&quot;</span><span class="w">  </span><span class="c1"># HELLO</span>
+</code></pre></div>
+<p>Use when you need to keep a long-running process alive and pass data back and forth — interactive CLI, database, language server.</p>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="../">bash</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -2509,6 +2862,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../find/" class="md-footer__link md-footer__link--prev" aria-label="Previous: find">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                find
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../rsync/" class="md-footer__link md-footer__link--next" aria-label="Next: rsync">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                rsync
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -2619,15 +3010,15 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/deck/", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "/deck/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
   
-      <script src="/deck/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="/deck/javascripts/mathjax.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
       
-        <script src="/deck/assets/external/unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../../assets/external/unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
 
