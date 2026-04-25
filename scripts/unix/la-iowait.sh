@@ -11,14 +11,6 @@
 
 set -euo pipefail
 
-SERVERS=(
-    server01
-    server02
-    server03
-    server04
-    server05
-)
-
 SSH_USER=${SSH_USER:-}
 SSH_KEY=${SSH_KEY:-}
 
@@ -61,48 +53,86 @@ state() {
     fi
 }
 
-# collect — SSH into host, format one result row, write it to the pipe.
+# collect — SSH into host, write tab-separated raw fields to the pipe.
 # Mirrors: async def collect(host, queue) in Python.
-# Writing to the named pipe ≡ await queue.put(metrics)
+# Writes raw data so display() can sort and format with dynamic column widths.
+# Error rows use la1=-1 so sort puts them last in descending order.
 collect() {
     local host=$1 pipe=$2
     local -a cmd; ssh_cmd cmd "$host"
     local out
 
-    if ! out=$("${cmd[@]}" bash -s <<< "$REMOTE" 2>/dev/null); then
-        printf '%-16s  UNREACHABLE\n' "$host" > "$pipe"
+    if ! out=$("${cmd[@]}" bash -s <<< "$REMOTE" 2>/dev/null) || [[ -z "$out" ]]; then
+        printf '%s\t0\t-1\t-1\t-1\t0\t0\t0\t0\tERROR\n' "$host" > "$pipe"
         return
     fi
 
     read -r nproc la1 la5 la15 cpu iowait r b <<< "$out"
-    local s; s=$(state "$la1" "$nproc")
-
-    # one formatted line per host — ≡ await queue.put(metrics)
-    printf '%-16s  %s%%   %-5s  %-5s/%-5s/%-6s  %s%%    %-4s  %-4s  [%s]\n' \
-        "$host" "$cpu" "$nproc" "$la1" "$la5" "$la15" "$iowait" "$r" "$b" "$s" \
+    printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n' \
+        "$host" "$nproc" "$la1" "$la5" "$la15" "$cpu" "$iowait" "$r" "$b" \
         > "$pipe"
 }
 
-# display — print header then stream rows from the pipe as they arrive.
-# Mirrors: async def display(queue, total) in Python.
-# Each read blocks until a collector writes — ≡ m = await queue.get()
+# display — collect all raw lines, sort by la1 descending, format with dynamic widths.
+# Mirrors: def display(results, sort_by) in Python.
+# Reads raw TSV from the pipe (blocks until all collectors write + parent closes fd 3).
 display() {
     local pipe=$1
+    local -a raw=()
 
-    printf '%-16s  %-5s  %-5s  %-18s  %-7s  %-4s  %-4s  %s\n' \
-        "host" "cpu" "nproc" "la1/la5/la15" "iowait" "r" "b" "state"
-    printf '%0.s─' {1..82}; printf '\n'
-
-    # blocks on each read until a producer writes; exits when all writers close
-    # ≡ m = await queue.get()  (repeated until queue is drained)
+    # collect all raw TSV lines — ≡ results = [queue.get_nowait() for _ in servers]
     while IFS= read -r line; do
-        printf '%s\n' "$line"
+        raw+=("$line")
     done < "$pipe"
+
+    # sort by la1 (field 3, tab-separated) descending; errors (la1=-1) go last
+    local sorted
+    sorted=$(printf '%s\n' "${raw[@]}" | LC_ALL=C sort -t$'\t' -k4,4gr)
+
+    # compute max width for each column (header lengths are the minimums)
+    local w_host=4 w_cpu=3 w_nproc=5 w_la=13 w_iowait=6 w_r=1 w_b=1
+    while IFS=$'\t' read -r host nproc la1 la5 la15 cpu iowait r b status; do
+        [[ -z "$host" ]] && continue
+        local la="${la1}/${la5}/${la15}"
+        local cpu_s="${cpu}%" iowait_s="${iowait}%"
+        (( ${#host}     > w_host   )) && w_host=${#host}
+        (( ${#cpu_s}    > w_cpu    )) && w_cpu=${#cpu_s}
+        (( ${#nproc}    > w_nproc  )) && w_nproc=${#nproc}
+        (( ${#la}       > w_la     )) && w_la=${#la}
+        (( ${#iowait_s} > w_iowait )) && w_iowait=${#iowait_s}
+        (( ${#r}        > w_r      )) && w_r=${#r}
+        (( ${#b}        > w_b      )) && w_b=${#b}
+    done <<< "$sorted"
+
+    local total=$(( w_host + 2 + w_cpu + 2 + w_nproc + 2 + w_la + 2 + w_iowait + 2 + w_r + 2 + w_b + 2 + 5 ))
+
+    printf "%-${w_host}s  %-${w_cpu}s  %-${w_nproc}s  %-${w_la}s  %-${w_iowait}s  %-${w_r}s  %-${w_b}s  %s\n" \
+        "host" "cpu" "nproc" "la1/la5↓/la15" "iowait" "r" "b" "state"
+    printf '%.0s─' $(seq 1 "$total"); printf '\n'
+
+    while IFS=$'\t' read -r host nproc la1 la5 la15 cpu iowait r b status; do
+        [[ -z "$host" ]] && continue
+        if [[ "$status" == "ERROR" ]]; then
+            printf "%-${w_host}s  UNREACHABLE\n" "$host"
+            continue
+        fi
+        local s; s=$(state "$la1" "$nproc")
+        local la="${la1}/${la5}/${la15}"
+        printf "%-${w_host}s  %-${w_cpu}s  %-${w_nproc}s  %-${w_la}s  %-${w_iowait}s  %-${w_r}s  %-${w_b}s  [%s]\n" \
+            "$host" "${cpu}%" "$nproc" "$la" "${iowait}%" "$r" "$b" "$s"
+    done <<< "$sorted"
 }
 
 # main — fan-out: one collector per server, shared named pipe, one display consumer.
 # Mirrors: async def main() in Python.
 main() {
+    local servers_file=${1:?usage: $0 <servers-file>}
+    local -a SERVERS=()
+    while IFS= read -r line || [[ -n "$line" ]]; do
+        [[ -z "$line" || "$line" == \#* ]] && continue
+        SERVERS+=("$line")
+    done < "$servers_file"
+
     local tmpdir pipe
     tmpdir=$(mktemp -d)
     pipe="$tmpdir/results"
@@ -136,4 +166,4 @@ main() {
     wait "$display_pid"
 }
 
-main
+main "$@"
