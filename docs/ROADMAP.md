@@ -34,8 +34,12 @@ Randomness that the kernel depends on.
 
 ### Phase 3 — Scheduling
 
-How the kernel decides who runs next.
+How the kernel and platform control planes decide where work runs next.
 
+- [x] **Simulated annealing** — workload placement across constrained nodes
+  - script: `scripts/unix/simulated_annealing.py`
+  - note: `core/unix/math/simulated_annealing.md`
+  - math: stochastic optimization, Metropolis acceptance, geometric cooling
 - [ ] **CFS virtual runtime** — Completely Fair Scheduler, weight-based time slices
   - math: logarithmic functions, priority queues, fairness (min-max)
 - [ ] **Queueing theory** — M/M/1, M/D/1: latency, throughput, utilisation
@@ -76,10 +80,11 @@ Bit-level arithmetic in Unix.
 
 ## Dependency map
 
-```
+```text
 EWMA
  └─► Poisson ──► CFS ──► Queueing ──► TCP CUBIC
        └─► Entropy           └─► CRC
+              └─► Annealing
                         └─► B-tree ──► Buddy
                               └─► chmod (bitmask)
 ```

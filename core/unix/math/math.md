@@ -14,3 +14,5 @@ like a proof.
 ## Topics
 
 - [EWMA](ewma.md) — exponential weighted moving average: load average, TCP smoothing
+- [Simulated Annealing](simulated_annealing.md) — stochastic optimization:
+  workload placement and cooling schedules
