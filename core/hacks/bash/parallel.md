@@ -127,6 +127,13 @@ echo "$result"  # HELLO
 
 Use when you need to keep a long-running process alive and pass data back and forth — interactive CLI, database, language server.
 
+## Practical example
+
+[`scripts/unix/la_iowait.sh`](https://github.com/searge/deck/blob/main/scripts/unix/la_iowait.sh)
+uses background SSH collectors and one shared FIFO to build a sorted fleet
+health table. See [Load Average](unix/load_average.md) for the metrics,
+input format, and the equivalent `asyncio` implementation.
+
 ## See also
 
 - [bash](bash.md)

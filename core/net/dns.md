@@ -103,4 +103,4 @@ dig example.com | grep -E '^\w'
 
 ## See also
 
-- [net_info](../hacks/net_info.md)
+- [net_info](hacks/net_info.md)

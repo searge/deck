@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-# Parallel runner health-check.
+# Parallel host load and I/O-wait health-check.
 #
-# Same fan-out pattern as check-runners.py, using bash primitives:
+# Companion note: core/unix/load_average.md
+# Python counterpart: scripts/unix/la_iowait.py
+#
+# Same fan-out pattern as the Python version, using Bash primitives:
 #
 #   Named pipe (FIFO)          ≡  asyncio.Queue
 #   printf '…' > "$pipe"      ≡  await queue.put(metrics)
@@ -13,6 +16,13 @@ set -euo pipefail
 
 SSH_USER=${SSH_USER:-}
 SSH_KEY=${SSH_KEY:-}
+tmpdir=
+
+cleanup() {
+    [[ -z "$tmpdir" ]] || rm -rf -- "$tmpdir"
+}
+
+trap cleanup EXIT
 
 # Script executed on the remote host — matches fields of Metrics dataclass in Python.
 # Single-quoted heredoc: no local expansion; variables expand on the remote side.
@@ -45,35 +55,48 @@ ssh_cmd() {
 # Mirrors: Metrics.state property in Python.
 state() {
     local la1=$1 nproc=$2
-    local util
-    util=$(awk "BEGIN { printf \"%d\", ($la1 / $nproc) * 100 }")
-    if   (( util <  70 )); then echo "ok"
-    elif (( util <= 100 )); then echo "saturated"
-    else                         echo "OVERLOADED"
-    fi
+    awk -v la1="$la1" -v nproc="$nproc" 'BEGIN {
+        util = (la1 / nproc) * 100
+        if (util < 70) print "ok"
+        else if (util <= 100) print "saturated"
+        else print "OVERLOADED"
+    }'
 }
 
 # collect — SSH into host, write tab-separated raw fields to the pipe.
 # Mirrors: async def collect(host, queue) in Python.
 # Writes raw data so display() can sort and format with dynamic column widths.
-# Error rows use la1=-1 so sort puts them last in descending order.
+# Error rows use la5=-1 so sort puts them last in descending order.
 collect() {
     local host=$1 pipe=$2
     local -a cmd; ssh_cmd cmd "$host"
     local out
 
     if ! out=$("${cmd[@]}" bash -s <<< "$REMOTE" 2>/dev/null) || [[ -z "$out" ]]; then
-        printf '%s\t0\t-1\t-1\t-1\t0\t0\t0\t0\tERROR\n' "$host" > "$pipe"
+        printf '%s\t0\t-1\t-1\t-1\t0\t0\t0\t0\tUNREACHABLE\n' \
+            "$host" > "$pipe"
         return
     fi
 
-    read -r nproc la1 la5 la15 cpu iowait r b <<< "$out"
+    local nproc la1 la5 la15 cpu iowait r b extra
+    read -r nproc la1 la5 la15 cpu iowait r b extra <<< "$out"
+    if [[ -n "$extra" || ! "$nproc" =~ ^[1-9][0-9]*$ ||
+          ! "$la1" =~ ^[0-9]+([.][0-9]+)?$ ||
+          ! "$la5" =~ ^[0-9]+([.][0-9]+)?$ ||
+          ! "$la15" =~ ^[0-9]+([.][0-9]+)?$ ||
+          ! "$cpu" =~ ^[0-9]+$ || ! "$iowait" =~ ^[0-9]+$ ||
+          ! "$r" =~ ^[0-9]+$ || ! "$b" =~ ^[0-9]+$ ]]; then
+        printf '%s\t0\t-1\t-1\t-1\t0\t0\t0\t0\tINVALID_METRICS\n' \
+            "$host" > "$pipe"
+        return
+    fi
+
     printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n' \
         "$host" "$nproc" "$la1" "$la5" "$la15" "$cpu" "$iowait" "$r" "$b" \
         > "$pipe"
 }
 
-# display — collect all raw lines, sort by la1 descending, format with dynamic widths.
+# display — collect all raw lines, sort by la5 descending, format with dynamic widths.
 # Mirrors: def display(results, sort_by) in Python.
 # Reads raw TSV from the pipe (blocks until all collectors write + parent closes fd 3).
 display() {
@@ -85,7 +108,7 @@ display() {
         raw+=("$line")
     done < "$pipe"
 
-    # sort by la1 (field 3, tab-separated) descending; errors (la1=-1) go last
+    # sort by la5 (field 4, tab-separated) descending; errors (la5=-1) go last
     local sorted
     sorted=$(printf '%s\n' "${raw[@]}" | LC_ALL=C sort -t$'\t' -k4,4gr)
 
@@ -112,8 +135,8 @@ display() {
 
     while IFS=$'\t' read -r host nproc la1 la5 la15 cpu iowait r b status; do
         [[ -z "$host" ]] && continue
-        if [[ "$status" == "ERROR" ]]; then
-            printf "%-${w_host}s  UNREACHABLE\n" "$host"
+        if [[ -n "$status" ]]; then
+            printf "%-${w_host}s  %s\n" "$host" "${status//_/ }"
             continue
         fi
         local s; s=$(state "$la1" "$nproc")
@@ -127,16 +150,23 @@ display() {
 # Mirrors: async def main() in Python.
 main() {
     local servers_file=${1:?usage: $0 <servers-file>}
-    local -a SERVERS=()
+    local -a servers=()
+    local line
     while IFS= read -r line || [[ -n "$line" ]]; do
+        line=${line#"${line%%[![:space:]]*}"}
+        line=${line%"${line##*[![:space:]]}"}
         [[ -z "$line" || "$line" == \#* ]] && continue
-        SERVERS+=("$line")
+        servers+=("$line")
     done < "$servers_file"
 
-    local tmpdir pipe
+    if (( ${#servers[@]} == 0 )); then
+        printf 'no servers found in %s\n' "$servers_file" >&2
+        return 1
+    fi
+
+    local pipe
     tmpdir=$(mktemp -d)
     pipe="$tmpdir/results"
-    trap "rm -rf '$tmpdir'" EXIT
     mkfifo "$pipe"
 
     # Start display first — opens the read end of the pipe
@@ -151,9 +181,9 @@ main() {
 
     # Spawn one collector per server — ≡ asyncio.create_task(collect(host, queue))
     local pids=()
-    for host in "${SERVERS[@]}"; do
+    for host in "${servers[@]}"; do
         collect "$host" "$pipe" &
-        pids+=($!)
+        pids+=("$!")
     done
 
     # Wait for all collectors — ≡ await asyncio.gather(*collectors)

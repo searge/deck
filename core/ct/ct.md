@@ -250,8 +250,8 @@ cat rootfs.tar | docker import - myimage:latest
 
 ## See also
 
-- [osi_model](../net/osi_model.md)
-- [tcp_ip_model](../net/tcp_ip_model.md)
+- [osi_model](net/osi_model.md)
+- [tcp_ip_model](net/tcp_ip_model.md)
 
 ## References
 

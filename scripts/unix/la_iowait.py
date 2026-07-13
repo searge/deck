@@ -1,30 +1,27 @@
 #!/usr/bin/env python3
-"""Parallel runner health-check.
+"""Parallel host load and I/O-wait health-check.
 
-Pattern from the article on named pipes:
-  - producers (SSH collectors) write results into a queue
-  - consumer (display) blocks on queue.get() until data arrives
-  - N tasks run concurrently, one per server
+Companion note: core/unix/load_average.md
+Bash counterpart: scripts/unix/la_iowait.sh
 
-asyncio.Queue  ≡  named pipe (FIFO)
-queue.put()    ≡  echo ${i} >&3          (producer writes to pipe)
-queue.get()    ≡  xargs -n1 -I{} …      (consumer reads from pipe)
-task per host  ≡  background worker (&)
+The collectors run concurrently, one per host, and put their results into an
+unbounded asyncio.Queue. After all collectors finish, main drains and sorts the
+queue. The Bash version carries the same records through a named pipe (FIFO).
 """
 
+import argparse
 import asyncio
 import os
-import sys
 from dataclasses import dataclass
+
+SORT_FIELDS = ("la1", "la5", "la15", "cpu", "iowait", "r", "b")
 
 
 def load_servers(path: str) -> list[str]:
-    with open(path) as f:
-        return [
-            line.strip()
-            for line in f
-            if line.strip() and not line.startswith("#")
-        ]
+    """Load SSH hosts or aliases, ignoring blank lines and comments."""
+    with open(path, encoding="utf-8") as file:
+        lines = (line.strip() for line in file)
+        return [line for line in lines if line and not line.startswith("#")]
 
 
 # Collected on the remote host via a single SSH call.
@@ -83,12 +80,12 @@ def ssh_cmd(host: str) -> list[str]:
     return args
 
 
-async def collect(host: str, queue: asyncio.Queue) -> None:
+async def collect(host: str, queue: asyncio.Queue[Metrics]) -> None:
     """SSH into host, gather metrics, push one Metrics object into the queue.
 
     Mirrors the bash build-worker that runs in the background (&) and
-    writes each result to a named pipe. The queue never fills up here
-    because the consumer drains it concurrently on the other side.
+    writes each result to a named pipe. The queue is unbounded; main drains it
+    after all collectors finish.
     """
     proc = await asyncio.create_subprocess_exec(
         *ssh_cmd(host),
@@ -114,9 +111,9 @@ async def collect(host: str, queue: asyncio.Queue) -> None:
         )
         return
 
-    nproc, la1, la5, la15, cpu, iowait, r, b = stdout.decode().split()
-    await queue.put(
-        Metrics(
+    try:
+        nproc, la1, la5, la15, cpu, iowait, r, b = stdout.decode().split()
+        metrics = Metrics(
             host=host,
             nproc=int(nproc),
             la1=float(la1),
@@ -127,7 +124,21 @@ async def collect(host: str, queue: asyncio.Queue) -> None:
             r=int(r),
             b=int(b),
         )
-    )
+    except (UnicodeDecodeError, ValueError):
+        metrics = Metrics(
+            host=host,
+            nproc=1,
+            la1=0,
+            la5=0,
+            la15=0,
+            cpu=0,
+            iowait=0,
+            r=0,
+            b=0,
+            error="INVALID METRICS",
+        )
+
+    await queue.put(metrics)
 
 
 def _fmt(m: Metrics) -> tuple[str, ...]:
@@ -177,6 +188,7 @@ def display(results: list[Metrics], sort_by: str = "la1") -> None:
         max(len(h), max((len(r[i]) for r in rows), default=0))
         for i, h in enumerate(headers)
     ]
+    widths[0] = max(widths[0], max((len(m.host) for m in errors), default=0))
 
     sep = "─" * (sum(widths) + 2 * (len(widths) - 1))
     fmt = "  ".join(f"{{:<{w}}}" for w in widths)
@@ -186,7 +198,7 @@ def display(results: list[Metrics], sort_by: str = "la1") -> None:
     for row in rows:
         print(fmt.format(*row))
     for m in errors:
-        print(f"{m.host}  {m.error}")
+        print(f"{m.host:<{widths[0]}}  {m.error}")
 
 
 async def main() -> None:
@@ -196,13 +208,20 @@ async def main() -> None:
     Results are collected, sorted, then displayed with dynamic column widths.
     Total wall time ≈ slowest single SSH call, not sum of all calls.
     """
-    if len(sys.argv) < 2:
-        print(
-            f"usage: {sys.argv[0]} <servers-file> [sort-by]", file=sys.stderr
-        )
-        sys.exit(1)
-    servers = load_servers(sys.argv[1])
-    sort_by = sys.argv[2] if len(sys.argv) > 2 else "la5"
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("servers_file", help="one SSH host or alias per line")
+    parser.add_argument(
+        "sort_by",
+        choices=SORT_FIELDS,
+        default="la5",
+        nargs="?",
+        help="metric to sort descending (default: la5)",
+    )
+    args = parser.parse_args()
+
+    servers = load_servers(args.servers_file)
+    if not servers:
+        parser.error(f"no servers found in {args.servers_file}")
 
     queue: asyncio.Queue[Metrics] = asyncio.Queue()
 
@@ -214,7 +233,7 @@ async def main() -> None:
     # wait for all collectors, then drain the queue synchronously
     await asyncio.gather(*collectors)
     results = [queue.get_nowait() for _ in servers]
-    display(results, sort_by)
+    display(results, args.sort_by)
 
 
 if __name__ == "__main__":

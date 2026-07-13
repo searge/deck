@@ -260,7 +260,7 @@ def trace_ewma(
     label = f"{window_seconds // 60}min"
 
     print(f"EWMA step-by-step  ({label} window)\n")
-    print(f"  formula : new = old × α  +  queue × (1 − α)")
+    print("  formula : new = old × α  +  queue × (1 − α)")
     print(f"  α       = exp(−5 / {window_seconds})  = {alpha:.6f}   ← weight on history")
     print(f"  1 − α   =                   {1 - alpha:.6f}   ← weight on current queue")
     print()

@@ -86,4 +86,4 @@ curl -o /dev/null -s -w "\
 
 - [tls](tls.md)
 - [dns](dns.md)
-- [nginx](../hacks/nginx.md)
+- [nginx](hacks/nginx.md)

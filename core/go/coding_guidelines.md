@@ -376,5 +376,5 @@ go tool cover -func=coverage.out
 - [Standard Go Project Layout](https://github.com/golang-standards/project-layout)
 - [charmbracelet/lipgloss](https://github.com/charmbracelet/lipgloss)
 - [spf13/cobra](https://github.com/spf13/cobra)
-- [Python Guidelines](../py/coding_guidelines.md) -- same principles, Python context
+- [Python Guidelines](py/coding_guidelines.md) -- same principles, Python context
 - [Project Skeleton](project_skeleton.md) -- directory layout and scaffold

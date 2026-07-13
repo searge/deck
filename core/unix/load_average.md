@@ -35,7 +35,7 @@ $$
 $$
 
 | Normalized LA | State |
-|:---:|---|
+| :---: | --- |
 | \(< 0.7\) | Healthy — headroom available |
 | \(\approx 1.0\) | Saturated — fully loaded, no slack |
 | \(> 1.0\) | Overloaded — processes waiting |
@@ -53,7 +53,7 @@ nproc
 This is where the platforms diverge:
 
 | | Linux | BSD / macOS |
-|---|---|---|
+| --- | --- | --- |
 | Run queue (R state) | ✅ included | ✅ included |
 | Uninterruptible sleep (D state) | ✅ included | ❌ not included |
 | I/O wait inflates LA | yes | no |
@@ -127,11 +127,50 @@ watch -n 1 "ps aux | awk '\$8 ~ /^D/'"
 check for NFS hangs or network-backed mounts.
 
 > [!tip] CPU-bound vs I/O-bound — quick rule
-> ```
+>
+> ```text
 > high LA + low %wa  →  CPU-bound
 > high LA + high %wa →  I/O-bound (Linux only)
 > ```
+>
 > On BSD / macOS the distinction is simpler: high LA always means CPU pressure.
+
+## Parallel Fleet Snapshot
+
+The repository includes equivalent Python and Bash implementations of the
+diagnosis workflow for a list of SSH hosts:
+
+- [`la_iowait.py`](https://github.com/searge/deck/blob/main/scripts/unix/la_iowait.py)
+  uses one `asyncio` task per host and passes results through an
+  `asyncio.Queue`;
+- [`la_iowait.sh`](https://github.com/searge/deck/blob/main/scripts/unix/la_iowait.sh)
+  uses background jobs and a FIFO, applying the pattern from
+  [Bash Parallel](hacks/bash/parallel.md).
+
+The input file contains one SSH host or `~/.ssh/config` alias per line. Blank
+lines and lines beginning with `#` are ignored.
+
+```text title="servers.txt"
+runner-01
+runner-02
+# runner-maintenance
+```
+
+```bash
+# Default: sort by 5-minute load average
+uv run python scripts/unix/la_iowait.py servers.txt
+
+# Other Python sort keys: la1, la15, cpu, iowait, r, b
+uv run python scripts/unix/la_iowait.py servers.txt iowait
+
+# Bash version always sorts by la5
+bash scripts/unix/la_iowait.sh servers.txt
+```
+
+Both versions honor `SSH_USER` and `SSH_KEY`; otherwise `ssh` uses its normal
+configuration and agent. Remote Linux hosts need `nproc`, `vmstat`, and `awk`.
+The `state` column is based on `la1 / nproc`, while the default `la5` ordering
+keeps short spikes from dominating the list.
 
 ## Quick Reference
 
