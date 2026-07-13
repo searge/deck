@@ -13,4 +13,5 @@ understanding what's actually happening under the hood.
 ## Topics
 
 - [Load Average](load_average.md) — what LA really is, Linux vs BSD/macOS, how to interpret it
+- [Search](search/search.md) — fixed strings, regex engines, and userland tool internals
 - [Math](math/math.md) — mathematical concepts behind Linux internals
