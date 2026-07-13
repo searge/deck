@@ -21,7 +21,7 @@ DDS excels in distributed systems: autonomous vehicles, industrial automation, a
 ## DDS vs MQTT
 
 | Aspect | DDS | MQTT |
-|--------|-----|------|
+| ------ | --- | ---- |
 | Architecture | Peer-to-peer (brokerless) | Client-broker |
 | Discovery | Automatic | Manual (broker address) |
 | Data model | Typed, keyed data | Opaque byte payloads |
@@ -79,7 +79,10 @@ DDS defines 22+ QoS policies. Key ones:
 
 **Liveliness:** Detect dead writers. Manual or automatic heartbeat.
 
-QoS must be compatible between writer and reader. Mismatched QoS (e.g., reliable writer, best-effort reader) prevents communication — the middleware refuses the connection.
+QoS must be compatible between writer and reader. DDS uses a requested/offered
+model: a reliable writer can satisfy a best-effort reader, but a best-effort
+writer cannot satisfy a reader that requests reliable delivery. Incompatible
+endpoints are not matched.
 
 ## RTPS wire protocol
 
@@ -128,7 +131,7 @@ export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 ### ROS2 concepts mapped to DDS
 
 | ROS2 | DDS |
-|------|-----|
+| ---- | --- |
 | Node | Participant (often) |
 | Publisher | DataWriter |
 | Subscriber | DataReader |
@@ -324,6 +327,7 @@ For high-bandwidth data (images, point clouds):
 
 ## See also
 
+- [Boids over DDS](boids_dds.md)
 - [mqtt](mqtt.md)
 - [tcp_ip_model](tcp_ip_model.md)
 

@@ -29,3 +29,4 @@ plumbing that holds the net together.
 ## Distributed systems
 
 - [consensus](consensus.md)
+- [Boids over DDS](boids_dds.md)
