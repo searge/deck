@@ -85,6 +85,10 @@
          <lastmod>2026-07-13</lastmod>
     </url>
     <url>
+         <loc>https://searge.pp.ua/deck/hacks/bash/grep/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
          <loc>https://searge.pp.ua/deck/hacks/bash/parallel/</loc>
          <lastmod>2026-07-13</lastmod>
     </url>
@@ -142,6 +146,10 @@
     </url>
     <url>
          <loc>https://searge.pp.ua/deck/hacks/vim/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/net/boids_dds/</loc>
          <lastmod>2026-07-13</lastmod>
     </url>
     <url>
@@ -210,6 +218,42 @@
     </url>
     <url>
          <loc>https://searge.pp.ua/deck/unix/math/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/unix/math/simulated_annealing/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/unix/search/aho_corasick/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/unix/search/boyer_moore/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/unix/search/grep_and_ripgrep/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/unix/search/literal_prefilters/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/unix/search/parallel_traversal/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/unix/search/regex_automata/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/unix/search/</loc>
+         <lastmod>2026-07-13</lastmod>
+    </url>
+    <url>
+         <loc>https://searge.pp.ua/deck/unix/search/two_way/</loc>
          <lastmod>2026-07-13</lastmod>
     </url>
 </urlset>
