@@ -25,3 +25,7 @@ plumbing that holds the net together.
 - [mqtt](mqtt.md)
 - [snmp](snmp.md)
 - [dds](dds.md)
+
+## Distributed systems
+
+- [consensus](consensus.md)
