@@ -6,44 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Bash Emacs mode keybindings for movement, deletion, and history.">
+        <meta name="description" content="Failure models, quorum arithmetic, Raft, PBFT, and etcd operations.">
       
       
         <meta name="author" content="searge">
       
       
-        <link rel="canonical" href="https://searge.pp.ua/deck/hacks/bash/emacs_mode/">
+        <link rel="canonical" href="https://searge.pp.ua/deck/net/consensus/">
       
       
         <link rel="prev" href="../">
       
       
-        <link rel="next" href="../find/">
+        <link rel="next" href="../dds/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/logo.webp">
+      <link rel="icon" href="../../assets/images/logo.webp">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Emacs mode - Cyberdeck</title>
+        <title>Consensus - Cyberdeck</title>
       
     
     
   
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
 
     
-  <link rel="stylesheet" href="../../../assets/stylesheets/nord.css">
+  <link rel="stylesheet" href="../../assets/stylesheets/nord.css">
 
     
       
@@ -53,12 +53,12 @@
         
         
         
-        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -70,9 +70,9 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "name": "Emacs mode",
-    "description": "Bash Emacs mode keybindings for movement, deletion, and history.",
-    "url": "https://searge.pp.ua/deck/hacks/bash/emacs_mode/",
+    "name": "Consensus",
+    "description": "Failure models, quorum arithmetic, Raft, PBFT, and etcd operations.",
+    "url": "https://searge.pp.ua/deck/net/consensus/",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Cyberdeck",
@@ -87,17 +87,17 @@
 
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Emacs mode - Cyberdeck" />
-<meta property="og:description" content="Bash Emacs mode keybindings for movement, deletion, and history." />
-<meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/bash/emacs_mode.png" />
+<meta property="og:title" content="Consensus - Cyberdeck" />
+<meta property="og:description" content="Failure models, quorum arithmetic, Raft, PBFT, and etcd operations." />
+<meta property="og:image" content="https://searge.pp.ua/deck/assets/images/social/net/consensus.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://searge.pp.ua/deck/hacks/bash/emacs_mode/" />
+<meta property="og:url" content="https://searge.pp.ua/deck/net/consensus/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Emacs mode - Cyberdeck" />
-<meta property="twitter:description" content="Bash Emacs mode keybindings for movement, deletion, and history." />
-<meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/hacks/bash/emacs_mode.png" />
+<meta property="twitter:title" content="Consensus - Cyberdeck" />
+<meta property="twitter:description" content="Failure models, quorum arithmetic, Raft, PBFT, and etcd operations." />
+<meta property="twitter:image" content="https://searge.pp.ua/deck/assets/images/social/net/consensus.png" />
 </head>
   
   
@@ -117,7 +117,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#emacs_mode" class="md-skip">
+        <a href="#consensus" class="md-skip">
           Skip to content
         </a>
       
@@ -133,9 +133,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-header__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -146,7 +146,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            <a href="../../.." class="md-header__topic-link">
+            <a href="../.." class="md-header__topic-link">
               Cyberdeck
             </a>
           </span>
@@ -154,7 +154,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Emacs mode
+              Consensus
             
           </span>
         </div>
@@ -277,9 +277,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
+    <a href="../.." title="Cyberdeck" class="md-nav__button md-logo" aria-label="Cyberdeck" data-md-component="logo">
       
-  <img src="../../../assets/images/logo.webp" alt="logo">
+  <img src="../../assets/images/logo.webp" alt="logo">
 
     </a>
   </label>
@@ -305,7 +305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -352,7 +352,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../ci/" class="md-nav__link ">
+            <a href="../../ci/" class="md-nav__link ">
               
   
   
@@ -396,7 +396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ci/gitlab_ci/" class="md-nav__link">
+      <a href="../../ci/gitlab_ci/" class="md-nav__link">
         
   
   
@@ -451,7 +451,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../cloud/" class="md-nav__link ">
+            <a href="../../cloud/" class="md-nav__link ">
               
   
   
@@ -495,7 +495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../cloud/gcloud/" class="md-nav__link">
+      <a href="../../cloud/gcloud/" class="md-nav__link">
         
   
   
@@ -548,7 +548,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../ct/" class="md-nav__link ">
+            <a href="../../ct/" class="md-nav__link ">
               
   
   
@@ -614,7 +614,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../emb/" class="md-nav__link ">
+            <a href="../../emb/" class="md-nav__link ">
               
   
   
@@ -658,7 +658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../emb/yocto/" class="md-nav__link">
+      <a href="../../emb/yocto/" class="md-nav__link">
         
   
   
@@ -715,7 +715,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../go/" class="md-nav__link ">
+            <a href="../../go/" class="md-nav__link ">
               
   
   
@@ -759,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/coding_guidelines/" class="md-nav__link">
+      <a href="../../go/coding_guidelines/" class="md-nav__link">
         
   
   
@@ -787,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/project_skeleton/" class="md-nav__link">
+      <a href="../../go/project_skeleton/" class="md-nav__link">
         
   
   
@@ -819,8 +819,6 @@
       
   
   
-    
-  
   
   
     
@@ -858,15 +856,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../hacks/" class="md-nav__link ">
               
   
   
@@ -890,7 +888,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -910,7 +908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../drush/" class="md-nav__link">
+      <a href="../../hacks/drush/" class="md-nav__link">
         
   
   
@@ -938,7 +936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../elasticsearch/" class="md-nav__link">
+      <a href="../../hacks/elasticsearch/" class="md-nav__link">
         
   
   
@@ -966,7 +964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../net_info/" class="md-nav__link">
+      <a href="../../hacks/net_info/" class="md-nav__link">
         
   
   
@@ -994,7 +992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../nginx/" class="md-nav__link">
+      <a href="../../hacks/nginx/" class="md-nav__link">
         
   
   
@@ -1022,7 +1020,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../solr/" class="md-nav__link">
+      <a href="../../hacks/solr/" class="md-nav__link">
         
   
   
@@ -1050,7 +1048,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../varnish/" class="md-nav__link">
+      <a href="../../hacks/varnish/" class="md-nav__link">
         
   
   
@@ -1075,8 +1073,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1102,15 +1098,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../hacks/bash/" class="md-nav__link ">
               
   
   
@@ -1134,7 +1130,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1151,37 +1147,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Emacs mode
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../hacks/bash/emacs_mode/" class="md-nav__link">
         
   
   
@@ -1197,81 +1166,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#movement" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Movement
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#deletion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Deletion
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#case" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Case
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#undo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Undo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#history" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        History
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1284,7 +1178,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../find/" class="md-nav__link">
+      <a href="../../hacks/bash/find/" class="md-nav__link">
         
   
   
@@ -1312,7 +1206,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../parallel/" class="md-nav__link">
+      <a href="../../hacks/bash/parallel/" class="md-nav__link">
         
   
   
@@ -1340,7 +1234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rsync/" class="md-nav__link">
+      <a href="../../hacks/bash/rsync/" class="md-nav__link">
         
   
   
@@ -1368,7 +1262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ssh/" class="md-nav__link">
+      <a href="../../hacks/bash/ssh/" class="md-nav__link">
         
   
   
@@ -1396,7 +1290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user/" class="md-nav__link">
+      <a href="../../hacks/bash/user/" class="md-nav__link">
         
   
   
@@ -1456,7 +1350,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../databases/" class="md-nav__link ">
+            <a href="../../hacks/databases/" class="md-nav__link ">
               
   
   
@@ -1500,7 +1394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mariadb/" class="md-nav__link">
+      <a href="../../hacks/databases/mariadb/" class="md-nav__link">
         
   
   
@@ -1528,7 +1422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/mysql/" class="md-nav__link">
+      <a href="../../hacks/databases/mysql/" class="md-nav__link">
         
   
   
@@ -1556,7 +1450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../databases/postgresql/" class="md-nav__link">
+      <a href="../../hacks/databases/postgresql/" class="md-nav__link">
         
   
   
@@ -1610,7 +1504,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../gcp/" class="md-nav__link ">
+            <a href="../../hacks/gcp/" class="md-nav__link ">
               
   
   
@@ -1677,7 +1571,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../git/" class="md-nav__link ">
+            <a href="../../hacks/git/" class="md-nav__link ">
               
   
   
@@ -1721,7 +1615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/git_cicd/" class="md-nav__link">
+      <a href="../../hacks/git/git_cicd/" class="md-nav__link">
         
   
   
@@ -1779,7 +1673,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../kubernetes/" class="md-nav__link ">
+            <a href="../../hacks/kubernetes/" class="md-nav__link ">
               
   
   
@@ -1823,7 +1717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/helm/" class="md-nav__link">
+      <a href="../../hacks/kubernetes/helm/" class="md-nav__link">
         
   
   
@@ -1851,7 +1745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/kubectl/" class="md-nav__link">
+      <a href="../../hacks/kubernetes/kubectl/" class="md-nav__link">
         
   
   
@@ -1905,7 +1799,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../vim/" class="md-nav__link ">
+            <a href="../../hacks/vim/" class="md-nav__link ">
               
   
   
@@ -1956,6 +1850,8 @@
       
   
   
+    
+  
   
   
     
@@ -1987,15 +1883,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../net/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -2019,7 +1915,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2036,10 +1932,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../net/consensus/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consensus
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2055,6 +1978,159 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#failure-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Failure models
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quorum-arithmetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quorum arithmetic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quorum arithmetic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crash-fault-tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crash fault tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#byzantine-fault-tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Byzantine fault tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raft-vs-pbft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Raft vs PBFT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pbft-normal-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PBFT normal case
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etcd-and-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        etcd and Kubernetes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd and Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inspect-an-etcd-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspect an etcd cluster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incident checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-a-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing a model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2067,7 +2143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dds/" class="md-nav__link">
+      <a href="../dds/" class="md-nav__link">
         
   
   
@@ -2095,7 +2171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/dns/" class="md-nav__link">
+      <a href="../dns/" class="md-nav__link">
         
   
   
@@ -2123,7 +2199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/http/" class="md-nav__link">
+      <a href="../http/" class="md-nav__link">
         
   
   
@@ -2151,7 +2227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/mqtt/" class="md-nav__link">
+      <a href="../mqtt/" class="md-nav__link">
         
   
   
@@ -2179,7 +2255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/osi_model/" class="md-nav__link">
+      <a href="../osi_model/" class="md-nav__link">
         
   
   
@@ -2207,7 +2283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/snmp/" class="md-nav__link">
+      <a href="../snmp/" class="md-nav__link">
         
   
   
@@ -2235,7 +2311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tcp_ip_model/" class="md-nav__link">
+      <a href="../tcp_ip_model/" class="md-nav__link">
         
   
   
@@ -2263,7 +2339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../net/tls/" class="md-nav__link">
+      <a href="../tls/" class="md-nav__link">
         
   
   
@@ -2320,7 +2396,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../py/" class="md-nav__link ">
+            <a href="../../py/" class="md-nav__link ">
               
   
   
@@ -2364,7 +2440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../py/coding_guidelines/" class="md-nav__link">
+      <a href="../../py/coding_guidelines/" class="md-nav__link">
         
   
   
@@ -2392,7 +2468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../py/project_skeleton/" class="md-nav__link">
+      <a href="../../py/project_skeleton/" class="md-nav__link">
         
   
   
@@ -2449,7 +2525,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../unix/" class="md-nav__link ">
+            <a href="../../unix/" class="md-nav__link ">
               
   
   
@@ -2493,7 +2569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../unix/load_average/" class="md-nav__link">
+      <a href="../../unix/load_average/" class="md-nav__link">
         
   
   
@@ -2541,7 +2617,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../unix/math/" class="md-nav__link ">
+            <a href="../../unix/math/" class="md-nav__link ">
               
   
   
@@ -2585,7 +2661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../unix/math/ewma/" class="md-nav__link">
+      <a href="../../unix/math/ewma/" class="md-nav__link">
         
   
   
@@ -2648,10 +2724,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#movement" class="md-nav__link">
+  <a href="#failure-models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Movement
+        Failure models
       
     </span>
   </a>
@@ -2659,10 +2735,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#deletion" class="md-nav__link">
+  <a href="#quorum-arithmetic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Deletion
+        Quorum arithmetic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quorum arithmetic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crash-fault-tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crash fault tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#byzantine-fault-tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Byzantine fault tolerance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raft-vs-pbft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Raft vs PBFT
       
     </span>
   </a>
@@ -2670,10 +2785,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#case" class="md-nav__link">
+  <a href="#pbft-normal-case" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Case
+        PBFT normal case
       
     </span>
   </a>
@@ -2681,10 +2796,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#undo" class="md-nav__link">
+  <a href="#etcd-and-kubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Undo
+        etcd and Kubernetes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd and Kubernetes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inspect-an-etcd-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspect an etcd cluster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incident checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-a-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing a model
       
     </span>
   </a>
@@ -2692,10 +2846,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#history" class="md-nav__link">
+  <a href="#references" class="md-nav__link">
     <span class="md-ellipsis">
       
-        History
+        References
       
     </span>
   </a>
@@ -2723,21 +2877,28 @@
       
       
       
-        <span class="md-tag">bash</span>
+        <span class="md-tag">consensus</span>
       
     
       
       
       
       
-        <span class="md-tag">keybindings</span>
+        <span class="md-tag">distributed-systems</span>
       
     
       
       
       
       
-        <span class="md-tag">shell</span>
+        <span class="md-tag">fault-tolerance</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">kubernetes</span>
       
     
   </nav>
@@ -2747,163 +2908,317 @@
   
 
 
-<h1 id="emacs_mode">emacs_mode</h1>
-<p>Shell readline shortcuts (default bash keybindings).</p>
-<h2 id="movement">Movement</h2>
+<h1 id="consensus">consensus</h1>
+<p>Consensus lets independent nodes agree on one ordered history despite failures,
+delays, and duplicated messages. A replicated state machine applies that history
+to identical initial state, so every correct replica produces the same result.</p>
+<p>The algorithm is only meaningful together with its <strong>failure model</strong>. Raft and
+PBFT solve related problems under different assumptions; PBFT is not a
+more-secure drop-in replacement for Raft.</p>
+<h2 id="failure-models">Failure models</h2>
 <table>
 <thead>
 <tr>
-<th>Key</th>
-<th>Action</th>
+<th>Failure</th>
+<th>What a faulty node can do</th>
+<th>Typical model</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>Ctrl-a</code></td>
-<td>Move to start of line</td>
+<td>Crash-stop</td>
+<td>Halt and never return</td>
+<td>Simplified CFT</td>
 </tr>
 <tr>
-<td><code>Ctrl-e</code></td>
-<td>Move to end of line</td>
+<td>Crash-recovery</td>
+<td>Restart with persisted but possibly stale state</td>
+<td>Raft, etcd</td>
 </tr>
 <tr>
-<td><code>Ctrl-b</code></td>
-<td>Back one character</td>
+<td>Omission</td>
+<td>Lose, delay, or duplicate messages</td>
+<td>Networks and partitions</td>
 </tr>
 <tr>
-<td><code>Alt-b</code></td>
-<td>Back one word</td>
-</tr>
-<tr>
-<td><code>Ctrl-f</code></td>
-<td>Forward one character</td>
-</tr>
-<tr>
-<td><code>Alt-f</code></td>
-<td>Forward one word</td>
-</tr>
-<tr>
-<td><code>Ctrl-] x</code></td>
-<td>Forward to next occurrence of x</td>
-</tr>
-<tr>
-<td><code>Alt-Ctrl-] x</code></td>
-<td>Back to previous occurrence of x</td>
+<td>Byzantine</td>
+<td>Lie, equivocate, corrupt state, or collude</td>
+<td>PBFT and other BFT protocols</td>
 </tr>
 </tbody>
 </table>
-<h2 id="deletion">Deletion</h2>
+<p>A TLS-authenticated peer can still be Byzantine if its host, key, or process is
+compromised. Authentication identifies the liar; it does not make a
+crash-fault-tolerant protocol tolerate lies.</p>
+<p>Consensus normally separates two goals:</p>
+<ul>
+<li><strong>Safety:</strong> correct nodes never commit conflicting histories.</li>
+<li><strong>Liveness:</strong> new operations eventually commit.</li>
+</ul>
+<p>Protocols preserve safety during a partition by refusing to commit on a side
+without quorum. Liveness then depends on enough correct nodes being able to
+communicate. In a fully asynchronous system, timeouts cannot distinguish a
+failed peer from a slow one; practical protocols rely on eventual periods of
+timely communication.</p>
+<h2 id="quorum-arithmetic">Quorum arithmetic</h2>
+<h3 id="crash-fault-tolerance">Crash fault tolerance</h3>
+<p>Raft uses majority quorums:</p>
+<div class="arithmatex">\[
+q = \left\lfloor \frac{n}{2} \right\rfloor + 1
+\]</div>
+<p>To tolerate (f) unavailable members, the cluster needs at least:</p>
+<div class="arithmatex">\[
+n = 2f + 1
+\]</div>
+<p>Any two majorities overlap. Raft combines that overlap with voting and log
+matching rules so two leaders cannot commit different entries for the same log
+position.</p>
+<h3 id="byzantine-fault-tolerance">Byzantine fault tolerance</h3>
+<p>PBFT requires:</p>
+<div class="arithmatex">\[
+n \ge 3f + 1, \qquad q = 2f + 1
+\]</div>
+<p>Two PBFT quorums overlap in at least:</p>
+<div class="arithmatex">\[
+2q - n = f + 1
+\]</div>
+<p>With at most (f) Byzantine replicas, the overlap therefore contains at least
+one correct replica. This prevents two conflicting values from both collecting
+a valid commit certificate.</p>
 <table>
 <thead>
 <tr>
-<th>Key</th>
-<th>Action</th>
+<th style="text-align: center;">Faults tolerated</th>
+<th style="text-align: center;">Raft members</th>
+<th style="text-align: center;">PBFT replicas</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>Ctrl-u</code></td>
-<td>Delete to beginning of line</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
 </tr>
 <tr>
-<td><code>Ctrl-k</code></td>
-<td>Delete to end of line</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">7</td>
 </tr>
 <tr>
-<td><code>Ctrl-w</code></td>
-<td>Delete to start of word</td>
-</tr>
-<tr>
-<td><code>Ctrl-y</code></td>
-<td>Paste from kill ring</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">10</td>
 </tr>
 </tbody>
 </table>
-<h2 id="case">Case</h2>
+<div class="admonition warning">
+<p class="admonition-title">Replication is not backup</p>
+<p>Consensus reproduces valid operations on every replica. It will faithfully
+replicate an accidental deletion or application-level corruption too.</p>
+</div>
+<h2 id="raft-vs-pbft">Raft vs PBFT</h2>
 <table>
 <thead>
 <tr>
-<th>Key</th>
-<th>Action</th>
+<th>Property</th>
+<th>Raft</th>
+<th>PBFT</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>Alt-c</code></td>
-<td>Capitalize to end of word</td>
+<td>Fault model</td>
+<td>Crash, restart, delay, partition</td>
+<td>Arbitrary or malicious replica behavior</td>
 </tr>
 <tr>
-<td><code>Alt-u</code></td>
-<td>Uppercase to end of word</td>
+<td>Minimum replicas for (f) faults</td>
+<td>(2f+1)</td>
+<td>(3f+1)</td>
 </tr>
 <tr>
-<td><code>Alt-l</code></td>
-<td>Lowercase to end of word</td>
+<td>Commit quorum</td>
+<td>Majority</td>
+<td>(2f+1)</td>
+</tr>
+<tr>
+<td>Coordinator</td>
+<td>Elected leader</td>
+<td>Primary in a numbered view</td>
+</tr>
+<tr>
+<td>Normal message cost</td>
+<td>(O(n)) per log entry</td>
+<td>(O(n^2)) all-to-all phases</td>
+</tr>
+<tr>
+<td>Replica identity</td>
+<td>Stable membership</td>
+<td>Authenticated messages and known replicas</td>
+</tr>
+<tr>
+<td>Common context</td>
+<td>etcd, Consul, distributed databases</td>
+<td>Multi-party or adversarial replication</td>
 </tr>
 </tbody>
 </table>
-<h2 id="undo">Undo</h2>
+<p>Raft manages an ordered log through leader election, log replication, and
+majority commit. It assumes a member may disappear or return with stale state,
+but will not fabricate two different messages for two peers.</p>
+<p>PBFT replicates a deterministic service while allowing up to (f) replicas to
+behave arbitrarily. Its extra replica and message phases are the price of
+detecting equivocation rather than merely waiting for a missing node.</p>
+<h2 id="pbft-normal-case">PBFT normal case</h2>
+<p>For (f=1), PBFT runs four replicas: one primary and three backups. The request
+passes through three agreement phases before execution:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant C as Client
+    participant P as Primary
+    participant R1 as Backup 1
+    participant R2 as Backup 2
+    participant R3 as Backup 3
+
+    C-&gt;&gt;P: REQUEST(operation, timestamp)
+    P-&gt;&gt;R1: PRE-PREPARE(view, sequence, digest)
+    P-&gt;&gt;R2: PRE-PREPARE(view, sequence, digest)
+    P-&gt;&gt;R3: PRE-PREPARE(view, sequence, digest)
+    Note over P,R3: Backups validate and multicast PREPARE
+    R1--&gt;&gt;P: PREPARE
+    R1--&gt;&gt;R2: PREPARE
+    R1--&gt;&gt;R3: PREPARE
+    R2--&gt;&gt;P: PREPARE
+    R2--&gt;&gt;R1: PREPARE
+    R2--&gt;&gt;R3: PREPARE
+    R3--&gt;&gt;P: PREPARE
+    R3--&gt;&gt;R1: PREPARE
+    R3--&gt;&gt;R2: PREPARE
+    Note over P,R3: Prepared replicas multicast COMMIT
+    Note over P,R3: 2f+1 matching commits make the request committed-local
+    P--&gt;&gt;C: REPLY(result)
+    R1--&gt;&gt;C: REPLY(result)
+    R2--&gt;&gt;C: REPLY(result)
+    R3--&gt;&gt;C: REPLY(result)</code></pre>
+<ol>
+<li><strong>Request:</strong> the client signs or authenticates an operation and sends it to
+   the primary.</li>
+<li><strong>Pre-prepare:</strong> the primary assigns the request a view and sequence number,
+   then broadcasts its digest.</li>
+<li><strong>Prepare:</strong> backups validate the proposal and multicast matching prepare
+   messages. This proves enough replicas saw the same ordering proposal.</li>
+<li><strong>Commit:</strong> every prepared replica multicasts a commit. A replica executes
+   only after collecting (2f+1) matching commits.</li>
+<li><strong>Reply:</strong> replicas execute requests in sequence order. The client accepts
+   the result after receiving (f+1) matching replies, which guarantees at
+   least one came from a correct replica.</li>
+</ol>
+<p>PBFT also uses checkpoints to discard old protocol state and a <strong>view change</strong>
+to replace a faulty or unresponsive primary. Safety does not depend on message
+timing; progress requires the network eventually to remain timely long enough
+for correct replicas to complete a view.</p>
+<h2 id="etcd-and-kubernetes">etcd and Kubernetes</h2>
+<p>Kubernetes stores its control-plane state in etcd. etcd uses Raft, so it
+tolerates unavailable members, slow links, restarts, and network partitions as
+long as a majority can communicate. It does <strong>not</strong> tolerate an authenticated
+member inventing or equivocating about log entries.</p>
 <table>
 <thead>
 <tr>
-<th>Key</th>
-<th>Action</th>
+<th style="text-align: center;">etcd members</th>
+<th style="text-align: center;">Majority</th>
+<th style="text-align: center;">Failures tolerated</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>Ctrl-x Ctrl-u</code></td>
-<td>Undo last change</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td><code>Alt-r</code></td>
-<td>Undo all changes to line</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
 </tr>
 <tr>
-<td><code>Ctrl-l</code></td>
-<td>Clear screen</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">3</td>
 </tr>
 </tbody>
 </table>
-<h2 id="history">History</h2>
-<table>
-<thead>
-<tr>
-<th>Key / Sequence</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Ctrl-r</code></td>
-<td>Incremental reverse search</td>
-</tr>
-<tr>
-<td><code>Alt-p</code></td>
-<td>Non-incremental reverse search</td>
-</tr>
-<tr>
-<td><code>!!</code></td>
-<td>Execute last command</td>
-</tr>
-<tr>
-<td><code>!abc</code></td>
-<td>Last command starting with abc</td>
-</tr>
-<tr>
-<td><code>!$</code></td>
-<td>Last argument of last command</td>
-</tr>
-<tr>
-<td><code>!^</code></td>
-<td>First argument of last command</td>
-</tr>
-<tr>
-<td><code>^abc^xyz</code></td>
-<td>Replace abc with xyz in last command</td>
-</tr>
-</tbody>
-</table>
+<p>An even member adds replication traffic without increasing failure tolerance.
+Use an odd-sized cluster unless a temporary membership change requires
+otherwise.</p>
+<h3 id="inspect-an-etcd-cluster">Inspect an etcd cluster</h3>
+<p>For a kubeadm-managed local etcd:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ETCDCTL_API</span><span class="o">=</span><span class="m">3</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ETCDCTL_ENDPOINTS</span><span class="o">=</span>https://127.0.0.1:2379
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ETCDCTL_CACERT</span><span class="o">=</span>/etc/kubernetes/pki/etcd/ca.crt
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ETCDCTL_CERT</span><span class="o">=</span>/etc/kubernetes/pki/etcd/healthcheck-client.crt
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ETCDCTL_KEY</span><span class="o">=</span>/etc/kubernetes/pki/etcd/healthcheck-client.key
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Member identity and peer/client URLs</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>etcdctl<span class="w"> </span>member<span class="w"> </span>list<span class="w"> </span>--write-out<span class="o">=</span>table
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Leader, term, Raft index, applied index, and endpoint errors</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>etcdctl<span class="w"> </span>endpoint<span class="w"> </span>status<span class="w"> </span>--cluster<span class="w"> </span>--write-out<span class="o">=</span>table
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># End-to-end proposal test, not just process liveness</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>etcdctl<span class="w"> </span>endpoint<span class="w"> </span>health<span class="w"> </span>--cluster
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># Compare the key-value history hash at one revision</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>etcdctl<span class="w"> </span>endpoint<span class="w"> </span>hashkv<span class="w"> </span>--cluster<span class="w"> </span>--write-out<span class="o">=</span>table
+</code></pre></div>
+<p><code>endpoint health</code> attempts to commit a proposal. A process can therefore be
+alive while the endpoint is unhealthy because the cluster has no quorum or the
+write path is too slow.</p>
+<h3 id="incident-checklist">Incident checklist</h3>
+<ol>
+<li>Count configured members and calculate the required majority.</li>
+<li>Find the leader and compare <code>RAFT TERM</code>, <code>RAFT INDEX</code>, and
+   <code>RAFT APPLIED INDEX</code> across endpoints.</li>
+<li>Check peer connectivity and latency before assuming a member has crashed.</li>
+<li>Check disk latency: slow <code>fsync</code> can delay heartbeats and trigger elections.</li>
+<li>Do not remove another voting member while the cluster is already degraded.
+   Membership changes themselves require consensus.</li>
+<li>Keep tested snapshots. If quorum is permanently lost, follow the documented
+   disaster-recovery procedure instead of forcing a stale member to become the
+   new source of truth.</li>
+</ol>
+<h2 id="choosing-a-model">Choosing a model</h2>
+<p>Use Raft or another crash-fault-tolerant protocol when one operator controls the
+replicas and the realistic failures are process crashes, disk loss, delay, and
+partition.</p>
+<p>Consider BFT when compromised replicas are explicitly inside the threat model,
+replicas belong to mutually distrustful parties, and the extra nodes, message
+traffic, deterministic execution, key management, and recovery complexity are
+justified.</p>
+<p>PBFT is not synonymous with blockchain. Some blockchains use descendants of
+BFT protocols; others use different consensus and membership mechanisms.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://raft.github.io/raft.pdf">In Search of an Understandable Consensus Algorithm</a></li>
+<li><a href="https://www.usenix.org/legacy/publications/library/proceedings/osdi99/full_papers/castro/castro_html/castro.html">Practical Byzantine Fault Tolerance</a></li>
+<li><a href="https://etcd.io/docs/v3.7/learning/glossary/">etcd glossary</a></li>
+<li><a href="https://etcd.io/docs/v3.6/tasks/operator/how-to-check-cluster-status/">How to check etcd cluster status</a></li>
+<li><a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/">Creating Highly Available Clusters with kubeadm</a></li>
+</ul>
 
 
 
@@ -2942,7 +3257,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Bash">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Networking">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2952,20 +3267,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Bash
+                Networking
               </div>
             </div>
           </a>
         
         
           
-          <a href="../find/" class="md-footer__link md-footer__link--next" aria-label="Next: find">
+          <a href="../dds/" class="md-footer__link md-footer__link--next" aria-label="Next: DDS">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                find
+                DDS
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -3085,15 +3400,15 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.top", "search.suggest", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
   
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="../../../assets/external/unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../assets/external/unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
 
