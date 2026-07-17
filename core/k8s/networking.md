@@ -24,16 +24,36 @@ with the Kubernetes object graph before inspecting node packet rules.
 This page describes portable Kubernetes contracts. It does not assume
 `iptables`, IPVS, eBPF, one overlay, or one cloud load balancer.
 
+## Deep Path
+
+Read these pages in dependency order:
+
+1. [Packet Path](networking/packet_path.md): network namespaces, veth, routes,
+   overlays, MTU, conntrack and packet evidence.
+2. [CNI](networking/cni.md): runtime-to-plugin execution, IPAM, chaining,
+   rollback and sandbox failures.
+3. [Service Dataplane](networking/service_dataplane.md): Service and
+   EndpointSlice state translated through iptables, nftables, IPVS or eBPF.
+4. [NetworkPolicy](networking/network_policy.md): isolation, additive rules,
+   enforcement ownership and a reproducible policy matrix.
+5. [Kubernetes DNS](networking/dns.md): resolver behavior, CoreDNS discovery,
+   Service routing, upstream forwarding and policy.
+6. [eBPF And Cilium](networking/ebpf_cilium.md): kernel hooks, maps, identity,
+   Hubble and kube-proxy replacement.
+
+The [Professional Roadmap](roadmap.md) places this path between Linux
+foundations and service mesh.
+
 ## Three Planes Of Evidence
 
 ```mermaid
-flowchart LR
-    P[Pod IP and port] --> ES[EndpointSlice address and conditions]
-    S[Service selector and ports] --> ES
-    ES --> DP[Service dataplane]
-    DNS[cluster DNS] --> S
-    C[client] -->|Service name or ClusterIP| DP
-    DP --> P
+flowchart TB
+    W["Workload plane<br/>Pod IP and port"]
+    C["Discovery and control plane<br/>Service, EndpointSlice, DNS"]
+    D["Dataplane<br/>packet or socket translation"]
+    W -->|publishes endpoint identity| C
+    C -->|programs desired backends| D
+    D -->|routes traffic| W
 ```
 
 1. **Workload plane:** the process listens on the expected address/port and the

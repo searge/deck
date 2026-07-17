@@ -30,15 +30,15 @@ empty. One scheduling cycle chooses a node; a separate binding cycle applies
 that decision.
 
 ```mermaid
-flowchart LR
+flowchart TB
     P[unbound Pod] --> Q[scheduling queue]
     Q --> PF[PreFilter]
-    PF --> F[Filter all candidate nodes]
-    F -->|none feasible| U[Unschedulable and retry]
-    F --> S[PreScore and Score]
+    PF --> F[Filter nodes]
+    F -->|none feasible| U[Unschedulable; retry later]
+    F -->|feasible nodes| S[Score feasible nodes]
     S --> R[Reserve and Permit]
-    R --> B[Bind Pod to node]
-    B --> K[kubelet observes assignment]
+    R --> B[Bind Pod]
+    B --> K[kubelet observes binding]
     U --> Q
 ```
 

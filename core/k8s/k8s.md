@@ -36,18 +36,20 @@ Three areas cooperate without forming one synchronous pipeline:
 binary. Its implementation varies by cluster.
 
 ```mermaid
-flowchart LR
+flowchart TB
     U[kubectl or API client] --> A[kube-apiserver]
     A --> E[(etcd)]
-    A -. LIST/WATCH .-> C[controllers]
-    A -. LIST/WATCH .-> S[scheduler]
-    A -. assigned Pods .-> K[kubelet]
-    C --> A
-    S --> A
-    K --> A
-    K --> R[CRI runtime]
-    K --> N[CNI and Service dataplane]
-    K --> V[CSI and storage backend]
+    A -. LIST/WATCH .-> C[controllers and scheduler]
+    C -->|spec and status updates| A
+```
+
+Node realization is a separate feedback path:
+
+```mermaid
+flowchart TB
+    A[kube-apiserver] -. assigned Pods .-> K[kubelet]
+    K -->|node and Pod status| A
+    K --> L["node-local implementations<br/>CRI runtime<br/>CNI and Service dataplane<br/>CSI and storage backend"]
 ```
 
 Arrows back to the API server are independent updates. Status can therefore be
@@ -75,6 +77,11 @@ Start with [Object To Running Pod](object_to_running_pod.md). It follows one
 Deployment-created Pod through the synchronous API write and the independent
 control loops that converge afterward.
 
+Use the [Professional Roadmap](roadmap.md) to sequence Linux, core Kubernetes,
+networking, eBPF/Cilium, service mesh, observability, and edge systems. The
+[Interview Checkpoints](interview.md) identify the first mechanism that still
+needs a model, lab, and evidence trace.
+
 ### API And Control Loops
 
 - [API Machinery](api_machinery.md): discovery, request processing,
@@ -101,6 +108,15 @@ control loops that converge afterward.
   DNS, NetworkPolicy, and Gateway/Ingress boundaries
 - [Storage](storage.md): PVC/PV binding, CSI controller/node transitions,
   topology, filesystems, snapshots, and backend boundaries
+
+### Advanced Systems
+
+- [Service Mesh](service_mesh.md): Envoy listeners, filters, clusters, xDS,
+  sidecars, Istio ambient mode, and proxy failure boundaries
+- [Observability And Tracing](observability.md): context propagation, spans,
+  sampling, collectors, and evidence correlation
+- [Edge Kubernetes](edge.md): disconnected operation, air-gap delivery,
+  constrained nodes, devices, upgrades, and local autonomy
 
 ## Route By Symptom
 

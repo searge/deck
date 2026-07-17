@@ -1,0 +1,139 @@
+{
+  "service": {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+      "name": "web",
+      "namespace": "demo",
+      "uid": "service-uid"
+    },
+    "spec": {
+      "clusterIP": "10.96.0.42",
+      "ports": [
+        {
+          "name": "http",
+          "port": 80,
+          "protocol": "TCP",
+          "targetPort": "http"
+        }
+      ],
+      "selector": {
+        "app": "web"
+      }
+    }
+  },
+  "pods": [
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "labels": {
+          "app": "web"
+        },
+        "name": "web-a",
+        "namespace": "demo",
+        "uid": "pod-a"
+      },
+      "status": {
+        "conditions": [
+          {
+            "status": "True",
+            "type": "Ready"
+          }
+        ],
+        "podIP": "10.244.1.10"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "labels": {
+          "app": "web"
+        },
+        "name": "web-b",
+        "namespace": "demo",
+        "uid": "pod-b"
+      },
+      "status": {
+        "conditions": [
+          {
+            "status": "False",
+            "type": "Ready"
+          }
+        ],
+        "podIP": "10.244.2.11"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "labels": {
+          "app": "worker"
+        },
+        "name": "worker",
+        "namespace": "demo",
+        "uid": "pod-worker"
+      },
+      "status": {
+        "podIP": "10.244.1.20"
+      }
+    }
+  ],
+  "endpointSlices": [
+    {
+      "addressType": "IPv4",
+      "apiVersion": "discovery.k8s.io/v1",
+      "endpoints": [
+        {
+          "addresses": [
+            "10.244.1.10"
+          ],
+          "conditions": {
+            "ready": true,
+            "serving": true,
+            "terminating": false
+          },
+          "targetRef": {
+            "kind": "Pod",
+            "name": "web-a",
+            "namespace": "demo",
+            "uid": "pod-a"
+          }
+        },
+        {
+          "addresses": [
+            "10.244.2.11"
+          ],
+          "conditions": {
+            "ready": false,
+            "serving": false,
+            "terminating": false
+          },
+          "targetRef": {
+            "kind": "Pod",
+            "name": "web-b",
+            "namespace": "demo",
+            "uid": "pod-b"
+          }
+        }
+      ],
+      "kind": "EndpointSlice",
+      "metadata": {
+        "labels": {
+          "kubernetes.io/service-name": "web"
+        },
+        "name": "web-example",
+        "namespace": "demo"
+      },
+      "ports": [
+        {
+          "name": "http",
+          "port": 8080,
+          "protocol": "TCP"
+        }
+      ]
+    }
+  ]
+}

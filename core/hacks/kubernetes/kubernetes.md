@@ -37,6 +37,7 @@ not a complete inventory; use API discovery when resource coverage matters.
 | node health or planned maintenance | [node maintenance](node_maintenance.md) | [node lifecycle](k8s/node_lifecycle.md) |
 | scheduling, throttling, OOM, or eviction | [resources](resources.md) | [resource internals](k8s/resources.md) |
 | Service, EndpointSlice, DNS, or policy | [networking](networking.md) | [network internals](k8s/networking.md) |
+| CNI, packet path, eBPF, mesh, or edge networking | [networking](networking.md) | [professional roadmap](k8s/roadmap.md) |
 | PVC, PV, attach, mount, or snapshot | [storage](storage.md) | [storage internals](k8s/storage.md) |
 
 General tools: [kubectl](kubectl.md), [Helm](helm.md).

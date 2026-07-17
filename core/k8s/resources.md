@@ -38,14 +38,17 @@ not scheduler capacity unless they also become requests through defaults or
 explicit configuration.
 
 ```mermaid
-flowchart LR
+flowchart TB
     S[Pod requests] --> SCH[scheduler accounting]
-    S --> K[kubelet QoS and cgroup config]
-    L[Pod limits] --> K
+```
+
+The node enforcement path consumes both requests and limits:
+
+```mermaid
+flowchart TB
+    R[Pod requests and limits] --> K[kubelet QoS and cgroup config]
     K --> CG[cgroup v2 controllers]
-    CG --> CPU[cpu.max and cpu.weight]
-    CG --> MEM[memory limits and OOM]
-    CG --> IO[implementation-dependent I/O controls]
+    CG --> E["resource enforcement<br/>CPU weight and limit<br/>memory limits and OOM<br/>optional I/O controls"]
 ```
 
 ## CPU And Memory Differ

@@ -49,7 +49,7 @@ Within the request machinery, conversion, defaulting, validation, and storage
 handling also occur; exact internal placement varies with the verb and type.
 
 ```mermaid
-flowchart LR
+flowchart TB
     C[client request] --> AU[authenticate]
     AU --> AZ[authorize]
     AZ --> MA[mutating admission]

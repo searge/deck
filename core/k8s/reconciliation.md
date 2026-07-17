@@ -42,16 +42,25 @@ not a serialized instruction such as "add replica number 4".
 ## A Common Controller Path
 
 ```mermaid
-flowchart LR
+flowchart TB
     A[kube-apiserver] -->|LIST then WATCH| R[Reflector]
     R --> D[DeltaFIFO]
     D --> I[Indexer and local cache]
     I --> H[event handler]
     H --> Q[rate-limited keyed workqueue]
     Q --> RC[reconcile key]
-    RC -->|read current cached state| I
-    RC -->|write object or external system| A
-    RC -->|retry with backoff| Q
+```
+
+The worker closes a separate feedback loop:
+
+```mermaid
+flowchart TB
+    RC[reconcile key] --> I[read current cached state]
+    I --> W[write object or external system when needed]
+    W --> O[new observation]
+    O --> N[next reconcile if state changed]
+    RC -. transient failure .-> B[rate-limited retry]
+    B --> N
 ```
 
 An informer starts with a list, fills its cache, and watches subsequent

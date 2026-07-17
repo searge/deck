@@ -27,24 +27,24 @@ can skip or alter steps.
 
 ## Object And I/O Paths
 
-The control path prepares API and backend state:
+One common dynamically provisioned control path is:
 
 ```mermaid
-flowchart LR
+flowchart TB
     PVC[PVC] --> SC[StorageClass]
-    SC --> PR[external-provisioner]
+    SC --> SCH[scheduling and topology decision]
+    SCH --> PR[external-provisioner]
     PR --> BE[storage backend volume]
-    PR --> PV[PV]
-    PV <-->|claimRef and volumeName| PVC
-    PVC --> SCH[scheduler topology decision]
-    SCH --> VA[VolumeAttachment when applicable]
+    BE --> PV[PV]
+    PV --> B[PVC and PV bound by claimRef and volumeName]
+    B --> VA[VolumeAttachment when applicable]
     VA --> AT[CSI controller attach]
 ```
 
 The node path makes the volume usable by one Pod:
 
 ```mermaid
-flowchart LR
+flowchart TB
     K[kubelet volume manager] --> CSIN[CSI node plugin]
     CSIN --> STAGE[node stage when supported]
     STAGE --> PUB[publish into Pod]

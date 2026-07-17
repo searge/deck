@@ -31,24 +31,20 @@ dataplane, runtime, or CSI implementation.
 The client waits for one synchronous request:
 
 ```mermaid
-sequenceDiagram
-    participant U as kubectl
-    participant A as kube-apiserver
-    participant P as Request pipeline
-    participant E as etcd
-
-    U->>A: PATCH Deployment
-    A->>P: authenticate, authorize, admit, validate
-    P->>E: persist storage representation
-    E-->>A: committed revision
-    A-->>U: accepted object
+flowchart TB
+    U[kubectl sends PATCH Deployment] --> A[kube-apiserver]
+    A --> P[authenticate, authorize, admit, validate]
+    P --> E[(persist storage representation in etcd)]
+    E --> R[committed revision]
+    R --> O[accepted object returned to kubectl]
 ```
 
 The response proves that the desired object was accepted and persisted. It
 does not wait for a ReplicaSet, Pod, scheduler binding, image pull, probe,
 EndpointSlice update, or Service dataplane programming.
 
-Afterward, several level-triggered loops converge concurrently:
+Afterward, several level-triggered loops converge concurrently. Workload
+realization follows these ownership and node boundaries:
 
 ```mermaid
 flowchart TD
@@ -56,10 +52,14 @@ flowchart TD
     RS -->|owns| P[Pod]
     P -->|spec.nodeName set by binding| N[Node]
     N --> K[kubelet Pod sync]
-    K --> CRI[Pod sandbox and containers]
-    K --> CNI[Pod network when applicable]
-    K --> CSI[Volumes when applicable]
-    P -->|labels and conditions observed| ES[EndpointSlice]
+    K --> L["node-local realization<br/>CRI sandbox and containers<br/>CNI network<br/>CSI volumes"]
+```
+
+Traffic readiness converges through a separate observer path:
+
+```mermaid
+flowchart TB
+    P[Pod labels and conditions] --> ES[EndpointSlice]
     SVC[Service selector] --> ES
     ES --> DP[Service dataplane]
 ```
@@ -70,13 +70,11 @@ dependency graph, not a transaction.
 ## Object Ownership
 
 ```mermaid
-flowchart LR
+flowchart TB
     D[Deployment UID] -->|ownerReference| R[ReplicaSet UID]
-    R -->|ownerReference| P1[Pod UID]
-    R -->|ownerReference| P2[Pod UID]
-    S[Service] -->|label selector, not ownership| P1
-    S -->|label selector, not ownership| P2
-    E[EndpointSlice] -->|managed for Service| S
+    R -->|ownerReference| P[Pod UIDs]
+    E[EndpointSlice] -->|managed for Service| S[Service]
+    S -. label selector, not ownership .-> P
 ```
 
 Ownership controls lifecycle and garbage collection. A Service selector is a

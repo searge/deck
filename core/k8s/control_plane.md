@@ -39,16 +39,18 @@ process memory. They do keep transient connections, caches, metrics, and flow-
 control state, so replicas are not operationally invisible.
 
 ```mermaid
-flowchart LR
+flowchart TB
     C[clients and components] --> LB[API endpoint]
-    LB --> A1[kube-apiserver]
-    LB --> A2[kube-apiserver]
-    A1 --> E[(etcd quorum)]
-    A2 --> E
-    A1 -. watches .-> CM[controller manager leader]
-    A2 -. watches .-> S[scheduler leader]
-    CM --> A1
-    S --> A2
+    LB --> A[kube-apiserver replicas]
+    A --> E[(etcd quorum)]
+```
+
+Active control loops use the same API boundary:
+
+```mermaid
+flowchart TB
+    A[kube-apiserver] -. watches .-> L["elected active components<br/>controller manager<br/>scheduler"]
+    L -->|API writes| A
 ```
 
 ## etcd, Quorum, And Latency

@@ -34,7 +34,7 @@ Kubelet updates both:
   heartbeat.
 
 ```mermaid
-flowchart LR
+flowchart TB
     K[kubelet] -->|Node status| A[kube-apiserver]
     K -->|renew Lease| A
     A -. watch .-> NC[node lifecycle controller]

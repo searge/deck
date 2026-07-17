@@ -29,13 +29,8 @@ user namespaces, and specialized runtimes branch from this path.
 ```mermaid
 flowchart TD
     A[assigned Pod from API] --> K[kubelet Pod worker]
-    K --> V[prepare volumes]
-    K --> S[create Pod sandbox through CRI]
-    S --> N[configure Pod network]
-    K --> I[pull or resolve images]
-    V --> C[create containers through CRI]
-    N --> C
-    I --> C
+    K --> R["reconcile prerequisites<br/>volumes, sandbox and CNI, images"]
+    R --> C[create containers through CRI]
     C --> T[start init and app containers]
     T --> P[probes and lifecycle hooks]
     P --> ST[report Pod status]
