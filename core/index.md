@@ -26,3 +26,4 @@ Long-term memory of the deck. Everything the ghost learned, mapped, and survived
 - [go](go/go.md) — functional Go patterns, Cobra + Lipgloss, project skeleton
 - [ci](ci/ci.md) — CI/CD patterns, GitLab CI pipelines, automation
 - [unix](unix/unix.md) — Unix/Linux internals, diagnostics, concepts
+- [kubernetes](k8s/k8s.md) — API machinery, reconciliation, scheduling, nodes, networking, and storage
