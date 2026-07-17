@@ -63,13 +63,13 @@ text:    HERE IS A SIMPLE EXAMPLE
 
 ## Complexity
 
-| Property | Cost |
-| -------- | ---- |
-| Pattern preprocessing | \(O(\lvert P\rvert + \lvert alphabet\rvert)\) |
-| Table memory | \(O(\lvert P\rvert + \lvert alphabet\rvert)\) |
-| Typical search | Sublinear character inspections |
-| Worst case in the lab implementation | \(O(\lvert T\rvert\lvert P\rvert)\) |
-| Refined variants with the Galil rule | \(O(\lvert T\rvert + \lvert P\rvert)\) |
+| Property                             | Cost                                          |
+| ------------------------------------ | --------------------------------------------- |
+| Pattern preprocessing                | \(O(\lvert P\rvert + \lvert alphabet\rvert)\) |
+| Table memory                         | \(O(\lvert P\rvert + \lvert alphabet\rvert)\) |
+| Typical search                       | Sublinear character inspections               |
+| Worst case in the lab implementation | \(O(\lvert T\rvert\lvert P\rvert)\)           |
+| Refined variants with the Galil rule | \(O(\lvert T\rvert + \lvert P\rvert)\)        |
 
 "Sublinear" describes inspected characters, not permission to ignore input I/O.
 A CLI tool may still read or map the whole file while its matcher examines only
